@@ -3,34 +3,39 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package igu;
-
-import java.awt.Color;
-import javax.swing.JFrame;
+ 
+import javax.swing.JOptionPane;
+import motortech.Inputs;
 import motortech.MotorTech;
 import motortech.Views;
 
 public class Login extends javax.swing.JFrame {
     SignUp signUp;
     Home home;
-    
+       
+    String textUser;
+    String textPassUser;
     int xMouse;
     int yMouse;
     
     public Login() {
         initComponents();
         
-        btnHome.requestFocus();
-        
         signUp = new SignUp();
         home = new Home();
+        
+        btnHome.requestFocus();
+        
+        textUser = inputUser.getText();
+        textPassUser = String.valueOf(inputPass.getPassword());
     }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
-        label6 = new java.awt.Label();
+        Container = new javax.swing.JPanel();
+        titleWindow = new java.awt.Label();
         lblPass = new java.awt.Label();
         lblUser = new java.awt.Label();
         inputUser = new javax.swing.JTextField();
@@ -50,32 +55,33 @@ public class Login extends javax.swing.JFrame {
         setTitle("Inicio de Sesión");
         setFont(new java.awt.Font("Century Gothic", 0, 10)); // NOI18N
         setLocation(new java.awt.Point(0, 0));
-        setMaximumSize(new java.awt.Dimension(500, 400));
         setMinimumSize(new java.awt.Dimension(400, 300));
         setUndecorated(true);
+        setPreferredSize(new java.awt.Dimension(501, 400));
         setResizable(false);
 
-        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
-        jPanel1.setMaximumSize(new java.awt.Dimension(0, 0));
-        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        Container.setBackground(new java.awt.Color(255, 255, 255));
+        Container.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
+        Container.setMaximumSize(new java.awt.Dimension(0, 0));
+        Container.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        label6.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
-        label6.setText("INICIAR SESIÓN");
-        jPanel1.add(label6, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 60, -1, -1));
+        titleWindow.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
+        titleWindow.setText("INICIAR SESIÓN");
+        Container.add(titleWindow, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 60, -1, -1));
 
         lblPass.setFont(new java.awt.Font("Century Gothic", 0, 10)); // NOI18N
         lblPass.setText("Contraseña");
-        jPanel1.add(lblPass, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 190, -1, -1));
+        Container.add(lblPass, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 190, -1, -1));
 
         lblUser.setFont(new java.awt.Font("Century Gothic", 0, 10)); // NOI18N
         lblUser.setText("Usuario");
-        jPanel1.add(lblUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 120, 50, -1));
+        Container.add(lblUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 120, 50, -1));
 
         inputUser.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         inputUser.setForeground(new java.awt.Color(204, 204, 204));
         inputUser.setText("Ingrese su usuario");
         inputUser.setBorder(null);
+        inputUser.setNextFocusableComponent(inputPass);
         inputUser.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 inputUserFocusGained(evt);
@@ -84,7 +90,7 @@ public class Login extends javax.swing.JFrame {
                 inputUserFocusLost(evt);
             }
         });
-        jPanel1.add(inputUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 140, 290, 30));
+        Container.add(inputUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 140, 290, 30));
 
         btnHome.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -95,7 +101,7 @@ public class Login extends javax.swing.JFrame {
         lblBtnHome.setAlignment(java.awt.Label.CENTER);
         lblBtnHome.setBackground(new java.awt.Color(0, 153, 153));
         lblBtnHome.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        lblBtnHome.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
+        lblBtnHome.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         lblBtnHome.setForeground(new java.awt.Color(255, 255, 255));
         lblBtnHome.setText("Iniciar");
         lblBtnHome.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -121,27 +127,36 @@ public class Login extends javax.swing.JFrame {
             .addComponent(lblBtnHome, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
         );
 
-        jPanel1.add(btnHome, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 270, 90, 30));
+        Container.add(btnHome, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 270, 90, 30));
 
         inputPass.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         inputPass.setForeground(new java.awt.Color(204, 204, 204));
         inputPass.setText("Contraseña");
         inputPass.setBorder(null);
+        inputPass.setNextFocusableComponent(btnHome);
         inputPass.setPreferredSize(new java.awt.Dimension(290, 30));
-        jPanel1.add(inputPass, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 210, -1, -1));
+        inputPass.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                inputPassFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                inputPassFocusLost(evt);
+            }
+        });
+        Container.add(inputPass, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 210, -1, -1));
 
         SepPass.setForeground(new java.awt.Color(153, 153, 153));
         SepPass.setPreferredSize(new java.awt.Dimension(290, 10));
-        jPanel1.add(SepPass, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 240, -1, -1));
+        Container.add(SepPass, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 240, -1, -1));
 
         Sepuser.setForeground(new java.awt.Color(153, 153, 153));
         Sepuser.setPreferredSize(new java.awt.Dimension(290, 10));
-        jPanel1.add(Sepuser, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 170, -1, -1));
+        Container.add(Sepuser, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 170, -1, -1));
 
         label5.setAlignment(java.awt.Label.CENTER);
         label5.setBackground(new java.awt.Color(255, 255, 255));
         label5.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        label5.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
+        label5.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         label5.setForeground(new java.awt.Color(0, 0, 0));
         label5.setText("Registrar");
         label5.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -149,9 +164,10 @@ public class Login extends javax.swing.JFrame {
                 openSingUp(evt);
             }
         });
-        jPanel1.add(label5, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 270, 90, 30));
+        Container.add(label5, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 270, 90, 30));
 
         barWindow.setBackground(new java.awt.Color(255, 255, 255));
+        barWindow.setPreferredSize(new java.awt.Dimension(498, 35));
         barWindow.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseDragged(java.awt.event.MouseEvent evt) {
                 barWindowMouseDragged(evt);
@@ -236,17 +252,17 @@ public class Login extends javax.swing.JFrame {
 
         barWindow.add(btnMinimize, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 0, -1, -1));
 
-        jPanel1.add(barWindow, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 500, 35));
+        Container.add(barWindow, new org.netbeans.lib.awtextra.AbsoluteConstraints(1, 1, 500, 35));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(Container, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 350, Short.MAX_VALUE)
+            .addComponent(Container, javax.swing.GroupLayout.DEFAULT_SIZE, 370, Short.MAX_VALUE)
         );
 
         pack();
@@ -257,7 +273,7 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_closeApp
 
     private void minimizeApp(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_minimizeApp
-        this.setExtendedState(JFrame.ICONIFIED);
+        Views.minimizeWindows(this);
     }//GEN-LAST:event_minimizeApp
 
     private void lblMinimizeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblMinimizeMouseClicked
@@ -274,13 +290,26 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_barWindowMouseDragged
 
     private void openSingUp(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_openSingUp
-        Views.openWindows(signUp);
-        this.setVisible(false);
+        Views.openWindows(signUp, this);
     }//GEN-LAST:event_openSingUp
 
     private void openHome(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_openHome
-        Views.openWindows(home);
-        this.setVisible(false);
+        String currentTextPass = String.valueOf(inputPass.getPassword());
+        String currentTextUser = inputUser.getText();
+        String title = "MotorTech - Inicio de Sesion";
+        
+        
+        if(currentTextPass.equals(textPassUser)){
+            Inputs.dialogMessageDialog(this, inputPass, title, "La contraseña no puede estar vacia");
+            return;
+        }
+        
+        if(currentTextUser.equals(textUser)) {
+            Inputs.dialogMessageDialog(this, inputUser, title, "El usuario no puede estar vacio");
+            return;
+        }
+        
+        Views.openWindows(home, this);
     }//GEN-LAST:event_openHome
 
     private void lblBtnHomeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBtnHomeMouseClicked
@@ -304,15 +333,24 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_lblBtnHomeMouseExited
 
     private void inputUserFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputUserFocusGained
-        inputUser.setText("");
+       Inputs.inputTextFocus(inputUser, "Ingrese su usuario");
     }//GEN-LAST:event_inputUserFocusGained
 
     private void inputUserFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputUserFocusLost
-        inputUser.setText("Ingrese su usuario");
+        Inputs.inputTextFocus(inputUser, "Ingrese su usuario", true);
     }//GEN-LAST:event_inputUserFocusLost
+
+    private void inputPassFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputPassFocusGained
+        Inputs.inputPassFocus(inputPass, "Contraseña");
+    }//GEN-LAST:event_inputPassFocusGained
+
+    private void inputPassFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputPassFocusLost
+        Inputs.inputPassFocus(inputPass, "Contraseña", true);
+    }//GEN-LAST:event_inputPassFocusLost
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel Container;
     private javax.swing.JSeparator SepPass;
     private javax.swing.JSeparator Sepuser;
     private javax.swing.JPanel barWindow;
@@ -321,13 +359,12 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JPanel btnMinimize;
     private javax.swing.JPasswordField inputPass;
     private javax.swing.JTextField inputUser;
-    private javax.swing.JPanel jPanel1;
     private java.awt.Label label5;
-    private java.awt.Label label6;
     private java.awt.Label lblBtnHome;
     private javax.swing.JLabel lblExit;
     private java.awt.Label lblMinimize;
     private java.awt.Label lblPass;
     private java.awt.Label lblUser;
+    private java.awt.Label titleWindow;
     // End of variables declaration//GEN-END:variables
 }
