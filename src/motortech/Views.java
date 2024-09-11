@@ -8,6 +8,12 @@ public class Views {
         window.setLocationRelativeTo(null);
     }
     
+    public static void openWindows(JFrame newWindow, JFrame oldWindow){
+        newWindow.setVisible(true);
+        newWindow.setLocationRelativeTo(null);
+        oldWindow.dispose();
+    }
+    
     public static void closeWindows() {
         System.exit(0);
     }
@@ -16,5 +22,9 @@ public class Views {
         int x = evt.getXOnScreen();
         int y = evt.getYOnScreen();
         window.setLocation(x - xMouse, y - yMouse);
+    }
+    
+    public static void minimizeWindows(JFrame window){
+        window.setExtendedState(JFrame.ICONIFIED);
     }
 }

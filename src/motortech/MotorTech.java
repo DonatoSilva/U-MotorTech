@@ -16,11 +16,6 @@ public class MotorTech {
         Views.openWindows(login);
     }
     
-    /// Input Interaction
-    public static void inputSelect() {
-        
-    }
-    
     
     /// App colors
     public static Color getBgPrimary() {
