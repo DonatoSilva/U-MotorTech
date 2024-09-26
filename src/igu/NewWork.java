@@ -8,12 +8,12 @@ package igu;
  *
  * @author figue
  */
-public class AutomobileRegistry extends javax.swing.JFrame {
+public class NewWork extends javax.swing.JFrame {
 
     /**
-     * Creates new form AutomobileRegistry
+     * Creates new form WorkForm
      */
-    public AutomobileRegistry() {
+    public NewWork() {
         initComponents();
     }
 

@@ -4,15 +4,11 @@
  */
 package igu;
  
-import javax.swing.JOptionPane;
 import motortech.Inputs;
 import motortech.MotorTech;
 import motortech.Views;
 
 public class Login extends javax.swing.JFrame {
-    SignUp signUp;
-    Home home;
-       
     String textUser;
     String textPassUser;
     int xMouse;
@@ -20,9 +16,6 @@ public class Login extends javax.swing.JFrame {
     
     public Login() {
         initComponents();
-        
-        signUp = new SignUp();
-        home = new Home();
         
         btnHome.requestFocus();
         
@@ -50,6 +43,7 @@ public class Login extends javax.swing.JFrame {
         lblExit = new javax.swing.JLabel();
         btnMinimize = new javax.swing.JPanel();
         lblMinimize = new java.awt.Label();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Inicio de Sesión");
@@ -57,7 +51,6 @@ public class Login extends javax.swing.JFrame {
         setLocation(new java.awt.Point(0, 0));
         setMinimumSize(new java.awt.Dimension(400, 300));
         setUndecorated(true);
-        setPreferredSize(new java.awt.Dimension(501, 400));
         setResizable(false);
 
         Container.setBackground(new java.awt.Color(255, 255, 255));
@@ -254,6 +247,9 @@ public class Login extends javax.swing.JFrame {
 
         Container.add(barWindow, new org.netbeans.lib.awtextra.AbsoluteConstraints(1, 1, 500, 35));
 
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/Motortech.jpg"))); // NOI18N
+        Container.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 320, -1, -1));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -262,7 +258,7 @@ public class Login extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(Container, javax.swing.GroupLayout.DEFAULT_SIZE, 370, Short.MAX_VALUE)
+            .addComponent(Container, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -290,6 +286,7 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_barWindowMouseDragged
 
     private void openSingUp(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_openSingUp
+        SignUp signUp = new SignUp();
         Views.openWindows(signUp, this);
     }//GEN-LAST:event_openSingUp
 
@@ -300,15 +297,18 @@ public class Login extends javax.swing.JFrame {
         
         
         if(currentTextPass.equals(textPassUser)){
-            Inputs.dialogMessageDialog(this, inputPass, title, "La contraseña no puede estar vacia");
+            Inputs.dialogMessageDialog(this, inputPass, title, "La contraseña no puede estar vacía");
             return;
         }
         
         if(currentTextUser.equals(textUser)) {
-            Inputs.dialogMessageDialog(this, inputUser, title, "El usuario no puede estar vacio");
+            Inputs.dialogMessageDialog(this, inputUser, title, "El usuario no puede estar vacío");
             return;
         }
         
+        
+        
+        Home home = new Home();
         Views.openWindows(home, this);
     }//GEN-LAST:event_openHome
 
@@ -359,6 +359,7 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JPanel btnMinimize;
     private javax.swing.JPasswordField inputPass;
     private javax.swing.JTextField inputUser;
+    private javax.swing.JLabel jLabel1;
     private java.awt.Label label5;
     private java.awt.Label lblBtnHome;
     private javax.swing.JLabel lblExit;

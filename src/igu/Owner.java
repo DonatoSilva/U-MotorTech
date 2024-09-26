@@ -8,12 +8,12 @@ package igu;
  *
  * @author figue
  */
-public class WorkForm extends javax.swing.JFrame {
+public class Owner extends javax.swing.JFrame {
 
     /**
-     * Creates new form WorkForm
+     * Creates new form OwnerRegistry
      */
-    public WorkForm() {
+    public Owner() {
         initComponents();
     }
 

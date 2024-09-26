@@ -1,6 +1,8 @@
 package motortech;
 
+import java.time.chrono.ThaiBuddhistEra;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 public class Views {
     public static void openWindows(JFrame window){
@@ -26,5 +28,20 @@ public class Views {
     
     public static void minimizeWindows(JFrame window){
         window.setExtendedState(JFrame.ICONIFIED);
+    }
+    
+    public static int showDialogDelete(JFrame window, String title, String message){
+        int option = JOptionPane.showOptionDialog(
+                window,
+                message,
+                title,
+                JOptionPane.YES_NO_OPTION,
+                JOptionPane.WARNING_MESSAGE,
+                null,
+                new String[]{"Eliminar", "Cancelar"},
+                "Cancelar"
+        );
+        
+        return option;
     }
 }

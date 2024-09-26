@@ -6,6 +6,8 @@ import motortech.Views;
 import motortech.Inputs;
 
 public class SignUp extends javax.swing.JFrame {
+    Login login;
+    
     int xMouse;
     int yMouse;
     
@@ -17,6 +19,8 @@ public class SignUp extends javax.swing.JFrame {
     
     public SignUp() {
         initComponents();
+        
+        login = new Login();
         
         textNameUser = inputNameUser.getText();
         textUser = inputUser.getText();
@@ -62,6 +66,7 @@ public class SignUp extends javax.swing.JFrame {
         lblBtnOwner = new java.awt.Label();
         btnHome = new javax.swing.JPanel();
         lblBtnLogin = new java.awt.Label();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Registar Usuario");
@@ -435,6 +440,9 @@ public class SignUp extends javax.swing.JFrame {
 
         Containe.add(btnHome, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 280, 90, 30));
 
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/Motortech.jpg"))); // NOI18N
+        Containe.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 340, -1, -1));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -517,7 +525,39 @@ public class SignUp extends javax.swing.JFrame {
     }//GEN-LAST:event_inputUserFocusLost
 
     private void lblBtnOwnerMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBtnOwnerMouseClicked
+        String title = "MotorTect - Registar usuario";
         
+        if (textNameUser.equals(inputNameUser.getText())) {
+            Inputs.dialogMessageDialog(this, inputNameUser, title ,"El nombre no puede estar vacío");
+            return;
+        }
+        
+        if (inputCellUser.getText().equals(textCellUser)){
+            Inputs.dialogMessageDialog(this, inputCellUser, title ,"El campo del celular no puede estar vacío");
+            return;
+        }
+        
+        if (textEmailUser.equals(inputEmailUser.getText())) {
+            Inputs.dialogMessageDialog(this, inputNameUser, title ,"El nombre no puede estar vacío");
+            return;
+        }
+        
+        if (textEmailUser.equals(inputEmailUser.getText())) {
+            Inputs.dialogMessageDialog(this, inputNameUser, title ,"El correo electronico no puede estar vacío");
+            return;
+        }
+        
+        if (textUser.equals(inputUser.getText())) {
+            Inputs.dialogMessageDialog(this, inputNameUser, title ,"El nombre no puede estar vacío");
+            return;
+        }
+        
+        if (textUser.equals(String.valueOf(inputPassUser.getPassword()))) {
+            Inputs.dialogMessageDialog(this, inputNameUser, title ,"La contreseña no puede estar vacía");
+            return;
+        }
+        
+        Views.openWindows(login, this);
     }//GEN-LAST:event_lblBtnOwnerMouseClicked
 
     private void lblBtnOwnerMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBtnOwnerMouseEntered
@@ -529,7 +569,7 @@ public class SignUp extends javax.swing.JFrame {
     }//GEN-LAST:event_lblBtnOwnerMouseExited
 
     private void lblBtnLoginMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBtnLoginMouseClicked
-        Login login = new Login();
+        
         Views.openWindows(login, this);
     }//GEN-LAST:event_lblBtnLoginMouseClicked
 
@@ -567,6 +607,7 @@ public class SignUp extends javax.swing.JFrame {
     private javax.swing.JPasswordField inputPassUser;
     private javax.swing.JTextField inputUser;
     private javax.swing.JPanel inputUser1;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JLabel lblBtnClose;
     private java.awt.Label lblBtnLogin;
