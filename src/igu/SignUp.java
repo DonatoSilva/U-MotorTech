@@ -1,4 +1,3 @@
-
 package igu;
 
 import motortech.MotorTech;
@@ -6,45 +5,50 @@ import motortech.Views;
 import motortech.Inputs;
 
 public class SignUp extends javax.swing.JFrame {
+
     Login login;
-    
-    int xMouse;
-    int yMouse;
-    
-    String textNameUser;
-    String textCellUser;
-    String textEmailUser;
-    String textUser;
-    String textPassUser;
-    
+
+    private int xMouse;
+    private int yMouse;
+
+    private String textNameUser;
+    private String textCellUser;
+    private String textEmailUser;
+    private String textUser;
+    private String textPassUser;
+    private String textPassUser1;
+
     boolean isPopupWindow = false;
-    
+
     public SignUp() {
         initComponents();
-        
+
         login = new Login();
+
+        initInput();
         
-        textNameUser = inputNameUser.getText();
-        textUser = inputUser.getText();
-        textEmailUser = inputEmailUser.getText();
-        textCellUser = inputCellUser.getText();
-        textPassUser = String.valueOf(inputPassUser.getPassword());
-    }
-    
-    public SignUp(boolean isPopup) {
-        initComponents();
-        
-        login = new Login();
-        isPopupWindow = isPopup;
-        
-        textNameUser = inputNameUser.getText();
-        textUser = inputUser.getText();
-        textEmailUser = inputEmailUser.getText();
-        textCellUser = inputCellUser.getText();
-        textPassUser = String.valueOf(inputPassUser.getPassword());
     }
 
+    public SignUp(boolean isPopup) {
+        initComponents();
+
+        login = new Login();
+        isPopupWindow = isPopup;
+
+        initInput();
+    }
     
+    private void initInput() {
+        btnHome.setVisible(!isPopupWindow);
+        
+        textNameUser = inputNameUser.getText();
+        textUser = inputUser.getText();
+        textEmailUser = inputEmailUser.getText();
+        textCellUser = inputCellUser.getText();
+        textPassUser = String.valueOf(inputPassUser.getPassword());
+        textPassUser1 = String.valueOf(inputPassUser1.getPassword());
+    }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -76,12 +80,15 @@ public class SignUp extends javax.swing.JFrame {
         inputPassUser = new javax.swing.JPasswordField();
         SepPassUser = new javax.swing.JSeparator();
         lblPassUser = new java.awt.Label();
-        lblInfPass = new javax.swing.JLabel();
         btnOwner = new javax.swing.JPanel();
         lblBtnOwner = new java.awt.Label();
         btnHome = new javax.swing.JPanel();
         lblBtnLogin = new java.awt.Label();
         jLabel1 = new javax.swing.JLabel();
+        inputPassUser1 = new javax.swing.JPasswordField();
+        lblPassUser1 = new java.awt.Label();
+        lblInfPass = new javax.swing.JLabel();
+        SepPassUser1 = new javax.swing.JSeparator();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Registar Usuario");
@@ -92,6 +99,7 @@ public class SignUp extends javax.swing.JFrame {
         Containe.setBackground(new java.awt.Color(255, 255, 255));
         Containe.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(0, 153, 153))); // NOI18N
         Containe.setMinimumSize(new java.awt.Dimension(800, 36));
+        Containe.setPreferredSize(new java.awt.Dimension(800, 400));
         Containe.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         barWindow.setBackground(new java.awt.Color(255, 255, 255));
@@ -193,6 +201,7 @@ public class SignUp extends javax.swing.JFrame {
         lblCellUser.setFont(new java.awt.Font("Century Gothic", 0, 10)); // NOI18N
         lblCellUser.setText("Teléfono");
 
+        inputCellUser.setBackground(new java.awt.Color(255, 255, 255));
         inputCellUser.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         inputCellUser.setForeground(new java.awt.Color(204, 204, 204));
         inputCellUser.setText("+57 316605882");
@@ -237,6 +246,7 @@ public class SignUp extends javax.swing.JFrame {
         lblNameUser.setFont(new java.awt.Font("Century Gothic", 0, 10)); // NOI18N
         lblNameUser.setText("Nombre");
 
+        inputNameUser.setBackground(new java.awt.Color(255, 255, 255));
         inputNameUser.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         inputNameUser.setForeground(new java.awt.Color(204, 204, 204));
         inputNameUser.setText("Nombre completo");
@@ -281,6 +291,7 @@ public class SignUp extends javax.swing.JFrame {
         lblEmailUser.setFont(new java.awt.Font("Century Gothic", 0, 10)); // NOI18N
         lblEmailUser.setText("Correo");
 
+        inputEmailUser.setBackground(new java.awt.Color(255, 255, 255));
         inputEmailUser.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         inputEmailUser.setForeground(new java.awt.Color(204, 204, 204));
         inputEmailUser.setText("Correo@email.com");
@@ -325,6 +336,7 @@ public class SignUp extends javax.swing.JFrame {
         lblUser.setFont(new java.awt.Font("Century Gothic", 0, 10)); // NOI18N
         lblUser.setText("Usuario");
 
+        inputUser.setBackground(new java.awt.Color(255, 255, 255));
         inputUser.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         inputUser.setForeground(new java.awt.Color(204, 204, 204));
         inputUser.setText("Ejemplo: JoseIdeas");
@@ -366,6 +378,7 @@ public class SignUp extends javax.swing.JFrame {
         inputPass.setBackground(new java.awt.Color(255, 255, 255));
         inputPass.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        inputPassUser.setBackground(new java.awt.Color(255, 255, 255));
         inputPassUser.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         inputPassUser.setForeground(new java.awt.Color(204, 204, 204));
         inputPassUser.setText("Contraseña");
@@ -391,13 +404,7 @@ public class SignUp extends javax.swing.JFrame {
         lblPassUser.setText("Contraseña");
         inputPass.add(lblPassUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 60, -1));
 
-        lblInfPass.setFont(new java.awt.Font("Century Gothic", 0, 10)); // NOI18N
-        lblInfPass.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        lblInfPass.setText("<html>La Contraseña debe llevar  8 caracteres min, <br>\nentre Mayusculas, y signos (@!?)</html>");
-        lblInfPass.setVerticalAlignment(javax.swing.SwingConstants.TOP);
-        inputPass.add(lblInfPass, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 54, 310, -1));
-
-        Containe.add(inputPass, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 190, 310, 90));
+        Containe.add(inputPass, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 190, 310, 60));
 
         lblBtnOwner.setAlignment(java.awt.Label.CENTER);
         lblBtnOwner.setBackground(new java.awt.Color(0, 153, 153));
@@ -421,14 +428,14 @@ public class SignUp extends javax.swing.JFrame {
         btnOwner.setLayout(btnOwnerLayout);
         btnOwnerLayout.setHorizontalGroup(
             btnOwnerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(lblBtnOwner, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 90, Short.MAX_VALUE)
+            .addComponent(lblBtnOwner, javax.swing.GroupLayout.DEFAULT_SIZE, 90, Short.MAX_VALUE)
         );
         btnOwnerLayout.setVerticalGroup(
             btnOwnerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(lblBtnOwner, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
         );
 
-        Containe.add(btnOwner, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 280, 90, 30));
+        Containe.add(btnOwner, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 340, 90, 30));
 
         lblBtnLogin.setAlignment(java.awt.Label.CENTER);
         lblBtnLogin.setBackground(new java.awt.Color(255, 255, 255));
@@ -453,20 +460,52 @@ public class SignUp extends javax.swing.JFrame {
             .addComponent(lblBtnLogin, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
         );
 
-        Containe.add(btnHome, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 280, 90, 30));
+        Containe.add(btnHome, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 340, 90, 30));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/Motortech.jpg"))); // NOI18N
         Containe.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 340, -1, -1));
+
+        inputPassUser1.setBackground(new java.awt.Color(255, 255, 255));
+        inputPassUser1.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        inputPassUser1.setForeground(new java.awt.Color(204, 204, 204));
+        inputPassUser1.setText("Contraseña");
+        inputPassUser1.setBorder(null);
+        inputPassUser1.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                inputPassUser1FocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                inputPassUser1FocusLost(evt);
+            }
+        });
+        Containe.add(inputPassUser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 280, 310, 30));
+
+        lblPassUser1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        lblPassUser1.setFont(new java.awt.Font("Century Gothic", 0, 10)); // NOI18N
+        lblPassUser1.setText("Confirma contraseña");
+        Containe.add(lblPassUser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 260, 120, -1));
+
+        lblInfPass.setFont(new java.awt.Font("Century Gothic", 0, 10)); // NOI18N
+        lblInfPass.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        lblInfPass.setText("<html>La Contraseña debe llevar  8 caracteres min, <br>\nentre Mayusculas, y signos (@!?)</html>");
+        lblInfPass.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        Containe.add(lblInfPass, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 70, 310, -1));
+
+        SepPassUser1.setBackground(new java.awt.Color(255, 255, 255));
+        SepPassUser1.setForeground(new java.awt.Color(153, 153, 153));
+        SepPassUser1.setPreferredSize(new java.awt.Dimension(310, 19));
+        SepPassUser1.setVerifyInputWhenFocusTarget(false);
+        Containe.add(SepPassUser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 310, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(Containe, javax.swing.GroupLayout.DEFAULT_SIZE, 800, Short.MAX_VALUE)
+            .addComponent(Containe, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(Containe, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
+            .addComponent(Containe, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         getAccessibleContext().setAccessibleDescription("venta donde se pueden registrar los nuevos usuarios de MotorTech");
@@ -487,12 +526,12 @@ public class SignUp extends javax.swing.JFrame {
         if (!isPopupWindow) {
             Views.closeWindows();
         }
-        
+
         this.dispose();
     }//GEN-LAST:event_closeWindow
 
     private void minimizeWinodw(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_minimizeWinodw
-         Views.minimizeWindows(this);
+        Views.minimizeWindows(this);
     }//GEN-LAST:event_minimizeWinodw
 
     private void btnCloseMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCloseMouseEntered
@@ -545,37 +584,53 @@ public class SignUp extends javax.swing.JFrame {
 
     private void lblBtnOwnerMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBtnOwnerMouseClicked
         String title = "MotorTect - Registar usuario";
-        
+
         if (textNameUser.equals(inputNameUser.getText())) {
-            Inputs.dialogMessageDialog(this, inputNameUser, title ,"El nombre no puede estar vacío");
+            Inputs.dialogMessageDialog(this, inputNameUser, title, "El nombre no puede estar vacío");
             return;
         }
-        
-        if (inputCellUser.getText().equals(textCellUser)){
-            Inputs.dialogMessageDialog(this, inputCellUser, title ,"El campo del celular no puede estar vacío");
+
+        if (inputCellUser.getText().equals(textCellUser)) {
+            Inputs.dialogMessageDialog(this, inputCellUser, title, "El campo del celular no puede estar vacío");
             return;
         }
-        
+
         if (textEmailUser.equals(inputEmailUser.getText())) {
-            Inputs.dialogMessageDialog(this, inputNameUser, title ,"El nombre no puede estar vacío");
+            Inputs.dialogMessageDialog(this, inputNameUser, title, "El nombre no puede estar vacío");
             return;
         }
-        
+
         if (textEmailUser.equals(inputEmailUser.getText())) {
-            Inputs.dialogMessageDialog(this, inputNameUser, title ,"El correo electronico no puede estar vacío");
+            Inputs.dialogMessageDialog(this, inputNameUser, title, "El correo electronico no puede estar vacío");
             return;
         }
-        
+
         if (textUser.equals(inputUser.getText())) {
-            Inputs.dialogMessageDialog(this, inputNameUser, title ,"El nombre no puede estar vacío");
+            Inputs.dialogMessageDialog(this, inputNameUser, title, "El nombre no puede estar vacío");
+            return;
+        }
+
+        if (textPassUser.equals(String.valueOf(inputPassUser.getPassword()))) {
+            Inputs.dialogMessageDialog(this, inputNameUser, title, "La contreseña no puede estar vacía");
+            return;
+        }
+
+        if (textPassUser1.equals(String.valueOf(inputPassUser1.getPassword()))) {
+            Inputs.dialogMessageDialog(this, inputNameUser, title, "Tienes que verificar la contraseña");
             return;
         }
         
-        if (textUser.equals(String.valueOf(inputPassUser.getPassword()))) {
-            Inputs.dialogMessageDialog(this, inputNameUser, title ,"La contreseña no puede estar vacía");
+               
+        if (inputPassUser1.getPassword().length < 8){
+            Inputs.dialogMessageDialog(this, inputNameUser, title, "La contraseña no puede tener menos de 8 caracteres");
             return;
         }
         
+        if (!String.valueOf(inputPassUser1.getPassword()).equals(String.valueOf(inputPassUser.getPassword()))) {
+            Inputs.dialogMessageDialog(this, inputNameUser, title, "La contraseña y su verificacion no son las mismas");
+            return;
+        }
+
         Views.openWindows(login, this);
     }//GEN-LAST:event_lblBtnOwnerMouseClicked
 
@@ -588,7 +643,7 @@ public class SignUp extends javax.swing.JFrame {
     }//GEN-LAST:event_lblBtnOwnerMouseExited
 
     private void lblBtnLoginMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBtnLoginMouseClicked
-        
+
         Views.openWindows(login, this);
     }//GEN-LAST:event_lblBtnLoginMouseClicked
 
@@ -600,10 +655,17 @@ public class SignUp extends javax.swing.JFrame {
         Inputs.inputPassFocus(inputPassUser, textPassUser, true);
     }//GEN-LAST:event_inputPassUserFocusLost
 
+    private void inputPassUser1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputPassUser1FocusGained
+        Inputs.inputPassFocus(inputPassUser1, textPassUser1);
+    }//GEN-LAST:event_inputPassUser1FocusGained
+
+    private void inputPassUser1FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputPassUser1FocusLost
+        Inputs.inputPassFocus(inputPassUser1, textPassUser1, true);
+    }//GEN-LAST:event_inputPassUser1FocusLost
+
     /**
      * @param args the command line arguments
      */
-    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Containe;
@@ -611,6 +673,7 @@ public class SignUp extends javax.swing.JFrame {
     private javax.swing.JSeparator SepEmailUser;
     private javax.swing.JSeparator SepNameUser;
     private javax.swing.JSeparator SepPassUser;
+    private javax.swing.JSeparator SepPassUser1;
     private javax.swing.JSeparator SepUser;
     private javax.swing.JPanel barWindow;
     private javax.swing.JPanel btnClose;
@@ -624,6 +687,7 @@ public class SignUp extends javax.swing.JFrame {
     private javax.swing.JTextField inputNameUser;
     private javax.swing.JPanel inputPass;
     private javax.swing.JPasswordField inputPassUser;
+    private javax.swing.JPasswordField inputPassUser1;
     private javax.swing.JTextField inputUser;
     private javax.swing.JPanel inputUser1;
     private javax.swing.JLabel jLabel1;
@@ -637,6 +701,7 @@ public class SignUp extends javax.swing.JFrame {
     private javax.swing.JLabel lblInfPass;
     private java.awt.Label lblNameUser;
     private java.awt.Label lblPassUser;
+    private java.awt.Label lblPassUser1;
     private java.awt.Label lblUser;
     private java.awt.Label titleWindow;
     // End of variables declaration//GEN-END:variables

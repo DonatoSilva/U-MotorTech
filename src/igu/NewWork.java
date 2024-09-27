@@ -6,10 +6,10 @@ import motortech.MotorTech;
 import motortech.Views;
 
 public class NewWork extends javax.swing.JFrame {
-    int xMouse;
-    int yMouse;
+    private int xMouse;
+    private int yMouse;
     
-    JFrame callerOrigin;
+    private JFrame callerOrigin;
     
     public NewWork(JFrame callerOriginFrame) {
         initComponents();

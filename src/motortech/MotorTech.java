@@ -1,8 +1,6 @@
 package motortech;
 
 import igu.Login;
-import igu.NewWork;
-import igu.ViewWork;
 import java.awt.Color;
 
 /**
@@ -17,7 +15,7 @@ public class MotorTech {
     private String status;
     
     public static void main(String[] args) {
-        NewWork login = new NewWork();
+        Login login = new Login();
         Views.openWindows(login);
     }
     

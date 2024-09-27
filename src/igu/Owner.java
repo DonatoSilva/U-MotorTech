@@ -1,11 +1,6 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package igu;
 
 import java.awt.Color;
-import javax.swing.JOptionPane;
 import motortech.Inputs;
 import motortech.MotorTech;
 import motortech.Views;
@@ -17,15 +12,14 @@ public class Owner extends javax.swing.JFrame {
     private int yMouse;
     
     private String textSearch;
+    private Home home;
 
-    public Owner() {
+    public Owner(Home callerFrame) {
         initComponents();
-        
-        motorTech = new MotorTech();
-        motorTech.setStatusTable("IN");
         
         lblTitle.requestFocus();
         textSearch = inputSearch.getText();
+        home = callerFrame;
     }
 
     @SuppressWarnings("unchecked")
@@ -34,8 +28,8 @@ public class Owner extends javax.swing.JFrame {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         Container = new javax.swing.JPanel();
-        btnOwner = new javax.swing.JPanel();
-        lblBtnOwner = new javax.swing.JLabel();
+        btnHome = new javax.swing.JPanel();
+        lblBtnHome = new javax.swing.JLabel();
         lblTitle = new javax.swing.JLabel();
         contentSearch = new javax.swing.JPanel();
         inputSearch = new javax.swing.JTextField();
@@ -50,8 +44,8 @@ public class Owner extends javax.swing.JFrame {
         lblMinimize = new java.awt.Label();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        btnNewWork = new javax.swing.JPanel();
-        lblBtnNewWork = new javax.swing.JLabel();
+        btnNewOwner = new javax.swing.JPanel();
+        lblBtnNewOwner = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -76,39 +70,39 @@ public class Owner extends javax.swing.JFrame {
         });
         Container.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        btnOwner.setBackground(new java.awt.Color(255, 255, 255));
-        btnOwner.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnOwner.addMouseListener(new java.awt.event.MouseAdapter() {
+        btnHome.setBackground(new java.awt.Color(255, 255, 255));
+        btnHome.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnHome.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnOwnerMouseClicked(evt);
+                btnHomeMouseClicked(evt);
             }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnOwnerMouseEntered(evt);
+                btnHomeMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnOwnerMouseExited(evt);
+                btnHomeMouseExited(evt);
             }
         });
-        btnOwner.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        btnHome.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        lblBtnOwner.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        lblBtnOwner.setForeground(new java.awt.Color(0, 0, 0));
-        lblBtnOwner.setText("Inicio");
-        lblBtnOwner.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        lblBtnOwner.addMouseListener(new java.awt.event.MouseAdapter() {
+        lblBtnHome.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        lblBtnHome.setForeground(new java.awt.Color(0, 0, 0));
+        lblBtnHome.setText("Inicio");
+        lblBtnHome.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblBtnHome.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                lblBtnOwnerMouseClicked(evt);
+                lblBtnHomeMouseClicked(evt);
             }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                lblBtnOwnerMouseEntered(evt);
+                lblBtnHomeMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                lblBtnOwnerMouseExited(evt);
+                lblBtnHomeMouseExited(evt);
             }
         });
-        btnOwner.add(lblBtnOwner, new org.netbeans.lib.awtextra.AbsoluteConstraints(1, 10, 90, -1));
+        btnHome.add(lblBtnHome, new org.netbeans.lib.awtextra.AbsoluteConstraints(1, 10, 90, -1));
 
-        Container.add(btnOwner, new org.netbeans.lib.awtextra.AbsoluteConstraints(7, 51, 101, 36));
+        Container.add(btnHome, new org.netbeans.lib.awtextra.AbsoluteConstraints(7, 51, 101, 36));
 
         lblTitle.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/Motortech.jpg"))); // NOI18N
         Container.add(lblTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(7, 15, -1, -1));
@@ -285,37 +279,37 @@ public class Owner extends javax.swing.JFrame {
         jLabel2.setText("Listado de propietarios");
         Container.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 79, 218, 28));
 
-        btnNewWork.setBackground(new java.awt.Color(255, 255, 255));
-        btnNewWork.setForeground(new java.awt.Color(0, 0, 0));
-        btnNewWork.setMinimumSize(new java.awt.Dimension(76, 35));
-        btnNewWork.addMouseListener(new java.awt.event.MouseAdapter() {
+        btnNewOwner.setBackground(new java.awt.Color(255, 255, 255));
+        btnNewOwner.setForeground(new java.awt.Color(0, 0, 0));
+        btnNewOwner.setMinimumSize(new java.awt.Dimension(76, 35));
+        btnNewOwner.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnNewWorkMouseClicked(evt);
+                btnNewOwnerMouseClicked(evt);
             }
         });
-        btnNewWork.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        btnNewOwner.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        lblBtnNewWork.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        lblBtnNewWork.setForeground(new java.awt.Color(0, 0, 0));
-        lblBtnNewWork.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblBtnNewWork.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/boton-circular-plus (1).png"))); // NOI18N
-        lblBtnNewWork.setText("Crear Propietario");
-        lblBtnNewWork.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        lblBtnNewWork.setPreferredSize(new java.awt.Dimension(55, 35));
-        lblBtnNewWork.addMouseListener(new java.awt.event.MouseAdapter() {
+        lblBtnNewOwner.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        lblBtnNewOwner.setForeground(new java.awt.Color(0, 0, 0));
+        lblBtnNewOwner.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblBtnNewOwner.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/boton-circular-plus (1).png"))); // NOI18N
+        lblBtnNewOwner.setText("Crear Propietario");
+        lblBtnNewOwner.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblBtnNewOwner.setPreferredSize(new java.awt.Dimension(55, 35));
+        lblBtnNewOwner.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                lblBtnNewWorkMouseClicked(evt);
+                lblBtnNewOwnerMouseClicked(evt);
             }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                lblBtnNewWorkMouseEntered(evt);
+                lblBtnNewOwnerMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                lblBtnNewWorkMouseExited(evt);
+                lblBtnNewOwnerMouseExited(evt);
             }
         });
-        btnNewWork.add(lblBtnNewWork, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 130, -1));
+        btnNewOwner.add(lblBtnNewOwner, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 130, -1));
 
-        Container.add(btnNewWork, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 60, 133, -1));
+        Container.add(btnNewOwner, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 60, 133, -1));
 
         jScrollPane1.setViewportView(Container);
 
@@ -333,30 +327,29 @@ public class Owner extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void lblBtnOwnerMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBtnOwnerMouseClicked
-        btnOwnerMouseClicked(evt);
-    }//GEN-LAST:event_lblBtnOwnerMouseClicked
+    private void lblBtnHomeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBtnHomeMouseClicked
+        btnHomeMouseClicked(evt);
+    }//GEN-LAST:event_lblBtnHomeMouseClicked
 
-    private void lblBtnOwnerMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBtnOwnerMouseEntered
-        btnOwnerMouseEntered(evt);
-    }//GEN-LAST:event_lblBtnOwnerMouseEntered
+    private void lblBtnHomeMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBtnHomeMouseEntered
+        btnHomeMouseEntered(evt);
+    }//GEN-LAST:event_lblBtnHomeMouseEntered
 
-    private void lblBtnOwnerMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBtnOwnerMouseExited
-        btnOwnerMouseExited(evt);
-    }//GEN-LAST:event_lblBtnOwnerMouseExited
+    private void lblBtnHomeMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBtnHomeMouseExited
+        btnHomeMouseExited(evt);
+    }//GEN-LAST:event_lblBtnHomeMouseExited
 
-    private void btnOwnerMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnOwnerMouseClicked
-        Owner owner = new Owner();
-        Views.openWindows(owner, this);
-    }//GEN-LAST:event_btnOwnerMouseClicked
+    private void btnHomeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnHomeMouseClicked
+        Views.openWindows(home, this);
+    }//GEN-LAST:event_btnHomeMouseClicked
 
-    private void btnOwnerMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnOwnerMouseEntered
-        lblBtnOwner.setForeground(MotorTech.getBgPrimary());
-    }//GEN-LAST:event_btnOwnerMouseEntered
+    private void btnHomeMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnHomeMouseEntered
+        lblBtnHome.setForeground(MotorTech.getBgPrimary());
+    }//GEN-LAST:event_btnHomeMouseEntered
 
-    private void btnOwnerMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnOwnerMouseExited
-        lblBtnOwner.setForeground(Color.black);
-    }//GEN-LAST:event_btnOwnerMouseExited
+    private void btnHomeMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnHomeMouseExited
+        lblBtnHome.setForeground(Color.black);
+    }//GEN-LAST:event_btnHomeMouseExited
 
     private void inputSearchFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputSearchFocusGained
         Inputs.inputTextFocus(inputSearch, textSearch);
@@ -376,7 +369,7 @@ public class Owner extends javax.swing.JFrame {
         tableWork.setEnabled(false);
         if (evt.getClickCount() == 2) {
 
-            ViewWork viewWork = new ViewWork(this);
+            ViewOwner viewWork = new ViewOwner(this);
             tableWork.setEnabled(true);
             Views.openWindows(viewWork, this);
         }
@@ -402,22 +395,22 @@ public class Owner extends javax.swing.JFrame {
         Views.minimizeWindows(this);
     }//GEN-LAST:event_btnMinimizeminimizeApp
 
-    private void lblBtnNewWorkMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBtnNewWorkMouseClicked
-        btnNewWorkMouseClicked(evt);
-    }//GEN-LAST:event_lblBtnNewWorkMouseClicked
+    private void lblBtnNewOwnerMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBtnNewOwnerMouseClicked
+        btnNewOwnerMouseClicked(evt);
+    }//GEN-LAST:event_lblBtnNewOwnerMouseClicked
 
-    private void lblBtnNewWorkMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBtnNewWorkMouseEntered
-        lblBtnNewWork.setForeground(MotorTech.getBgPrimary());
-    }//GEN-LAST:event_lblBtnNewWorkMouseEntered
+    private void lblBtnNewOwnerMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBtnNewOwnerMouseEntered
+        lblBtnNewOwner.setForeground(MotorTech.getBgPrimary());
+    }//GEN-LAST:event_lblBtnNewOwnerMouseEntered
 
-    private void lblBtnNewWorkMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBtnNewWorkMouseExited
-        lblBtnNewWork.setForeground(Color.BLACK);
-    }//GEN-LAST:event_lblBtnNewWorkMouseExited
+    private void lblBtnNewOwnerMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBtnNewOwnerMouseExited
+        lblBtnNewOwner.setForeground(Color.BLACK);
+    }//GEN-LAST:event_lblBtnNewOwnerMouseExited
 
-    private void btnNewWorkMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnNewWorkMouseClicked
-        NewWork newWork = new NewWork(this);
-        Views.openWindows( newWork, this);
-    }//GEN-LAST:event_btnNewWorkMouseClicked
+    private void btnNewOwnerMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnNewOwnerMouseClicked
+        NewOwner newOwner = new NewOwner(this);
+        Views.openWindows(newOwner, this);
+    }//GEN-LAST:event_btnNewOwnerMouseClicked
 
     private void ContainerMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ContainerMouseDragged
         Views.moveWindows(this, evt, xMouse, yMouse);
@@ -451,9 +444,9 @@ public class Owner extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Container;
     private javax.swing.JPanel btnExit;
+    private javax.swing.JPanel btnHome;
     private javax.swing.JPanel btnMinimize;
-    private javax.swing.JPanel btnNewWork;
-    private javax.swing.JPanel btnOwner;
+    private javax.swing.JPanel btnNewOwner;
     private javax.swing.JPanel btnSearch;
     private javax.swing.JPanel contentSearch;
     private javax.swing.JTextField inputSearch;
@@ -462,8 +455,8 @@ public class Owner extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JLabel lblBtnNewWork;
-    private javax.swing.JLabel lblBtnOwner;
+    private javax.swing.JLabel lblBtnHome;
+    private javax.swing.JLabel lblBtnNewOwner;
     private javax.swing.JLabel lblBtnSearch;
     private javax.swing.JLabel lblExit;
     private java.awt.Label lblMinimize;

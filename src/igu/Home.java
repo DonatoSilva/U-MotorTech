@@ -57,6 +57,8 @@ public class Home extends javax.swing.JFrame {
         lblOutSesion = new javax.swing.JLabel();
         btnNewWork = new javax.swing.JPanel();
         lblBtnNewWork = new javax.swing.JLabel();
+        btnUser = new javax.swing.JPanel();
+        lblUser = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         checkIn = new javax.swing.JRadioButton();
         checkFinish = new javax.swing.JRadioButton();
@@ -376,6 +378,37 @@ public class Home extends javax.swing.JFrame {
         });
         btnNewWork.add(lblBtnNewWork, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 130, -1));
 
+        btnUser.setBackground(new java.awt.Color(255, 255, 255));
+        btnUser.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnUser.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnUserMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnUserMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnUserMouseExited(evt);
+            }
+        });
+        btnUser.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        lblUser.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        lblUser.setForeground(new java.awt.Color(0, 0, 0));
+        lblUser.setText("Usuarios");
+        lblUser.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblUserMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                lblUserMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                lblUserMouseExited(evt);
+            }
+        });
+        btnUser.add(lblUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 80, 40));
+
         jLabel3.setForeground(new java.awt.Color(0, 0, 0));
         jLabel3.setText("<html> Opciones: <br> Lista de Trabajo <html>");
 
@@ -414,10 +447,11 @@ public class Home extends javax.swing.JFrame {
                             .addComponent(lblTitle, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(0, 17, Short.MAX_VALUE))
                     .addGroup(ContainerLayout.createSequentialGroup()
-                        .addGroup(ContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnNewUser, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnOutSesion, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnOwner, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(ContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(btnNewUser, javax.swing.GroupLayout.DEFAULT_SIZE, 106, Short.MAX_VALUE)
+                            .addComponent(btnOutSesion, javax.swing.GroupLayout.DEFAULT_SIZE, 106, Short.MAX_VALUE)
+                            .addComponent(btnOwner, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnUser, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGroup(ContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(ContainerLayout.createSequentialGroup()
@@ -460,6 +494,8 @@ public class Home extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(checkFinish)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnNewUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnOutSesion, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -556,7 +592,7 @@ public class Home extends javax.swing.JFrame {
     }//GEN-LAST:event_btnMinimizeminimizeApp
 
     private void btnOwnerMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnOwnerMouseClicked
-        Owner owner = new Owner();
+        Owner owner = new Owner(this);
         Views.openWindows(owner, this);
     }//GEN-LAST:event_btnOwnerMouseClicked
 
@@ -694,6 +730,31 @@ public class Home extends javax.swing.JFrame {
         btnNewWorkMouseClicked(evt);
     }//GEN-LAST:event_lblBtnNewWorkMouseClicked
 
+    private void lblUserMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblUserMouseClicked
+        btnUserMouseClicked(evt);
+    }//GEN-LAST:event_lblUserMouseClicked
+
+    private void lblUserMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblUserMouseEntered
+        btnUserMouseEntered(evt);
+    }//GEN-LAST:event_lblUserMouseEntered
+
+    private void lblUserMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblUserMouseExited
+        btnUserMouseExited(evt);
+    }//GEN-LAST:event_lblUserMouseExited
+
+    private void btnUserMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnUserMouseClicked
+        User user = new User(this);
+        Views.openWindows(user, this);
+    }//GEN-LAST:event_btnUserMouseClicked
+
+    private void btnUserMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnUserMouseEntered
+        lblUser.setForeground(MotorTech.getBgPrimary());
+    }//GEN-LAST:event_btnUserMouseEntered
+
+    private void btnUserMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnUserMouseExited
+        lblUser.setForeground(Color.BLACK);
+    }//GEN-LAST:event_btnUserMouseExited
+
     /**
      * @param args the command line arguments
      */
@@ -708,6 +769,7 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JPanel btnOutSesion;
     private javax.swing.JPanel btnOwner;
     private javax.swing.JPanel btnSearch;
+    private javax.swing.JPanel btnUser;
     private javax.swing.JRadioButton checkFinish;
     private javax.swing.JRadioButton checkIn;
     private javax.swing.JPanel contentSearch;
@@ -726,6 +788,7 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JLabel lblNewUser;
     private javax.swing.JLabel lblOutSesion;
     private javax.swing.JLabel lblTitle;
+    private javax.swing.JLabel lblUser;
     private javax.swing.JTable tableWork;
     // End of variables declaration//GEN-END:variables
 }

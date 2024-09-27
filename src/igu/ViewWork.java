@@ -223,19 +223,8 @@ public class ViewWork extends javax.swing.JFrame {
 
         btnEnd.setBackground(new java.awt.Color(204, 204, 204));
         btnEnd.setForeground(new java.awt.Color(255, 255, 255));
-        btnEnd.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnEnd.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnEnd.setPreferredSize(new java.awt.Dimension(100, 35));
-        btnEnd.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnEndMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnEndMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnEndMouseExited(evt);
-            }
-        });
         btnEnd.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         lblBtnEnd.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
@@ -243,17 +232,6 @@ public class ViewWork extends javax.swing.JFrame {
         lblBtnEnd.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblBtnEnd.setText("Terminar");
         lblBtnEnd.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        lblBtnEnd.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                lblBtnEndMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                lblBtnEndMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                lblBtnEndMouseExited(evt);
-            }
-        });
         btnEnd.add(lblBtnEnd, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 90, -1));
 
         btnDelete.setBackground(new java.awt.Color(255, 102, 102));
@@ -520,9 +498,9 @@ public class ViewWork extends javax.swing.JFrame {
         jPanel14.add(jLabel35, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 20, 60, 30));
 
         jLabel33.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        jLabel33.setForeground(new java.awt.Color(0, 153, 153));
-        jLabel33.setText("EN TALER");
-        jLabel33.setBorder(javax.swing.BorderFactory.createCompoundBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 153, 153), 1, true), javax.swing.BorderFactory.createEmptyBorder(5, 10, 5, 10)));
+        jLabel33.setForeground(new java.awt.Color(255, 51, 102));
+        jLabel33.setText("TERMINADO");
+        jLabel33.setBorder(javax.swing.BorderFactory.createCompoundBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 51, 51), 1, true), javax.swing.BorderFactory.createEmptyBorder(5, 10, 5, 10)));
 
         jLabel37.setText("ID: 01");
 
@@ -752,31 +730,6 @@ public class ViewWork extends javax.swing.JFrame {
     private void lblBtnPrevMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBtnPrevMouseClicked
         btnPrevMouseClicked(evt);
     }//GEN-LAST:event_lblBtnPrevMouseClicked
-
-    private void lblBtnEndMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBtnEndMouseClicked
-        btnEndMouseClicked(evt);
-    }//GEN-LAST:event_lblBtnEndMouseClicked
-
-    private void lblBtnEndMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBtnEndMouseEntered
-        btnEndMouseEntered(evt);
-    }//GEN-LAST:event_lblBtnEndMouseEntered
-
-    private void lblBtnEndMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBtnEndMouseExited
-        btnEndMouseExited(evt);
-    }//GEN-LAST:event_lblBtnEndMouseExited
-
-    private void btnEndMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEndMouseClicked
-        NewWork newWork = new NewWork(this);
-        Views.openWindows(newWork, this);
-    }//GEN-LAST:event_btnEndMouseClicked
-
-    private void btnEndMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEndMouseEntered
-        btnEnd.setBackground(MotorTech.getBgPrimarySelect());
-    }//GEN-LAST:event_btnEndMouseEntered
-
-    private void btnEndMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEndMouseExited
-        btnEnd.setBackground(MotorTech.getBgPrimary());
-    }//GEN-LAST:event_btnEndMouseExited
 
     private void lblBtnEditarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBtnEditarMouseClicked
         NewWork newWork = new NewWork(this);

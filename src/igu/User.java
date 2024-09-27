@@ -1,4 +1,3 @@
-
 package igu;
 
 import java.awt.Color;
@@ -11,25 +10,25 @@ public class User extends javax.swing.JFrame {
 
     private int xMouse;
     private int yMouse;
-    
-    private String textSearch;
 
-    
-    public User() {
+    private String textSearch;
+    private Home home;
+
+    public User(Home callerJframer) {
         initComponents();
-        
+
         textSearch = inputSearch.getText();
+        home = callerJframer;
     }
 
-    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         Container = new javax.swing.JPanel();
-        btnOwner = new javax.swing.JPanel();
-        lblBtnOwner = new javax.swing.JLabel();
+        btnHome = new javax.swing.JPanel();
+        lblBtnHome = new javax.swing.JLabel();
         lblTitle = new javax.swing.JLabel();
         btnNewUser = new javax.swing.JPanel();
         lblNewUser = new javax.swing.JLabel();
@@ -50,7 +49,8 @@ public class User extends javax.swing.JFrame {
         lblOutSesion = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(1000, 700));
+        setUndecorated(true);
+        setResizable(false);
 
         jScrollPane1.setBorder(null);
         jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
@@ -70,37 +70,37 @@ public class User extends javax.swing.JFrame {
             }
         });
 
-        btnOwner.setBackground(new java.awt.Color(255, 255, 255));
-        btnOwner.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnOwner.addMouseListener(new java.awt.event.MouseAdapter() {
+        btnHome.setBackground(new java.awt.Color(255, 255, 255));
+        btnHome.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnHome.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnOwnerMouseClicked(evt);
+                btnHomeMouseClicked(evt);
             }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnOwnerMouseEntered(evt);
+                btnHomeMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnOwnerMouseExited(evt);
+                btnHomeMouseExited(evt);
             }
         });
-        btnOwner.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        btnHome.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        lblBtnOwner.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        lblBtnOwner.setForeground(new java.awt.Color(0, 0, 0));
-        lblBtnOwner.setText("Inicio");
-        lblBtnOwner.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        lblBtnOwner.addMouseListener(new java.awt.event.MouseAdapter() {
+        lblBtnHome.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        lblBtnHome.setForeground(new java.awt.Color(0, 0, 0));
+        lblBtnHome.setText("Inicio");
+        lblBtnHome.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblBtnHome.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                lblBtnOwnerMouseClicked(evt);
+                lblBtnHomeMouseClicked(evt);
             }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                lblBtnOwnerMouseEntered(evt);
+                lblBtnHomeMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                lblBtnOwnerMouseExited(evt);
+                lblBtnHomeMouseExited(evt);
             }
         });
-        btnOwner.add(lblBtnOwner, new org.netbeans.lib.awtextra.AbsoluteConstraints(1, 10, 90, -1));
+        btnHome.add(lblBtnHome, new org.netbeans.lib.awtextra.AbsoluteConstraints(1, 10, 90, -1));
 
         lblTitle.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/Motortech.jpg"))); // NOI18N
 
@@ -190,17 +190,14 @@ public class User extends javax.swing.JFrame {
         tableWork.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         tableWork.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null}
             },
             new String [] {
-                "Id", "Propietario", "Placa", "Tipo de vehiculo"
+                "Id", "Nombre", "Usuario", "Teléfono", "Correo"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -340,19 +337,9 @@ public class User extends javax.swing.JFrame {
                         .addGroup(ContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btnNewUser, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnOutSesion, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnOwner, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(btnHome, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGroup(ContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(ContainerLayout.createSequentialGroup()
-                        .addGap(2, 2, 2)
-                        .addComponent(contentSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 389, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 404, Short.MAX_VALUE)
-                        .addComponent(btnMinimize, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnExit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())
                     .addGroup(ContainerLayout.createSequentialGroup()
                         .addGroup(ContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1)
@@ -361,7 +348,17 @@ public class User extends javax.swing.JFrame {
                                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(15, 615, Short.MAX_VALUE))
                     .addGroup(ContainerLayout.createSequentialGroup()
-                        .addComponent(jScrollPane3)
+                        .addGroup(ContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(ContainerLayout.createSequentialGroup()
+                                .addGap(2, 2, 2)
+                                .addComponent(contentSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 389, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 404, Short.MAX_VALUE)
+                                .addComponent(btnMinimize, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnExit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jScrollPane3))
                         .addContainerGap())))
         );
         ContainerLayout.setVerticalGroup(
@@ -373,7 +370,7 @@ public class User extends javax.swing.JFrame {
                         .addGap(8, 8, 8)
                         .addComponent(lblTitle)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnOwner, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnHome, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnNewUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -410,30 +407,29 @@ public class User extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void lblBtnOwnerMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBtnOwnerMouseClicked
-        btnOwnerMouseClicked(evt);
-    }//GEN-LAST:event_lblBtnOwnerMouseClicked
+    private void lblBtnHomeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBtnHomeMouseClicked
+        btnHomeMouseClicked(evt);
+    }//GEN-LAST:event_lblBtnHomeMouseClicked
 
-    private void lblBtnOwnerMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBtnOwnerMouseEntered
-        btnOwnerMouseEntered(evt);
-    }//GEN-LAST:event_lblBtnOwnerMouseEntered
+    private void lblBtnHomeMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBtnHomeMouseEntered
+        btnHomeMouseEntered(evt);
+    }//GEN-LAST:event_lblBtnHomeMouseEntered
 
-    private void lblBtnOwnerMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBtnOwnerMouseExited
-        btnOwnerMouseExited(evt);
-    }//GEN-LAST:event_lblBtnOwnerMouseExited
+    private void lblBtnHomeMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBtnHomeMouseExited
+        btnHomeMouseExited(evt);
+    }//GEN-LAST:event_lblBtnHomeMouseExited
 
-    private void btnOwnerMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnOwnerMouseClicked
-        Owner owner = new Owner();
-        Views.openWindows(owner, this);
-    }//GEN-LAST:event_btnOwnerMouseClicked
+    private void btnHomeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnHomeMouseClicked
+        Views.openWindows(home, this);
+    }//GEN-LAST:event_btnHomeMouseClicked
 
-    private void btnOwnerMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnOwnerMouseEntered
-        lblBtnOwner.setForeground(MotorTech.getBgPrimary());
-    }//GEN-LAST:event_btnOwnerMouseEntered
+    private void btnHomeMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnHomeMouseEntered
+        lblBtnHome.setForeground(MotorTech.getBgPrimary());
+    }//GEN-LAST:event_btnHomeMouseEntered
 
-    private void btnOwnerMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnOwnerMouseExited
-        lblBtnOwner.setForeground(Color.black);
-    }//GEN-LAST:event_btnOwnerMouseExited
+    private void btnHomeMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnHomeMouseExited
+        lblBtnHome.setForeground(Color.black);
+    }//GEN-LAST:event_btnHomeMouseExited
 
     private void lblNewUserMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblNewUserMouseClicked
         btnNewUserMouseClicked(evt);
@@ -494,9 +490,43 @@ public class User extends javax.swing.JFrame {
         tableWork.setEnabled(false);
         if (evt.getClickCount() == 2) {
 
-            ViewWork viewWork = new ViewWork(this);
-            tableWork.setEnabled(true);
-            Views.openWindows(viewWork, this);
+            int opcion = JOptionPane.showOptionDialog(
+                    this,
+                    "¿Seleccione lo que desea hacaer con este usuario?",
+                    "MotorTech - Usuario",
+                    JOptionPane.YES_NO_OPTION,
+                    JOptionPane.WARNING_MESSAGE,
+                    null,
+                    new String[]{"Cancelar", "Eliminar", "Editar"},
+                    "Cancelar"
+            );
+
+            if (opcion == 0) {
+                return;
+            }
+            
+            if (opcion == 2) {
+                SignUp signUp = new SignUp(true);
+                Views.openWindows(signUp);
+                return;
+            }
+            
+            int deleteModal = JOptionPane.showOptionDialog(
+                    this,
+                    "¿Seguro que desea eliminar este usuario?",
+                    "MotorTech - Usuario",
+                    JOptionPane.YES_NO_OPTION,
+                    JOptionPane.WARNING_MESSAGE,
+                    null,
+                    new String[]{"Cancelar", "Eliminar"},
+                    "Cancelar"
+            );
+            
+            if (deleteModal == 0) {
+                return;
+            }
+            
+            return;
         }
     }//GEN-LAST:event_tableWorkMouseClicked
 
@@ -536,14 +566,14 @@ public class User extends javax.swing.JFrame {
         Login login = new Login();
 
         int opcion = JOptionPane.showOptionDialog(
-            this,
-            "¿Esta seguro que desea cerrar sesión?",
-            "MotorTech - Inicio",
-            JOptionPane.YES_NO_OPTION,
-            JOptionPane.WARNING_MESSAGE,
-            null,
-            new String[]{"Cerrar sesión", "Cancelar"},
-            "Cancelar"
+                this,
+                "¿Esta seguro que desea cerrar sesión?",
+                "MotorTech - Inicio",
+                JOptionPane.YES_NO_OPTION,
+                JOptionPane.WARNING_MESSAGE,
+                null,
+                new String[]{"Cerrar sesión", "Cancelar"},
+                "Cancelar"
         );
 
         if (opcion == 1) {
@@ -570,48 +600,13 @@ public class User extends javax.swing.JFrame {
         yMouse = evt.getY();
     }//GEN-LAST:event_ContainerMousePressed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(User.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(User.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(User.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(User.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new User().setVisible(true);
-            }
-        });
-    }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Container;
     private javax.swing.JPanel btnExit;
+    private javax.swing.JPanel btnHome;
     private javax.swing.JPanel btnMinimize;
     private javax.swing.JPanel btnNewUser;
     private javax.swing.JPanel btnOutSesion;
-    private javax.swing.JPanel btnOwner;
     private javax.swing.JPanel btnSearch;
     private javax.swing.JPanel contentSearch;
     private javax.swing.JTextField inputSearch;
@@ -620,7 +615,7 @@ public class User extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JLabel lblBtnOwner;
+    private javax.swing.JLabel lblBtnHome;
     private javax.swing.JLabel lblBtnSearch;
     private javax.swing.JLabel lblExit;
     private java.awt.Label lblMinimize;
