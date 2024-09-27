@@ -13,10 +13,10 @@ import motortech.Views;
 public class Home extends javax.swing.JFrame {
     MotorTech motorTech;
     
-    int xMouse;
-    int yMouse;
+    private int xMouse;
+    private int yMouse;
     
-    String textSearch;
+    private String textSearch;
     
     
     public Home() {
@@ -40,8 +40,6 @@ public class Home extends javax.swing.JFrame {
         lblTitle = new javax.swing.JLabel();
         btnNewUser = new javax.swing.JPanel();
         lblNewUser = new javax.swing.JLabel();
-        btnAutomobile = new javax.swing.JPanel();
-        lblBtnAutomobile = new javax.swing.JLabel();
         contentSearch = new javax.swing.JPanel();
         inputSearch = new javax.swing.JTextField();
         jSeparator1 = new javax.swing.JSeparator();
@@ -155,38 +153,6 @@ public class Home extends javax.swing.JFrame {
             }
         });
         btnNewUser.add(lblNewUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 90, -1));
-
-        btnAutomobile.setBackground(new java.awt.Color(255, 255, 255));
-        btnAutomobile.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnAutomobile.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnAutomobileMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnAutomobileMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnAutomobileMouseExited(evt);
-            }
-        });
-        btnAutomobile.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        lblBtnAutomobile.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        lblBtnAutomobile.setForeground(new java.awt.Color(0, 0, 0));
-        lblBtnAutomobile.setText("Vehiculos");
-        lblBtnAutomobile.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        lblBtnAutomobile.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                lblBtnAutomobileMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                lblBtnAutomobileMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                lblBtnAutomobileMouseExited(evt);
-            }
-        });
-        btnAutomobile.add(lblBtnAutomobile, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 90, -1));
 
         contentSearch.setBackground(new java.awt.Color(255, 255, 255));
         contentSearch.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -383,6 +349,11 @@ public class Home extends javax.swing.JFrame {
         btnNewWork.setBackground(new java.awt.Color(255, 255, 255));
         btnNewWork.setForeground(new java.awt.Color(0, 0, 0));
         btnNewWork.setMinimumSize(new java.awt.Dimension(76, 35));
+        btnNewWork.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnNewWorkMouseClicked(evt);
+            }
+        });
         btnNewWork.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         lblBtnNewWork.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
@@ -393,6 +364,9 @@ public class Home extends javax.swing.JFrame {
         lblBtnNewWork.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         lblBtnNewWork.setPreferredSize(new java.awt.Dimension(55, 35));
         lblBtnNewWork.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblBtnNewWorkMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 lblBtnNewWorkMouseEntered(evt);
             }
@@ -443,8 +417,7 @@ public class Home extends javax.swing.JFrame {
                         .addGroup(ContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btnNewUser, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnOutSesion, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnOwner, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnAutomobile, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(btnOwner, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGroup(ContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(ContainerLayout.createSequentialGroup()
@@ -480,9 +453,7 @@ public class Home extends javax.swing.JFrame {
                         .addComponent(lblTitle)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnOwner, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnAutomobile, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(53, 53, 53)
+                        .addGap(95, 95, 95)
                         .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(checkIn)
@@ -531,7 +502,7 @@ public class Home extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnNewUserMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnNewUserMouseClicked
-        SignUp signUp = new SignUp();
+        SignUp signUp = new SignUp(Boolean.TRUE);
         Views.openWindows(signUp);
     }//GEN-LAST:event_btnNewUserMouseClicked
 
@@ -592,32 +563,6 @@ public class Home extends javax.swing.JFrame {
     private void lblBtnOwnerMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBtnOwnerMouseClicked
         btnOwnerMouseClicked(evt);
     }//GEN-LAST:event_lblBtnOwnerMouseClicked
-
-    private void lblBtnAutomobileMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBtnAutomobileMouseClicked
-        btnAutomobileMouseClicked(evt);
-    }//GEN-LAST:event_lblBtnAutomobileMouseClicked
-
-    private void btnAutomobileMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAutomobileMouseClicked
-        Automobile automobile = new Automobile();
-        Views.openWindows(automobile, this);
-    }//GEN-LAST:event_btnAutomobileMouseClicked
-
-    private void btnAutomobileMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAutomobileMouseEntered
-        lblBtnAutomobile.setForeground(MotorTech.getBgPrimary());
-        
-    }//GEN-LAST:event_btnAutomobileMouseEntered
-
-    private void lblBtnAutomobileMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBtnAutomobileMouseEntered
-        btnAutomobileMouseEntered(evt);
-    }//GEN-LAST:event_lblBtnAutomobileMouseEntered
-
-    private void btnAutomobileMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAutomobileMouseExited
-        lblBtnAutomobile.setForeground(Color.black);
-    }//GEN-LAST:event_btnAutomobileMouseExited
-
-    private void lblBtnAutomobileMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBtnAutomobileMouseExited
-        btnAutomobileMouseExited(evt);
-    }//GEN-LAST:event_lblBtnAutomobileMouseExited
 
     private void btnOwnerMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnOwnerMouseEntered
         lblBtnOwner.setForeground(MotorTech.getBgPrimary());
@@ -740,6 +685,15 @@ public class Home extends javax.swing.JFrame {
         btnSearchMouseClicked(evt);
     }//GEN-LAST:event_lblBtnSearchMouseClicked
 
+    private void btnNewWorkMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnNewWorkMouseClicked
+        NewWork newWork = new NewWork(this);
+        Views.openWindows( newWork, this);
+    }//GEN-LAST:event_btnNewWorkMouseClicked
+
+    private void lblBtnNewWorkMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBtnNewWorkMouseClicked
+        btnNewWorkMouseClicked(evt);
+    }//GEN-LAST:event_lblBtnNewWorkMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -747,7 +701,6 @@ public class Home extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Container;
-    private javax.swing.JPanel btnAutomobile;
     private javax.swing.JPanel btnExit;
     private javax.swing.JPanel btnMinimize;
     private javax.swing.JPanel btnNewUser;
@@ -765,7 +718,6 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JLabel lblBtnAutomobile;
     private javax.swing.JLabel lblBtnNewWork;
     private javax.swing.JLabel lblBtnOwner;
     private javax.swing.JLabel lblBtnSearch;

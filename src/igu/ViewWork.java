@@ -10,12 +10,18 @@ public class ViewWork extends javax.swing.JFrame {
     int xMouse;
     int yMouse;
     
-    JFrame callerOrigin; 
+    JFrame callerOrigin;
+    
+    
     
     public ViewWork(JFrame callerOriginFrame) {
         initComponents();
         
         callerOrigin = callerOriginFrame;
+    }
+    
+    public ViewWork() {
+        initComponents();
     }
     
     @SuppressWarnings("unchecked")
@@ -98,7 +104,7 @@ public class ViewWork extends javax.swing.JFrame {
         Container.setBackground(new java.awt.Color(255, 255, 255));
         Container.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(0, 153, 153))); // NOI18N
         Container.setMinimumSize(new java.awt.Dimension(850, 600));
-        Container.setPreferredSize(new java.awt.Dimension(1000, 600));
+        Container.setPreferredSize(new java.awt.Dimension(1200, 600));
         Container.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseDragged(java.awt.event.MouseEvent evt) {
                 ContainerMouseDragged(evt);
@@ -215,7 +221,7 @@ public class ViewWork extends javax.swing.JFrame {
         });
         btnPrev.add(lblBtnPrev, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
 
-        btnEnd.setBackground(new java.awt.Color(0, 153, 153));
+        btnEnd.setBackground(new java.awt.Color(204, 204, 204));
         btnEnd.setForeground(new java.awt.Color(255, 255, 255));
         btnEnd.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnEnd.setPreferredSize(new java.awt.Dimension(100, 35));
@@ -470,7 +476,7 @@ public class ViewWork extends javax.swing.JFrame {
 
         jLabel27.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         jLabel27.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel27.setText("-- --- ----");
+        jLabel27.setText("15 Sep 2024");
         jPanel12.add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, -1, -1));
 
         jPanel13.setBackground(new java.awt.Color(255, 255, 255));
@@ -483,7 +489,7 @@ public class ViewWork extends javax.swing.JFrame {
 
         jLabel29.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
         jLabel29.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel29.setText("-- hs");
+        jLabel29.setText("15 hs");
         jPanel13.add(jLabel29, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 20, 150, 30));
 
         jLabel36.setText("Cambiar");
@@ -499,12 +505,12 @@ public class ViewWork extends javax.swing.JFrame {
 
         jLabel31.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         jLabel31.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel31.setText("<html> <strong>Repuestos:  </strong> ------</html>");
+        jLabel31.setText("<html> <strong>Repuestos:  </strong> 250.000</html>");
         jPanel14.add(jLabel31, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 150, 30));
 
         jLabel32.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         jLabel32.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel32.setText("<html> <strong>Manos de obra:  </strong> ------</html>");
+        jLabel32.setText("<html> <strong>Manos de obra:  </strong> 450.000</html>");
         jPanel14.add(jLabel32, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 20, 150, 30));
 
         jLabel34.setText("Cambiar");
@@ -514,15 +520,15 @@ public class ViewWork extends javax.swing.JFrame {
         jPanel14.add(jLabel35, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 20, 60, 30));
 
         jLabel33.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        jLabel33.setForeground(new java.awt.Color(255, 102, 102));
+        jLabel33.setForeground(new java.awt.Color(0, 153, 153));
         jLabel33.setText("EN TALER");
-        jLabel33.setBorder(javax.swing.BorderFactory.createCompoundBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 51, 51), 1, true), javax.swing.BorderFactory.createEmptyBorder(5, 10, 5, 10)));
+        jLabel33.setBorder(javax.swing.BorderFactory.createCompoundBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 153, 153), 1, true), javax.swing.BorderFactory.createEmptyBorder(5, 10, 5, 10)));
 
         jLabel37.setText("ID: 01");
 
         jLabel38.setText("Creado: Jesus Donato Silva");
 
-        jLabel39.setText("Terminado: Ernesto");
+        jLabel39.setText("Terminado: Hernesto");
 
         javax.swing.GroupLayout ContainerLayout = new javax.swing.GroupLayout(Container);
         Container.setLayout(ContainerLayout);
@@ -576,7 +582,7 @@ public class ViewWork extends javax.swing.JFrame {
                                             .addGroup(ContainerLayout.createSequentialGroup()
                                                 .addGap(6, 6, 6)
                                                 .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, 338, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                        .addGap(0, 117, Short.MAX_VALUE))
+                                        .addGap(0, 0, Short.MAX_VALUE))
                                     .addGroup(ContainerLayout.createSequentialGroup()
                                         .addGap(63, 63, 63)
                                         .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -660,7 +666,7 @@ public class ViewWork extends javax.swing.JFrame {
                     .addGroup(ContainerLayout.createSequentialGroup()
                         .addGap(18, 18, 18)
                         .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 68, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(ContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(btnEnd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -674,12 +680,15 @@ public class ViewWork extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(Container, javax.swing.GroupLayout.DEFAULT_SIZE, 1200, Short.MAX_VALUE)
+            .addComponent(Container, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(Container, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
+
+        getAccessibleContext().setAccessibleName("Ver Trabajo");
+        getAccessibleContext().setAccessibleDescription("Se encuentran los detalles del trabajo ");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -757,7 +766,7 @@ public class ViewWork extends javax.swing.JFrame {
     }//GEN-LAST:event_lblBtnEndMouseExited
 
     private void btnEndMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEndMouseClicked
-        NewWork newWork = new NewWork();
+        NewWork newWork = new NewWork(this);
         Views.openWindows(newWork, this);
     }//GEN-LAST:event_btnEndMouseClicked
 
@@ -770,7 +779,7 @@ public class ViewWork extends javax.swing.JFrame {
     }//GEN-LAST:event_btnEndMouseExited
 
     private void lblBtnEditarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBtnEditarMouseClicked
-        NewWork newWork = new NewWork();
+        NewWork newWork = new NewWork(this);
         
         Views.openWindows(newWork, this);
     }//GEN-LAST:event_lblBtnEditarMouseClicked

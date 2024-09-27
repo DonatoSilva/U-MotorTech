@@ -70,6 +70,7 @@ public class Login extends javax.swing.JFrame {
         lblUser.setText("Usuario");
         Container.add(lblUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 120, 50, -1));
 
+        inputUser.setBackground(new java.awt.Color(255, 255, 255));
         inputUser.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         inputUser.setForeground(new java.awt.Color(204, 204, 204));
         inputUser.setText("Ingrese su usuario");
@@ -122,6 +123,7 @@ public class Login extends javax.swing.JFrame {
 
         Container.add(btnHome, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 270, 90, 30));
 
+        inputPass.setBackground(new java.awt.Color(255, 255, 255));
         inputPass.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         inputPass.setForeground(new java.awt.Color(204, 204, 204));
         inputPass.setText("Contraseña");

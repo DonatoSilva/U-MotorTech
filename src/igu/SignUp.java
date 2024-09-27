@@ -17,10 +17,25 @@ public class SignUp extends javax.swing.JFrame {
     String textUser;
     String textPassUser;
     
+    boolean isPopupWindow = false;
+    
     public SignUp() {
         initComponents();
         
         login = new Login();
+        
+        textNameUser = inputNameUser.getText();
+        textUser = inputUser.getText();
+        textEmailUser = inputEmailUser.getText();
+        textCellUser = inputCellUser.getText();
+        textPassUser = String.valueOf(inputPassUser.getPassword());
+    }
+    
+    public SignUp(boolean isPopup) {
+        initComponents();
+        
+        login = new Login();
+        isPopupWindow = isPopup;
         
         textNameUser = inputNameUser.getText();
         textUser = inputUser.getText();
@@ -431,7 +446,7 @@ public class SignUp extends javax.swing.JFrame {
         btnHome.setLayout(btnHomeLayout);
         btnHomeLayout.setHorizontalGroup(
             btnHomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(lblBtnLogin, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 90, Short.MAX_VALUE)
+            .addComponent(lblBtnLogin, javax.swing.GroupLayout.DEFAULT_SIZE, 90, Short.MAX_VALUE)
         );
         btnHomeLayout.setVerticalGroup(
             btnHomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -469,7 +484,11 @@ public class SignUp extends javax.swing.JFrame {
     }//GEN-LAST:event_moveWindow
 
     private void closeWindow(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_closeWindow
-        Views.closeWindows();
+        if (!isPopupWindow) {
+            Views.closeWindows();
+        }
+        
+        this.dispose();
     }//GEN-LAST:event_closeWindow
 
     private void minimizeWinodw(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_minimizeWinodw
