@@ -6,7 +6,6 @@ import javax.swing.JOptionPane;
 
 public class Views {
     public static void openWindows(JFrame window){
-         
         window.setVisible(true);
         window.setLocationRelativeTo(null);
     }

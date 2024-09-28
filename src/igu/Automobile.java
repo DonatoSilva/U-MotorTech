@@ -1,5 +1,6 @@
 package igu;
 
+import motortech.Inputs;
 import motortech.MotorTech;
 import motortech.Views;
 
@@ -7,14 +8,30 @@ public class Automobile extends javax.swing.JFrame {
 
     private int xMouse;
     private int yMouse;
+    private String textPlates;
+    private String textNumber;
 
-
+    boolean isPopupWindow = false;
     
     public Automobile() {
         initComponents();
         
+        initApp();
+    }
+    
+    public Automobile(boolean isPopup) {
+        initComponents();
+        
+        isPopupWindow = isPopup;
+        initApp();
+    }
+    
+    private void initApp(){
         buttonGroup.add(jRadioButton1);
         buttonGroup.add(jRadioButton2);
+        
+        textPlates = inputPlate.getText();
+        textNumber = inputNumber.getText();
     }
 
    
@@ -27,22 +44,26 @@ public class Automobile extends javax.swing.JFrame {
         titleWindow = new java.awt.Label();
         lblPass = new java.awt.Label();
         lblUser = new java.awt.Label();
-        btnHome = new javax.swing.JPanel();
-        lblBtnHome = new java.awt.Label();
+        btnSave = new javax.swing.JPanel();
+        lblBtnSave = new java.awt.Label();
         Sepuser = new javax.swing.JSeparator();
-        label5 = new java.awt.Label();
+        lblBtnCancel = new java.awt.Label();
         barWindow = new javax.swing.JPanel();
         btnExit = new javax.swing.JPanel();
         lblExit = new javax.swing.JLabel();
         btnMinimize = new javax.swing.JPanel();
         lblMinimize = new java.awt.Label();
         jLabel1 = new javax.swing.JLabel();
-        inputUser1 = new javax.swing.JTextField();
+        inputPlate = new javax.swing.JTextField();
         jRadioButton1 = new javax.swing.JRadioButton();
         jRadioButton2 = new javax.swing.JRadioButton();
+        lblUser1 = new java.awt.Label();
+        inputNumber = new javax.swing.JTextField();
+        Sepuser1 = new javax.swing.JSeparator();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(501, 370));
+        setUndecorated(true);
+        setResizable(false);
 
         Container.setBackground(new java.awt.Color(255, 255, 255));
         Container.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
@@ -51,70 +72,70 @@ public class Automobile extends javax.swing.JFrame {
 
         titleWindow.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
         titleWindow.setText("Crear vehículo");
-        Container.add(titleWindow, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 60, -1, -1));
+        Container.add(titleWindow, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 50, -1, -1));
 
         lblPass.setFont(new java.awt.Font("Century Gothic", 0, 10)); // NOI18N
         lblPass.setText("Seleccione el tipo de vehículo");
-        Container.add(lblPass, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 190, -1, -1));
+        Container.add(lblPass, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 230, -1, -1));
 
         lblUser.setFont(new java.awt.Font("Century Gothic", 0, 10)); // NOI18N
         lblUser.setText("Placa");
-        Container.add(lblUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 120, 50, -1));
+        Container.add(lblUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 100, 50, -1));
         lblUser.getAccessibleContext().setAccessibleDescription("");
 
-        btnHome.addMouseListener(new java.awt.event.MouseAdapter() {
+        btnSave.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnHomeopenHome(evt);
+                btnSaveopenHome(evt);
             }
         });
 
-        lblBtnHome.setAlignment(java.awt.Label.CENTER);
-        lblBtnHome.setBackground(new java.awt.Color(0, 153, 153));
-        lblBtnHome.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        lblBtnHome.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        lblBtnHome.setForeground(new java.awt.Color(255, 255, 255));
-        lblBtnHome.setText("Guardar");
-        lblBtnHome.addMouseListener(new java.awt.event.MouseAdapter() {
+        lblBtnSave.setAlignment(java.awt.Label.CENTER);
+        lblBtnSave.setBackground(new java.awt.Color(0, 153, 153));
+        lblBtnSave.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblBtnSave.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        lblBtnSave.setForeground(new java.awt.Color(255, 255, 255));
+        lblBtnSave.setText("Guardar");
+        lblBtnSave.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                lblBtnHomeMouseClicked(evt);
+                lblBtnSaveMouseClicked(evt);
             }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                lblBtnHomeMouseEntered(evt);
+                lblBtnSaveMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                lblBtnHomeMouseExited(evt);
+                lblBtnSaveMouseExited(evt);
             }
         });
 
-        javax.swing.GroupLayout btnHomeLayout = new javax.swing.GroupLayout(btnHome);
-        btnHome.setLayout(btnHomeLayout);
-        btnHomeLayout.setHorizontalGroup(
-            btnHomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(lblBtnHome, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 90, Short.MAX_VALUE)
+        javax.swing.GroupLayout btnSaveLayout = new javax.swing.GroupLayout(btnSave);
+        btnSave.setLayout(btnSaveLayout);
+        btnSaveLayout.setHorizontalGroup(
+            btnSaveLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(lblBtnSave, javax.swing.GroupLayout.DEFAULT_SIZE, 90, Short.MAX_VALUE)
         );
-        btnHomeLayout.setVerticalGroup(
-            btnHomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(lblBtnHome, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
+        btnSaveLayout.setVerticalGroup(
+            btnSaveLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(lblBtnSave, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
         );
 
-        Container.add(btnHome, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 270, 90, 30));
+        Container.add(btnSave, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 310, 90, 30));
 
         Sepuser.setForeground(new java.awt.Color(153, 153, 153));
         Sepuser.setPreferredSize(new java.awt.Dimension(290, 10));
-        Container.add(Sepuser, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 170, -1, -1));
+        Container.add(Sepuser, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 150, -1, -1));
 
-        label5.setAlignment(java.awt.Label.CENTER);
-        label5.setBackground(new java.awt.Color(255, 255, 255));
-        label5.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        label5.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        label5.setForeground(new java.awt.Color(0, 0, 0));
-        label5.setText("Cancelar");
-        label5.addMouseListener(new java.awt.event.MouseAdapter() {
+        lblBtnCancel.setAlignment(java.awt.Label.CENTER);
+        lblBtnCancel.setBackground(new java.awt.Color(255, 255, 255));
+        lblBtnCancel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblBtnCancel.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        lblBtnCancel.setForeground(new java.awt.Color(0, 0, 0));
+        lblBtnCancel.setText("Cancelar");
+        lblBtnCancel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                label5openSingUp(evt);
+                lblBtnCancelopenSingUp(evt);
             }
         });
-        Container.add(label5, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 270, 90, 30));
+        Container.add(lblBtnCancel, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 310, 90, 30));
 
         barWindow.setBackground(new java.awt.Color(255, 255, 255));
         barWindow.setPreferredSize(new java.awt.Dimension(498, 35));
@@ -207,29 +228,57 @@ public class Automobile extends javax.swing.JFrame {
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/Motortech.jpg"))); // NOI18N
         Container.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 320, -1, -1));
 
-        inputUser1.setBackground(new java.awt.Color(255, 255, 255));
-        inputUser1.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        inputUser1.setForeground(new java.awt.Color(204, 204, 204));
-        inputUser1.setText("Ingrese su placa");
-        inputUser1.setBorder(null);
-        inputUser1.addFocusListener(new java.awt.event.FocusAdapter() {
+        inputPlate.setBackground(new java.awt.Color(255, 255, 255));
+        inputPlate.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        inputPlate.setForeground(new java.awt.Color(204, 204, 204));
+        inputPlate.setText("Ingrese su placa");
+        inputPlate.setBorder(null);
+        inputPlate.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
-                inputUser1FocusGained(evt);
+                inputPlateFocusGained(evt);
             }
             public void focusLost(java.awt.event.FocusEvent evt) {
-                inputUser1FocusLost(evt);
+                inputPlateFocusLost(evt);
             }
         });
-        Container.add(inputUser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 140, 290, 30));
+        Container.add(inputPlate, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 120, 290, 30));
+        inputPlate.getAccessibleContext().setAccessibleName("Placa del carro");
+        inputPlate.getAccessibleContext().setAccessibleDescription("introdusca la placa del carro para continuar con el formulario");
 
         jRadioButton1.setBackground(new java.awt.Color(255, 255, 255));
+        jRadioButton1.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         jRadioButton1.setForeground(new java.awt.Color(0, 0, 0));
         jRadioButton1.setText("Automóvil");
-        Container.add(jRadioButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 220, -1, -1));
+        Container.add(jRadioButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 260, -1, -1));
 
+        jRadioButton2.setBackground(new java.awt.Color(255, 255, 255));
+        jRadioButton2.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         jRadioButton2.setForeground(new java.awt.Color(0, 0, 0));
         jRadioButton2.setText("Camioneta");
-        Container.add(jRadioButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 220, -1, -1));
+        Container.add(jRadioButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 260, -1, -1));
+
+        lblUser1.setFont(new java.awt.Font("Century Gothic", 0, 10)); // NOI18N
+        lblUser1.setText("Targeta de propiedad");
+        Container.add(lblUser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 160, 180, -1));
+
+        inputNumber.setBackground(new java.awt.Color(255, 255, 255));
+        inputNumber.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        inputNumber.setForeground(new java.awt.Color(204, 204, 204));
+        inputNumber.setText("Ingrese su tarjeta de propiedad");
+        inputNumber.setBorder(null);
+        inputNumber.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                inputNumberFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                inputNumberFocusLost(evt);
+            }
+        });
+        Container.add(inputNumber, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 180, 290, 30));
+
+        Sepuser1.setForeground(new java.awt.Color(153, 153, 153));
+        Sepuser1.setPreferredSize(new java.awt.Dimension(290, 10));
+        Container.add(Sepuser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 210, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -245,13 +294,13 @@ public class Automobile extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void inputUser1FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputUser1FocusLost
-        // TODO add your handling code here:
-    }//GEN-LAST:event_inputUser1FocusLost
+    private void inputPlateFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputPlateFocusLost
+        Inputs.inputTextFocus(inputPlate, textPlates, true);
+    }//GEN-LAST:event_inputPlateFocusLost
 
-    private void inputUser1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputUser1FocusGained
-        // TODO add your handling code here:
-    }//GEN-LAST:event_inputUser1FocusGained
+    private void inputPlateFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputPlateFocusGained
+        Inputs.inputTextFocus(inputPlate, textPlates);
+    }//GEN-LAST:event_inputPlateFocusGained
 
     private void barWindowMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_barWindowMousePressed
         xMouse = evt.getX();
@@ -279,29 +328,40 @@ public class Automobile extends javax.swing.JFrame {
     }//GEN-LAST:event_lblExitMouseEntered
 
     private void lblExitcloseApp(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblExitcloseApp
-        Views.closeWindows();
+        if (!isPopupWindow) {
+            Views.closeWindows();
+        }
+
+        this.dispose();
     }//GEN-LAST:event_lblExitcloseApp
 
-    private void label5openSingUp(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_label5openSingUp
-        SignUp signUp = new SignUp();
-        Views.openWindows(signUp, this);
-    }//GEN-LAST:event_label5openSingUp
+    private void lblBtnCancelopenSingUp(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBtnCancelopenSingUp
+        lblExitcloseApp(evt);
+    }//GEN-LAST:event_lblBtnCancelopenSingUp
 
-    private void btnHomeopenHome(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnHomeopenHome
+    private void btnSaveopenHome(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSaveopenHome
         
-    }//GEN-LAST:event_btnHomeopenHome
+    }//GEN-LAST:event_btnSaveopenHome
 
-    private void lblBtnHomeMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBtnHomeMouseExited
-        lblBtnHome.setBackground(MotorTech.getBgPrimary());
-    }//GEN-LAST:event_lblBtnHomeMouseExited
+    private void lblBtnSaveMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBtnSaveMouseExited
+        lblBtnSave.setBackground(MotorTech.getBgPrimary());
+    }//GEN-LAST:event_lblBtnSaveMouseExited
 
-    private void lblBtnHomeMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBtnHomeMouseEntered
-        lblBtnHome.setBackground(MotorTech.getBgPrimarySelect());
-    }//GEN-LAST:event_lblBtnHomeMouseEntered
+    private void lblBtnSaveMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBtnSaveMouseEntered
+        lblBtnSave.setBackground(MotorTech.getBgPrimarySelect());
+    }//GEN-LAST:event_lblBtnSaveMouseEntered
 
-    private void lblBtnHomeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBtnHomeMouseClicked
-       
-    }//GEN-LAST:event_lblBtnHomeMouseClicked
+    private void lblBtnSaveMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBtnSaveMouseClicked
+        lblExitcloseApp(evt);
+    }//GEN-LAST:event_lblBtnSaveMouseClicked
+
+    private void inputNumberFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputNumberFocusGained
+        Inputs.inputTextFocus(inputNumber, textNumber, true);
+    }//GEN-LAST:event_inputNumberFocusGained
+
+    private void inputNumberFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputNumberFocusLost
+        Inputs.inputTextFocus(inputNumber, textNumber);
+    }//GEN-LAST:event_inputNumberFocusLost
 
     /**
      * @param args the command line arguments
@@ -310,21 +370,24 @@ public class Automobile extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Container;
     private javax.swing.JSeparator Sepuser;
+    private javax.swing.JSeparator Sepuser1;
     private javax.swing.JPanel barWindow;
     private javax.swing.JPanel btnExit;
-    private javax.swing.JPanel btnHome;
     private javax.swing.JPanel btnMinimize;
+    private javax.swing.JPanel btnSave;
     private javax.swing.ButtonGroup buttonGroup;
-    private javax.swing.JTextField inputUser1;
+    private javax.swing.JTextField inputNumber;
+    private javax.swing.JTextField inputPlate;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JRadioButton jRadioButton1;
     private javax.swing.JRadioButton jRadioButton2;
-    private java.awt.Label label5;
-    private java.awt.Label lblBtnHome;
+    private java.awt.Label lblBtnCancel;
+    private java.awt.Label lblBtnSave;
     private javax.swing.JLabel lblExit;
     private java.awt.Label lblMinimize;
     private java.awt.Label lblPass;
     private java.awt.Label lblUser;
+    private java.awt.Label lblUser1;
     private java.awt.Label titleWindow;
     // End of variables declaration//GEN-END:variables
 }

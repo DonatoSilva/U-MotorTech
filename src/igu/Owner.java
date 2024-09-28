@@ -172,7 +172,7 @@ public class Owner extends javax.swing.JFrame {
                 {null, null, null, null}
             },
             new String [] {
-                "Id", "Propietario", "Placa", "Tipo de vehiculo"
+                "Id", "Nombre", "Cédula", "Teléfono"
             }
         ) {
             Class[] types = new Class [] {

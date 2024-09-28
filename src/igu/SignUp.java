@@ -22,11 +22,9 @@ public class SignUp extends javax.swing.JFrame {
 
     public SignUp() {
         initComponents();
-
         login = new Login();
 
         initInput();
-        
     }
 
     public SignUp(boolean isPopup) {
