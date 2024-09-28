@@ -408,8 +408,8 @@ public class Owner extends javax.swing.JFrame {
     }//GEN-LAST:event_lblBtnNewOwnerMouseExited
 
     private void btnNewOwnerMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnNewOwnerMouseClicked
-        NewOwner newOwner = new NewOwner(this);
-        Views.openWindows(newOwner, this);
+        NewOwner newOwner = new NewOwner(true);
+        Views.openWindows(newOwner);
     }//GEN-LAST:event_btnNewOwnerMouseClicked
 
     private void ContainerMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ContainerMouseDragged

@@ -594,38 +594,33 @@ public class SignUp extends javax.swing.JFrame {
         }
 
         if (textEmailUser.equals(inputEmailUser.getText())) {
-            Inputs.dialogMessageDialog(this, inputNameUser, title, "El nombre no puede estar vacío");
-            return;
-        }
-
-        if (textEmailUser.equals(inputEmailUser.getText())) {
-            Inputs.dialogMessageDialog(this, inputNameUser, title, "El correo electronico no puede estar vacío");
+            Inputs.dialogMessageDialog(this, inputEmailUser, title, "El correo electronico no puede estar vacío");
             return;
         }
 
         if (textUser.equals(inputUser.getText())) {
-            Inputs.dialogMessageDialog(this, inputNameUser, title, "El nombre no puede estar vacío");
+            Inputs.dialogMessageDialog(this, inputUser, title, "El Usuario no puede estar vacío");
             return;
         }
 
         if (textPassUser.equals(String.valueOf(inputPassUser.getPassword()))) {
-            Inputs.dialogMessageDialog(this, inputNameUser, title, "La contreseña no puede estar vacía");
+            Inputs.dialogMessageDialog(this, inputPassUser, title, "La contreseña no puede estar vacía");
             return;
         }
 
         if (textPassUser1.equals(String.valueOf(inputPassUser1.getPassword()))) {
-            Inputs.dialogMessageDialog(this, inputNameUser, title, "Tienes que verificar la contraseña");
+            Inputs.dialogMessageDialog(this, inputPassUser1, title, "Tienes que verificar la contraseña");
             return;
         }
         
                
-        if (inputPassUser1.getPassword().length < 8){
-            Inputs.dialogMessageDialog(this, inputNameUser, title, "La contraseña no puede tener menos de 8 caracteres");
+        if (inputPassUser.getPassword().length < 8){
+            Inputs.dialogMessageDialog(this, inputPassUser, title, "La contraseña no puede tener menos de 8 caracteres");
             return;
         }
         
         if (!String.valueOf(inputPassUser1.getPassword()).equals(String.valueOf(inputPassUser.getPassword()))) {
-            Inputs.dialogMessageDialog(this, inputNameUser, title, "La contraseña y su verificacion no son las mismas");
+            Inputs.dialogMessageDialog(this, inputPassUser1, title, "La contraseña y su verificacion no son las mismas");
             return;
         }
 

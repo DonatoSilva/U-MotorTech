@@ -769,7 +769,7 @@ public class NewWork extends javax.swing.JFrame {
 
     private void btnNewOwnerMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnNewOwnerMouseClicked
         NewOwner newOwner  = new NewOwner();
-        Views.openWindows(newOwner, this);
+        Views.openWindows(newOwner);
     }//GEN-LAST:event_btnNewOwnerMouseClicked
 
     private void btnNewOwnerMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnNewOwnerMouseEntered
