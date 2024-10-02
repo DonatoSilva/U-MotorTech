@@ -498,8 +498,8 @@ public class ViewOwner extends javax.swing.JFrame {
             }
 
             if (opcion == 2) {
-                SignUp signUp = new SignUp(true);
-                Views.openWindows(signUp);
+                Automobile automobile = new Automobile(true);
+                Views.openWindows(automobile);
                 return;
             }
 

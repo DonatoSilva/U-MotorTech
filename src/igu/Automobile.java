@@ -356,11 +356,11 @@ public class Automobile extends javax.swing.JFrame {
     }//GEN-LAST:event_lblBtnSaveMouseClicked
 
     private void inputNumberFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputNumberFocusGained
-        Inputs.inputTextFocus(inputNumber, textNumber, true);
+        Inputs.inputTextFocus(inputNumber, textNumber);
     }//GEN-LAST:event_inputNumberFocusGained
 
     private void inputNumberFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputNumberFocusLost
-        Inputs.inputTextFocus(inputNumber, textNumber);
+        Inputs.inputTextFocus(inputNumber, textNumber, true);
     }//GEN-LAST:event_inputNumberFocusLost
 
     /**

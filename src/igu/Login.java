@@ -4,6 +4,7 @@
  */
 package igu;
  
+import javax.swing.JPasswordField;
 import motortech.Inputs;
 import motortech.MotorTech;
 import motortech.Views;
@@ -295,6 +296,7 @@ public class Login extends javax.swing.JFrame {
     private void openHome(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_openHome
         String currentTextPass = String.valueOf(inputPass.getPassword());
         String currentTextUser = inputUser.getText();
+        
         String title = "MotorTech - Inicio de Sesion";
         
         
@@ -308,7 +310,16 @@ public class Login extends javax.swing.JFrame {
             return;
         }
         
+        if(!currentTextUser.equals("Admin")) {
+            Inputs.dialogMessageDialog(this, inputUser, title, "El usuario Es incorrecto");
+            return;
+        }
         
+        
+        if(!currentTextPass.equals("Admin")){
+            Inputs.dialogMessageDialog(this, inputPass, title, "La contraseña es erronia");
+            return;
+        }
         
         Home home = new Home();
         Views.openWindows(home, this);
