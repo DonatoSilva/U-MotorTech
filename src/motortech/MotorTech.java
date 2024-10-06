@@ -1,26 +1,21 @@
 package motortech;
 
-import igu.Login;
+import igu.ViewLogin;
 import java.awt.Color;
 
-/**
- *
- * @author figue
- */
 public class MotorTech {
-    /**
-     * @param args the command line arguments
-     */
     
     private String status;
     
-    public static void main(String[] args) {
-        Login login = new Login();
-        Views.openWindows(login);
-    }
-    
     public static void main() {}
     
+    
+    /// App status
+    
+    public static void main(String[] args) {
+        ViewLogin login = new ViewLogin();
+        Views.openWindows(login);
+    }
     
     public void setStatusTable(String newValue) {
         status = newValue;

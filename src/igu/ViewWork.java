@@ -756,7 +756,7 @@ public class ViewWork extends javax.swing.JFrame {
     }//GEN-LAST:event_lblBtnPrevMouseClicked
 
     private void lblBtnEditarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBtnEditarMouseClicked
-        NewWork newWork = new NewWork(this);
+        ViewNewWork newWork = new ViewNewWork(this);
         
         Views.openWindows(newWork, this);
     }//GEN-LAST:event_lblBtnEditarMouseClicked

@@ -465,7 +465,7 @@ public class ViewOwner extends javax.swing.JFrame {
     }//GEN-LAST:event_btnPrevMouseExited
 
     private void lblBtnEditarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBtnEditarMouseClicked
-        NewOwner newOwner = new NewOwner(true);
+        ViewNewOwner newOwner = new ViewNewOwner(true);
 
         Views.openWindows(newOwner);
     }//GEN-LAST:event_lblBtnEditarMouseClicked
@@ -498,7 +498,7 @@ public class ViewOwner extends javax.swing.JFrame {
             }
 
             if (opcion == 2) {
-                Automobile automobile = new Automobile(true);
+                ViewNewAutomobile automobile = new ViewNewAutomobile(true);
                 Views.openWindows(automobile);
                 return;
             }
