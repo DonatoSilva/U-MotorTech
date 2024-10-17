@@ -10,8 +10,8 @@ public class ListQuery {
                 + "Cedula INT PRIMARY KEY, "
                 + "NombresApellidos VARCHAR(100) NOT NULL, "
                 + "NumeroTarjetaPropiedad VARCHAR(50) NOT NULL, "
-                + "Direccion VARCHAR(150), "
-                + "Telefono VARCHAR(20), "
+                + "Direccion VARCHAR(150) NOT NULL, "
+                + "Telefono VARCHAR(20) NOT NULL, "
                 + "CorreoElectronico VARCHAR(100))";
 
         String vehiculosQuery = "CREATE TABLE Vehiculos ("
@@ -22,12 +22,10 @@ public class ListQuery {
                 + "FOREIGN KEY (PropietarioID) REFERENCES Propietarios(Cedula))";
 
         String usuariosQuery = "CREATE TABLE Usuarios ("
-                + "Cedula INT PRIMARY KEY, "
+                + "Telefono VARCHAR(20) PRIMARY KEY, "
+                + "Usuario VARCHAR(20) UNIQUE NOT NULL, "
                 + "NombresApellidos VARCHAR(100) NOT NULL, "
-                + "NumeroTarjetaPropiedad VARCHAR(50) NOT NULL, "
-                + "Direccion VARCHAR(150), "
-                + "Telefono VARCHAR(20), "
-                + "CorreoElectronico VARCHAR(100), "
+                + "CorreoElectronico VARCHAR(100) NOT NULL, "
                 + "Contrasena VARCHAR(50) NOT NULL)";
 
         String serviciosQuery = "CREATE TABLE Servicios ("
@@ -42,11 +40,20 @@ public class ListQuery {
                 + "EstadoVehiculo VARCHAR(10), "
                 + "MotivoIngreso VARCHAR(255), "
                 + "EstadoServicio VARCHAR(50), "
-                + "UsuarioID INT, "
+                + "UsuarioID VARCHAR(20), "
                 + "FOREIGN KEY (PropietarioID) REFERENCES Propietarios(Cedula), "
                 + "FOREIGN KEY (VehiculoPlaca) REFERENCES Vehiculos(Placa), "
-                + "FOREIGN KEY (UsuarioID) REFERENCES Usuarios(Cedula))";
-
+                + "FOREIGN KEY (UsuarioID) REFERENCES Usuarios(Telefono))";
+        
+        String allUsersQuery = "SELECT * FROM Usuarios";
+        String deleteUserQuery = "DELETE FROM Usuarios WHERE Telefono = ?";
+        String insertUserQuery = "INSERT INTO Usuarios (Telefono, Usuario, NombresApellidos, CorreoElectronico, Contrasena) VALUES (?, ?, ?, ?, ?)";
+        String updateUserQuery = "UPDATE Usuarios SET Usuario = ?, NombresApellidos = ?, CorreoElectronico = ?, Contrasena = ? WHERE Telefono = ?";
+        String getUserByPhoneQuery = "SELECT * FROM Usuarios WHERE Telefono = ?";
+        String getUsersByPhoneQuery = "SELECT * FROM Usuarios WHERE Telefono LIKE ?";
+        
+         String isLogin = "SELECT * FROM Usuarios WHERE Usuario = ? AND Contrasena = ?";
+        
         // Crear el diccionario y almacenar las consultas
         Map<String, String> listQuery = new HashMap<>();
         
@@ -54,6 +61,15 @@ public class ListQuery {
         listQuery.put("Vehiculos", vehiculosQuery);
         listQuery.put("Usuarios", usuariosQuery);
         listQuery.put("Servicios", serviciosQuery);
+        
+        listQuery.put("AllUsers", allUsersQuery);
+        listQuery.put("DeleteUser", deleteUserQuery);
+        listQuery.put("InsertUser", insertUserQuery);
+        listQuery.put("UpdateUser", updateUserQuery);
+        listQuery.put("GetUserByPhone", getUserByPhoneQuery);
+        listQuery.put("GetUsersByPhone", getUsersByPhoneQuery);
+        
+        listQuery.put("IsLogin", isLogin);
         
         return listQuery;
     }

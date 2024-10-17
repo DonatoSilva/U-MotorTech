@@ -1,8 +1,10 @@
 package igu;
 
+import controller.SignUpController;
 import motortech.MotorTech;
 import motortech.Views;
 import motortech.Inputs;
+import motortech.User;
 
 public class ViewNewSignUp extends javax.swing.JFrame {
 
@@ -10,15 +12,18 @@ public class ViewNewSignUp extends javax.swing.JFrame {
 
     private int xMouse;
     private int yMouse;
+    
+    private SignUpController signUpController;
 
-    private String textNameUser;
-    private String textCellUser;
-    private String textEmailUser;
-    private String textUser;
-    private String textPassUser;
-    private String textPassUser1;
+    public String textNameUser;
+    public String textCellUser;
+    public String textEmailUser;
+    public String textUser;
+    public String textPassUser;
+    public String textPassUser1;
 
-    boolean isPopupWindow = false;
+    public boolean isPopupWindow = false;
+    public boolean isEdit = false;
 
     public ViewNewSignUp() {
         initComponents();
@@ -29,15 +34,34 @@ public class ViewNewSignUp extends javax.swing.JFrame {
 
     public ViewNewSignUp(boolean isPopup) {
         initComponents();
-
-        login = new ViewLogin();
         isPopupWindow = isPopup;
 
         initInput();
     }
     
+    public ViewNewSignUp(boolean isPopup, boolean isEdit, User user){
+        initComponents();
+        isPopupWindow = isPopup;
+        this.isEdit = isEdit;
+        
+        inputNameUser.setText(user.getNombresApellidos());
+        inputUser.setText(user.getUsuario());
+        inputEmailUser.setText(user.getCorreoElectronico());
+        inputCellUser.setText(user.getTelefono());
+        inputPassUser.setText(user.getContrasena());
+        inputPassUser1.setText(user.getContrasena());
+        
+        initInput();
+    }
+    
     private void initInput() {
-        btnHome.setVisible(!isPopupWindow);
+        btnLogin.setVisible(!isPopupWindow);
+        
+        
+        if (isEdit) {
+            inputCellUser.setEditable(!isEdit);
+            lblBtnSingUp.setText("Editar");
+        }
         
         textNameUser = inputNameUser.getText();
         textUser = inputUser.getText();
@@ -45,6 +69,14 @@ public class ViewNewSignUp extends javax.swing.JFrame {
         textCellUser = inputCellUser.getText();
         textPassUser = String.valueOf(inputPassUser.getPassword());
         textPassUser1 = String.valueOf(inputPassUser1.getPassword());
+    }
+    
+    public SignUpController getSignUpController() {
+        return signUpController;
+    }
+
+    public void setSignUpController(SignUpController signUpController) {
+        this.signUpController = signUpController;
     }
 
     @SuppressWarnings("unchecked")
@@ -79,8 +111,8 @@ public class ViewNewSignUp extends javax.swing.JFrame {
         SepPassUser = new javax.swing.JSeparator();
         lblPassUser = new java.awt.Label();
         btnOwner = new javax.swing.JPanel();
-        lblBtnOwner = new java.awt.Label();
-        btnHome = new javax.swing.JPanel();
+        lblBtnSingUp = new java.awt.Label();
+        btnLogin = new javax.swing.JPanel();
         lblBtnLogin = new java.awt.Label();
         jLabel1 = new javax.swing.JLabel();
         inputPassUser1 = new javax.swing.JPasswordField();
@@ -404,21 +436,21 @@ public class ViewNewSignUp extends javax.swing.JFrame {
 
         Containe.add(inputPass, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 190, 310, 60));
 
-        lblBtnOwner.setAlignment(java.awt.Label.CENTER);
-        lblBtnOwner.setBackground(new java.awt.Color(0, 153, 153));
-        lblBtnOwner.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        lblBtnOwner.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        lblBtnOwner.setForeground(new java.awt.Color(255, 255, 255));
-        lblBtnOwner.setText("Registar");
-        lblBtnOwner.addMouseListener(new java.awt.event.MouseAdapter() {
+        lblBtnSingUp.setAlignment(java.awt.Label.CENTER);
+        lblBtnSingUp.setBackground(new java.awt.Color(0, 153, 153));
+        lblBtnSingUp.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblBtnSingUp.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        lblBtnSingUp.setForeground(new java.awt.Color(255, 255, 255));
+        lblBtnSingUp.setText("Registar");
+        lblBtnSingUp.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                lblBtnOwnerMouseClicked(evt);
+                lblBtnSingUpMouseClicked(evt);
             }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                lblBtnOwnerMouseEntered(evt);
+                lblBtnSingUpMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                lblBtnOwnerMouseExited(evt);
+                lblBtnSingUpMouseExited(evt);
             }
         });
 
@@ -426,11 +458,11 @@ public class ViewNewSignUp extends javax.swing.JFrame {
         btnOwner.setLayout(btnOwnerLayout);
         btnOwnerLayout.setHorizontalGroup(
             btnOwnerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(lblBtnOwner, javax.swing.GroupLayout.DEFAULT_SIZE, 90, Short.MAX_VALUE)
+            .addComponent(lblBtnSingUp, javax.swing.GroupLayout.DEFAULT_SIZE, 90, Short.MAX_VALUE)
         );
         btnOwnerLayout.setVerticalGroup(
             btnOwnerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(lblBtnOwner, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
+            .addComponent(lblBtnSingUp, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
         );
 
         Containe.add(btnOwner, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 340, 90, 30));
@@ -447,18 +479,18 @@ public class ViewNewSignUp extends javax.swing.JFrame {
             }
         });
 
-        javax.swing.GroupLayout btnHomeLayout = new javax.swing.GroupLayout(btnHome);
-        btnHome.setLayout(btnHomeLayout);
-        btnHomeLayout.setHorizontalGroup(
-            btnHomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout btnLoginLayout = new javax.swing.GroupLayout(btnLogin);
+        btnLogin.setLayout(btnLoginLayout);
+        btnLoginLayout.setHorizontalGroup(
+            btnLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(lblBtnLogin, javax.swing.GroupLayout.DEFAULT_SIZE, 90, Short.MAX_VALUE)
         );
-        btnHomeLayout.setVerticalGroup(
-            btnHomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        btnLoginLayout.setVerticalGroup(
+            btnLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(lblBtnLogin, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
         );
 
-        Containe.add(btnHome, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 340, 90, 30));
+        Containe.add(btnLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 340, 90, 30));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/Motortech.jpg"))); // NOI18N
         Containe.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 340, -1, -1));
@@ -523,6 +555,7 @@ public class ViewNewSignUp extends javax.swing.JFrame {
     private void closeWindow(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_closeWindow
         if (!isPopupWindow) {
             Views.closeWindows();
+            return;
         }
 
         this.dispose();
@@ -580,63 +613,24 @@ public class ViewNewSignUp extends javax.swing.JFrame {
         Inputs.inputTextFocus(inputUser, textUser, true);
     }//GEN-LAST:event_inputUserFocusLost
 
-    private void lblBtnOwnerMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBtnOwnerMouseClicked
-        String title = "MotorTect - Registar usuario";
-
-        if (textNameUser.equals(inputNameUser.getText())) {
-            Inputs.dialogMessageDialog(this, inputNameUser, title, "El nombre no puede estar vacío");
-            return;
-        }
-
-        if (inputCellUser.getText().equals(textCellUser)) {
-            Inputs.dialogMessageDialog(this, inputCellUser, title, "El campo del celular no puede estar vacío");
-            return;
-        }
-
-        if (textEmailUser.equals(inputEmailUser.getText())) {
-            Inputs.dialogMessageDialog(this, inputEmailUser, title, "El correo electronico no puede estar vacío");
-            return;
-        }
-
-        if (textUser.equals(inputUser.getText())) {
-            Inputs.dialogMessageDialog(this, inputUser, title, "El Usuario no puede estar vacío");
-            return;
-        }
-
-        if (textPassUser.equals(String.valueOf(inputPassUser.getPassword()))) {
-            Inputs.dialogMessageDialog(this, inputPassUser, title, "La contreseña no puede estar vacía");
-            return;
-        }
-
-        if (textPassUser1.equals(String.valueOf(inputPassUser1.getPassword()))) {
-            Inputs.dialogMessageDialog(this, inputPassUser1, title, "Tienes que verificar la contraseña");
-            return;
+    private void lblBtnSingUpMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBtnSingUpMouseClicked
+        if (isEdit){
+           signUpController.updateUser();
+           return;
         }
         
-               
-        if (inputPassUser.getPassword().length < 8){
-            Inputs.dialogMessageDialog(this, inputPassUser, title, "La contraseña no puede tener menos de 8 caracteres");
-            return;
-        }
-        
-        if (!String.valueOf(inputPassUser1.getPassword()).equals(String.valueOf(inputPassUser.getPassword()))) {
-            Inputs.dialogMessageDialog(this, inputPassUser1, title, "La contraseña y su verificacion no son las mismas");
-            return;
-        }
+        signUpController.createUser();
+    }//GEN-LAST:event_lblBtnSingUpMouseClicked
 
-        Views.openWindows(login, this);
-    }//GEN-LAST:event_lblBtnOwnerMouseClicked
+    private void lblBtnSingUpMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBtnSingUpMouseEntered
+        lblBtnSingUp.setBackground(MotorTech.getBgPrimarySelect());
+    }//GEN-LAST:event_lblBtnSingUpMouseEntered
 
-    private void lblBtnOwnerMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBtnOwnerMouseEntered
-        lblBtnOwner.setBackground(MotorTech.getBgPrimarySelect());
-    }//GEN-LAST:event_lblBtnOwnerMouseEntered
-
-    private void lblBtnOwnerMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBtnOwnerMouseExited
-        lblBtnOwner.setBackground(MotorTech.getBgPrimary());
-    }//GEN-LAST:event_lblBtnOwnerMouseExited
+    private void lblBtnSingUpMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBtnSingUpMouseExited
+        lblBtnSingUp.setBackground(MotorTech.getBgPrimary());
+    }//GEN-LAST:event_lblBtnSingUpMouseExited
 
     private void lblBtnLoginMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBtnLoginMouseClicked
-
         Views.openWindows(login, this);
     }//GEN-LAST:event_lblBtnLoginMouseClicked
 
@@ -670,25 +664,25 @@ public class ViewNewSignUp extends javax.swing.JFrame {
     private javax.swing.JSeparator SepUser;
     private javax.swing.JPanel barWindow;
     private javax.swing.JPanel btnClose;
-    private javax.swing.JPanel btnHome;
+    private javax.swing.JPanel btnLogin;
     private javax.swing.JPanel btnOwner;
     private javax.swing.JPanel inputCell;
-    private javax.swing.JTextField inputCellUser;
+    public javax.swing.JTextField inputCellUser;
     private javax.swing.JPanel inputEmail;
-    private javax.swing.JTextField inputEmailUser;
+    public javax.swing.JTextField inputEmailUser;
     private javax.swing.JPanel inputName;
-    private javax.swing.JTextField inputNameUser;
+    public javax.swing.JTextField inputNameUser;
     private javax.swing.JPanel inputPass;
-    private javax.swing.JPasswordField inputPassUser;
-    private javax.swing.JPasswordField inputPassUser1;
-    private javax.swing.JTextField inputUser;
+    public javax.swing.JPasswordField inputPassUser;
+    public javax.swing.JPasswordField inputPassUser1;
+    public javax.swing.JTextField inputUser;
     private javax.swing.JPanel inputUser1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JLabel lblBtnClose;
     private java.awt.Label lblBtnLogin;
     private javax.swing.JLabel lblBtnMinimize;
-    private java.awt.Label lblBtnOwner;
+    private java.awt.Label lblBtnSingUp;
     private java.awt.Label lblCellUser;
     private java.awt.Label lblEmailUser;
     private javax.swing.JLabel lblInfPass;

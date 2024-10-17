@@ -166,10 +166,7 @@ public class ViewOwners extends javax.swing.JFrame {
         tableWork.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         tableWork.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
                 "Id", "Nombre", "Cédula", "Teléfono"

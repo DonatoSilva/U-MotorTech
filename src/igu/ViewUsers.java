@@ -1,24 +1,53 @@
 package igu;
 
+import controller.SignUpController;
+import controller.UsersController;
+import dao.UserDAO;
 import java.awt.Color;
-import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 import motortech.Inputs;
 import motortech.MotorTech;
 import motortech.Views;
 
-public class ViewUser extends javax.swing.JFrame {
+public class ViewUsers extends javax.swing.JFrame {
 
     private int xMouse;
     private int yMouse;
 
     private String textSearch;
-    private Home home;
+    private UsersController usersController;
 
-    public ViewUser(Home callerJframer) {
+    public ViewUsers() {
         initComponents();
 
-        textSearch = inputSearch.getText();
-        home = callerJframer;
+        this.textSearch = inputSearch.getText();
+    }
+
+    public UsersController getUsersController() {
+        return usersController;
+    }
+
+    public void setUsersController(UsersController usersController) {
+        this.usersController = usersController;
+    }
+
+    public void addRow(Object[] rowData) {
+        DefaultTableModel table = (DefaultTableModel) tableUsers.getModel();
+        table.addRow(rowData);
+    }
+
+    public void removeRow(int row) {
+        DefaultTableModel table = (DefaultTableModel) tableUsers.getModel();
+        table.removeRow(row);
+    }
+
+    public void resetTable() {
+        DefaultTableModel table = (DefaultTableModel) tableUsers.getModel();
+        table.setRowCount(0);
+    }
+
+    public void setEnabledTable(boolean a) {
+        tableUsers.setEnabled(a);
     }
 
     @SuppressWarnings("unchecked")
@@ -35,10 +64,8 @@ public class ViewUser extends javax.swing.JFrame {
         contentSearch = new javax.swing.JPanel();
         inputSearch = new javax.swing.JTextField();
         jSeparator1 = new javax.swing.JSeparator();
-        btnSearch = new javax.swing.JPanel();
-        lblBtnSearch = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
-        tableWork = new javax.swing.JTable();
+        tableUsers = new javax.swing.JTable();
         btnExit = new javax.swing.JPanel();
         lblExit = new javax.swing.JLabel();
         btnMinimize = new javax.swing.JPanel();
@@ -151,70 +178,55 @@ public class ViewUser extends javax.swing.JFrame {
             }
         });
         inputSearch.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                inputSearchKeyPressed(evt);
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                inputSearchKeyReleased(evt);
             }
         });
         contentSearch.add(inputSearch, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 344, 30));
         contentSearch.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 344, 10));
 
-        btnSearch.setBackground(new java.awt.Color(0, 153, 153));
-        btnSearch.setMinimumSize(new java.awt.Dimension(76, 35));
-        btnSearch.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnSearchMouseClicked(evt);
-            }
-        });
-        btnSearch.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        lblBtnSearch.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        lblBtnSearch.setForeground(new java.awt.Color(255, 255, 255));
-        lblBtnSearch.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblBtnSearch.setText("Buscar");
-        lblBtnSearch.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        lblBtnSearch.setPreferredSize(new java.awt.Dimension(55, 35));
-        lblBtnSearch.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                lblBtnSearchMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                lblBtnSearchMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                lblBtnSearchMouseExited(evt);
-            }
-        });
-        btnSearch.add(lblBtnSearch, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
-
-        tableWork.setBackground(new java.awt.Color(255, 255, 255));
-        tableWork.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        tableWork.setModel(new javax.swing.table.DefaultTableModel(
+        tableUsers.setBackground(new java.awt.Color(255, 255, 255));
+        tableUsers.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        tableUsers.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null}
+
             },
             new String [] {
-                "Id", "Nombre", "Usuario", "Teléfono", "Correo"
+                "Nombre", "Usuario", "Correo", "Telefono"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
             }
-        });
-        tableWork.setGridColor(new java.awt.Color(238, 238, 238));
-        tableWork.setSelectionBackground(new java.awt.Color(0, 153, 153));
-        tableWork.setSelectionForeground(new java.awt.Color(255, 255, 255));
-        tableWork.setShowGrid(false);
-        tableWork.setShowHorizontalLines(true);
-        tableWork.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tableWorkMouseClicked(evt);
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
             }
         });
-        jScrollPane3.setViewportView(tableWork);
+        tableUsers.setGridColor(new java.awt.Color(238, 238, 238));
+        tableUsers.setSelectionBackground(new java.awt.Color(0, 153, 153));
+        tableUsers.setSelectionForeground(new java.awt.Color(255, 255, 255));
+        tableUsers.setShowGrid(false);
+        tableUsers.setShowHorizontalLines(true);
+        tableUsers.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tableUsersMouseClicked(evt);
+            }
+        });
+        jScrollPane3.setViewportView(tableUsers);
+        if (tableUsers.getColumnModel().getColumnCount() > 0) {
+            tableUsers.getColumnModel().getColumn(0).setResizable(false);
+            tableUsers.getColumnModel().getColumn(1).setResizable(false);
+            tableUsers.getColumnModel().getColumn(2).setResizable(false);
+            tableUsers.getColumnModel().getColumn(3).setResizable(false);
+        }
 
         btnExit.setBackground(new java.awt.Color(0, 153, 153));
         btnExit.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -352,9 +364,7 @@ public class ViewUser extends javax.swing.JFrame {
                             .addGroup(ContainerLayout.createSequentialGroup()
                                 .addGap(2, 2, 2)
                                 .addComponent(contentSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 389, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 404, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 407, Short.MAX_VALUE)
                                 .addComponent(btnMinimize, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(btnExit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -371,14 +381,13 @@ public class ViewUser extends javax.swing.JFrame {
                         .addComponent(lblTitle)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnHome, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 524, Short.MAX_VALUE)
                         .addComponent(btnNewUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnOutSesion, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(ContainerLayout.createSequentialGroup()
                         .addGroup(ContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(contentSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(ContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                 .addComponent(btnMinimize, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(btnExit, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
@@ -386,8 +395,7 @@ public class ViewUser extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 577, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 9, Short.MAX_VALUE)))
+                        .addComponent(jScrollPane3)))
                 .addGap(15, 15, 15))
         );
 
@@ -420,7 +428,7 @@ public class ViewUser extends javax.swing.JFrame {
     }//GEN-LAST:event_lblBtnHomeMouseExited
 
     private void btnHomeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnHomeMouseClicked
-        Views.openWindows(home, this);
+        usersController.btnHomeMouseClicked();
     }//GEN-LAST:event_btnHomeMouseClicked
 
     private void btnHomeMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnHomeMouseEntered
@@ -444,8 +452,10 @@ public class ViewUser extends javax.swing.JFrame {
     }//GEN-LAST:event_lblNewUserMouseExited
 
     private void btnNewUserMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnNewUserMouseClicked
-        ViewNewSignUp signUp = new ViewNewSignUp(Boolean.TRUE);
-        Views.openWindows(signUp);
+        ViewNewSignUp signUp = new ViewNewSignUp(true);
+        UserDAO userDAO = new UserDAO();
+        SignUpController signController = new SignUpController();
+        signController.SignUpController(signUp, userDAO, this);
     }//GEN-LAST:event_btnNewUserMouseClicked
 
     private void btnNewUserMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnNewUserMouseEntered
@@ -464,71 +474,9 @@ public class ViewUser extends javax.swing.JFrame {
         Inputs.inputTextFocus(inputSearch, textSearch, true);
     }//GEN-LAST:event_inputSearchFocusLost
 
-    private void inputSearchKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_inputSearchKeyPressed
-        if (evt.getKeyCode() == 10) {
-            inputSearch.setText("");
-        }
-    }//GEN-LAST:event_inputSearchKeyPressed
-
-    private void lblBtnSearchMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBtnSearchMouseClicked
-        btnSearchMouseClicked(evt);
-    }//GEN-LAST:event_lblBtnSearchMouseClicked
-
-    private void lblBtnSearchMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBtnSearchMouseEntered
-        btnSearch.setBackground(MotorTech.getBgPrimarySelect());
-    }//GEN-LAST:event_lblBtnSearchMouseEntered
-
-    private void lblBtnSearchMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBtnSearchMouseExited
-        btnSearch.setBackground(MotorTech.getBgPrimary());
-    }//GEN-LAST:event_lblBtnSearchMouseExited
-
-    private void btnSearchMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSearchMouseClicked
-        inputSearch.setText("");
-    }//GEN-LAST:event_btnSearchMouseClicked
-
-    private void tableWorkMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableWorkMouseClicked
-        tableWork.setEnabled(false);
-        if (evt.getClickCount() == 2) {
-
-            int opcion = JOptionPane.showOptionDialog(
-                    this,
-                    "¿Seleccione lo que desea hacaer con este usuario?",
-                    "MotorTech - Usuario",
-                    JOptionPane.YES_NO_OPTION,
-                    JOptionPane.WARNING_MESSAGE,
-                    null,
-                    new String[]{"Cancelar", "Eliminar", "Editar"},
-                    "Cancelar"
-            );
-
-            if (opcion == 0) {
-                return;
-            }
-            
-            if (opcion == 2) {
-                ViewNewSignUp signUp = new ViewNewSignUp(true);
-                Views.openWindows(signUp);
-                return;
-            }
-            
-            int deleteModal = JOptionPane.showOptionDialog(
-                    this,
-                    "¿Seguro que desea eliminar este usuario?",
-                    "MotorTech - Usuario",
-                    JOptionPane.YES_NO_OPTION,
-                    JOptionPane.WARNING_MESSAGE,
-                    null,
-                    new String[]{"Cancelar", "Eliminar"},
-                    "Cancelar"
-            );
-            
-            if (deleteModal == 0) {
-                return;
-            }
-            
-            return;
-        }
-    }//GEN-LAST:event_tableWorkMouseClicked
+    private void tableUsersMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableUsersMouseClicked
+        usersController.tableUserMouseClicked(evt);
+    }//GEN-LAST:event_tableUsersMouseClicked
 
     private void lblExitcloseApp(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblExitcloseApp
         Views.closeWindows();
@@ -563,24 +511,7 @@ public class ViewUser extends javax.swing.JFrame {
     }//GEN-LAST:event_lblOutSesionMouseExited
 
     private void btnOutSesionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnOutSesionMouseClicked
-        ViewLogin login = new ViewLogin();
-
-        int opcion = JOptionPane.showOptionDialog(
-                this,
-                "¿Esta seguro que desea cerrar sesión?",
-                "MotorTech - Inicio",
-                JOptionPane.YES_NO_OPTION,
-                JOptionPane.WARNING_MESSAGE,
-                null,
-                new String[]{"Cerrar sesión", "Cancelar"},
-                "Cancelar"
-        );
-
-        if (opcion == 1) {
-            return;
-        }
-
-        Views.openWindows(login, this);
+        usersController.btnOutSesionMouseClicked(evt);
     }//GEN-LAST:event_btnOutSesionMouseClicked
 
     private void btnOutSesionMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnOutSesionMouseEntered
@@ -600,6 +531,13 @@ public class ViewUser extends javax.swing.JFrame {
         yMouse = evt.getY();
     }//GEN-LAST:event_ContainerMousePressed
 
+    private void inputSearchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_inputSearchKeyReleased
+        UsersController usersController = this.getUsersController();
+        
+        String phone = inputSearch.getText().trim();
+        usersController.searchUsersByPhone(phone);
+    }//GEN-LAST:event_inputSearchKeyReleased
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Container;
     private javax.swing.JPanel btnExit;
@@ -607,21 +545,19 @@ public class ViewUser extends javax.swing.JFrame {
     private javax.swing.JPanel btnMinimize;
     private javax.swing.JPanel btnNewUser;
     private javax.swing.JPanel btnOutSesion;
-    private javax.swing.JPanel btnSearch;
     private javax.swing.JPanel contentSearch;
-    private javax.swing.JTextField inputSearch;
+    public javax.swing.JTextField inputSearch;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JLabel lblBtnHome;
-    private javax.swing.JLabel lblBtnSearch;
     private javax.swing.JLabel lblExit;
     private java.awt.Label lblMinimize;
     private javax.swing.JLabel lblNewUser;
     private javax.swing.JLabel lblOutSesion;
     private javax.swing.JLabel lblTitle;
-    private javax.swing.JTable tableWork;
+    private static javax.swing.JTable tableUsers;
     // End of variables declaration//GEN-END:variables
 }

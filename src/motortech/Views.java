@@ -1,6 +1,5 @@
 package motortech;
 
-import java.time.chrono.ThaiBuddhistEra;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 

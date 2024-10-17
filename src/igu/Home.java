@@ -1,9 +1,8 @@
 package igu;
 
-import igu.ViewNewAutomobile;
-import igu.ViewLogin;
-import igu.ViewOwners;
-import igu.ViewNewSignUp;
+import controller.HomeController;
+import controller.SignUpController;
+import dao.UserDAO;
 import java.awt.Color;
 import javax.swing.JOptionPane;
 import motortech.Inputs;
@@ -17,8 +16,9 @@ public class Home extends javax.swing.JFrame {
     private int yMouse;
     
     private String textSearch;
-    
-    
+    private HomeController homeController;
+
+        
     public Home() {
         initComponents();
         
@@ -27,6 +27,14 @@ public class Home extends javax.swing.JFrame {
         
         lblTitle.requestFocus();
         textSearch = inputSearch.getText();
+    }
+    
+    public HomeController getHomeController() {
+        return homeController;
+    }
+
+    public void setHomeController(HomeController homeController) {
+        this.homeController = homeController;
     }
 
     @SuppressWarnings("unchecked")
@@ -212,10 +220,7 @@ public class Home extends javax.swing.JFrame {
         tableWork.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         tableWork.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
                 "Id", "Propietario", "Placa", "Tipo de vehiculo"
@@ -538,8 +543,10 @@ public class Home extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnNewUserMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnNewUserMouseClicked
-        ViewNewSignUp signUp = new ViewNewSignUp(Boolean.TRUE);
-        Views.openWindows(signUp);
+        ViewNewSignUp signUp = new ViewNewSignUp(true);
+        UserDAO userDAO = new UserDAO();
+        SignUpController signUpController = new SignUpController();
+        signUpController.SignUpController(signUp, userDAO, this);
     }//GEN-LAST:event_btnNewUserMouseClicked
 
     private void lblNewUserMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblNewUserMouseClicked
@@ -653,8 +660,6 @@ public class Home extends javax.swing.JFrame {
     }//GEN-LAST:event_btnOutSesionMouseExited
 
     private void btnOutSesionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnOutSesionMouseClicked
-        ViewLogin login = new ViewLogin();
-        
         int opcion = JOptionPane.showOptionDialog(
                 this,
                 "¿Esta seguro que desea cerrar sesión?",
@@ -670,7 +675,7 @@ public class Home extends javax.swing.JFrame {
             return;
         }
         
-        Views.openWindows(login, this);
+        this.getHomeController().login();
     }//GEN-LAST:event_btnOutSesionMouseClicked
 
     private void lblBtnNewWorkMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBtnNewWorkMouseEntered
@@ -684,7 +689,6 @@ public class Home extends javax.swing.JFrame {
     private void tableWorkMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableWorkMouseClicked
         tableWork.setEnabled(false);
         if (evt.getClickCount() == 2) {
-            
             ViewWork viewWork = new ViewWork(this);
             tableWork.setEnabled(true);
             Views.openWindows(viewWork, this);
@@ -743,8 +747,7 @@ public class Home extends javax.swing.JFrame {
     }//GEN-LAST:event_lblUserMouseExited
 
     private void btnUserMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnUserMouseClicked
-        ViewUser user = new ViewUser(this);
-        Views.openWindows(user, this);
+        this.getHomeController().users();
     }//GEN-LAST:event_btnUserMouseClicked
 
     private void btnUserMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnUserMouseEntered

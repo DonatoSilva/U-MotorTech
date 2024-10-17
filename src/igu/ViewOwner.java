@@ -59,7 +59,6 @@ public class ViewOwner extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
-        setPreferredSize(new java.awt.Dimension(900, 600));
         setResizable(false);
 
         Container.setBackground(new java.awt.Color(255, 255, 255));
@@ -339,7 +338,7 @@ public class ViewOwner extends javax.swing.JFrame {
         tableWork.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         tableWork.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null}
+
             },
             new String [] {
                 "Id", "Placa", "Tipo", "Targeta de propiedad"

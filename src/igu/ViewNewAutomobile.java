@@ -10,8 +10,10 @@ public class ViewNewAutomobile extends javax.swing.JFrame {
     private int yMouse;
     private String textPlates;
     private String textNumber;
+    private String textNumber1;
 
     boolean isPopupWindow = false;
+    private int idOwner = -1;
     
     public ViewNewAutomobile() {
         initComponents();
@@ -22,7 +24,16 @@ public class ViewNewAutomobile extends javax.swing.JFrame {
     public ViewNewAutomobile(boolean isPopup) {
         initComponents();
         
+        isPopupWindow = isPopup;        
+        initApp();
+    }
+    
+    public ViewNewAutomobile(boolean isPopup, int idOwner) {
+        initComponents();
+        
         isPopupWindow = isPopup;
+        this.idOwner = idOwner;
+        
         initApp();
     }
     
@@ -30,8 +41,15 @@ public class ViewNewAutomobile extends javax.swing.JFrame {
         buttonGroup.add(jRadioButton1);
         buttonGroup.add(jRadioButton2);
         
+        if(this.idOwner != -1){
+            Sepuser2.setVisible(false);
+            inputNumber1.setVisible(false);
+            lblUser2.setVisible(false);
+        }
+        
         textPlates = inputPlate.getText();
         textNumber = inputNumber.getText();
+        textNumber1 = inputNumber1.getText();
     }
 
    
@@ -60,6 +78,9 @@ public class ViewNewAutomobile extends javax.swing.JFrame {
         lblUser1 = new java.awt.Label();
         inputNumber = new javax.swing.JTextField();
         Sepuser1 = new javax.swing.JSeparator();
+        Sepuser2 = new javax.swing.JSeparator();
+        inputNumber1 = new javax.swing.JTextField();
+        lblUser2 = new java.awt.Label();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -76,7 +97,7 @@ public class ViewNewAutomobile extends javax.swing.JFrame {
 
         lblPass.setFont(new java.awt.Font("Century Gothic", 0, 10)); // NOI18N
         lblPass.setText("Seleccione el tipo de vehículo");
-        Container.add(lblPass, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 230, -1, -1));
+        Container.add(lblPass, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 290, -1, -1));
 
         lblUser.setFont(new java.awt.Font("Century Gothic", 0, 10)); // NOI18N
         lblUser.setText("Placa");
@@ -115,10 +136,10 @@ public class ViewNewAutomobile extends javax.swing.JFrame {
         );
         btnSaveLayout.setVerticalGroup(
             btnSaveLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(lblBtnSave, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
+            .addComponent(lblBtnSave, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        Container.add(btnSave, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 310, 90, 30));
+        Container.add(btnSave, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 360, 90, 30));
 
         Sepuser.setForeground(new java.awt.Color(153, 153, 153));
         Sepuser.setPreferredSize(new java.awt.Dimension(290, 10));
@@ -135,7 +156,7 @@ public class ViewNewAutomobile extends javax.swing.JFrame {
                 lblBtnCancelopenSingUp(evt);
             }
         });
-        Container.add(lblBtnCancel, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 310, 90, 30));
+        Container.add(lblBtnCancel, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 360, 90, 30));
 
         barWindow.setBackground(new java.awt.Color(255, 255, 255));
         barWindow.setPreferredSize(new java.awt.Dimension(498, 35));
@@ -226,7 +247,7 @@ public class ViewNewAutomobile extends javax.swing.JFrame {
         Container.add(barWindow, new org.netbeans.lib.awtextra.AbsoluteConstraints(1, 1, 500, 35));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/Motortech.jpg"))); // NOI18N
-        Container.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 320, -1, -1));
+        Container.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 360, -1, -1));
 
         inputPlate.setBackground(new java.awt.Color(255, 255, 255));
         inputPlate.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
@@ -249,13 +270,13 @@ public class ViewNewAutomobile extends javax.swing.JFrame {
         jRadioButton1.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         jRadioButton1.setForeground(new java.awt.Color(0, 0, 0));
         jRadioButton1.setText("Automóvil");
-        Container.add(jRadioButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 260, -1, -1));
+        Container.add(jRadioButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 310, -1, -1));
 
         jRadioButton2.setBackground(new java.awt.Color(255, 255, 255));
         jRadioButton2.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         jRadioButton2.setForeground(new java.awt.Color(0, 0, 0));
         jRadioButton2.setText("Camioneta");
-        Container.add(jRadioButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 260, -1, -1));
+        Container.add(jRadioButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 310, -1, -1));
 
         lblUser1.setFont(new java.awt.Font("Century Gothic", 0, 10)); // NOI18N
         lblUser1.setText("Targeta de propiedad");
@@ -280,6 +301,29 @@ public class ViewNewAutomobile extends javax.swing.JFrame {
         Sepuser1.setPreferredSize(new java.awt.Dimension(290, 10));
         Container.add(Sepuser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 210, -1, -1));
 
+        Sepuser2.setForeground(new java.awt.Color(153, 153, 153));
+        Sepuser2.setPreferredSize(new java.awt.Dimension(290, 10));
+        Container.add(Sepuser2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 270, -1, -1));
+
+        inputNumber1.setBackground(new java.awt.Color(255, 255, 255));
+        inputNumber1.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        inputNumber1.setForeground(new java.awt.Color(204, 204, 204));
+        inputNumber1.setText("Ingrese la Cedula");
+        inputNumber1.setBorder(null);
+        inputNumber1.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                inputNumber1FocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                inputNumber1FocusLost(evt);
+            }
+        });
+        Container.add(inputNumber1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 240, 290, 30));
+
+        lblUser2.setFont(new java.awt.Font("Century Gothic", 0, 10)); // NOI18N
+        lblUser2.setText("Cedula del propietario");
+        Container.add(lblUser2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 220, 180, -1));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -288,7 +332,7 @@ public class ViewNewAutomobile extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(Container, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(Container, javax.swing.GroupLayout.DEFAULT_SIZE, 414, Short.MAX_VALUE)
         );
 
         pack();
@@ -363,6 +407,14 @@ public class ViewNewAutomobile extends javax.swing.JFrame {
         Inputs.inputTextFocus(inputNumber, textNumber, true);
     }//GEN-LAST:event_inputNumberFocusLost
 
+    private void inputNumber1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputNumber1FocusGained
+        Inputs.inputTextFocus(inputNumber1, textNumber1, true);
+    }//GEN-LAST:event_inputNumber1FocusGained
+
+    private void inputNumber1FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputNumber1FocusLost
+        Inputs.inputTextFocus(inputNumber1, textNumber1);
+    }//GEN-LAST:event_inputNumber1FocusLost
+
     /**
      * @param args the command line arguments
      */
@@ -371,12 +423,14 @@ public class ViewNewAutomobile extends javax.swing.JFrame {
     private javax.swing.JPanel Container;
     private javax.swing.JSeparator Sepuser;
     private javax.swing.JSeparator Sepuser1;
+    private javax.swing.JSeparator Sepuser2;
     private javax.swing.JPanel barWindow;
     private javax.swing.JPanel btnExit;
     private javax.swing.JPanel btnMinimize;
     private javax.swing.JPanel btnSave;
     private javax.swing.ButtonGroup buttonGroup;
     private javax.swing.JTextField inputNumber;
+    private javax.swing.JTextField inputNumber1;
     private javax.swing.JTextField inputPlate;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JRadioButton jRadioButton1;
@@ -388,6 +442,7 @@ public class ViewNewAutomobile extends javax.swing.JFrame {
     private java.awt.Label lblPass;
     private java.awt.Label lblUser;
     private java.awt.Label lblUser1;
+    private java.awt.Label lblUser2;
     private java.awt.Label titleWindow;
     // End of variables declaration//GEN-END:variables
 }

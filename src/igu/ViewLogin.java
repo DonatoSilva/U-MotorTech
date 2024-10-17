@@ -3,25 +3,36 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package igu;
- 
-import javax.swing.JPasswordField;
+
+import controller.LoginController;
 import motortech.Inputs;
 import motortech.MotorTech;
 import motortech.Views;
 
 public class ViewLogin extends javax.swing.JFrame {
+
     String textUser;
     String textPassUser;
     int xMouse;
     int yMouse;
     
+    LoginController loginController;
+
     public ViewLogin() {
         initComponents();
-        
+
         btnHome.requestFocus();
-        
+
         textUser = inputUser.getText();
         textPassUser = String.valueOf(inputPass.getPassword());
+    }
+    
+    public LoginController getLoginController() {
+        return loginController;
+    }
+
+    public void setLoginController(LoginController loginController) {
+        this.loginController = loginController;
     }
 
     @SuppressWarnings("unchecked")
@@ -85,6 +96,11 @@ public class ViewLogin extends javax.swing.JFrame {
                 inputUserFocusLost(evt);
             }
         });
+        inputUser.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                inputUserKeyPressed(evt);
+            }
+        });
         Container.add(inputUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 140, 290, 30));
 
         btnHome.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -137,6 +153,11 @@ public class ViewLogin extends javax.swing.JFrame {
             }
             public void focusLost(java.awt.event.FocusEvent evt) {
                 inputPassFocusLost(evt);
+            }
+        });
+        inputPass.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                inputPassKeyPressed(evt);
             }
         });
         Container.add(inputPass, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 210, -1, -1));
@@ -289,40 +310,11 @@ public class ViewLogin extends javax.swing.JFrame {
     }//GEN-LAST:event_barWindowMouseDragged
 
     private void openSingUp(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_openSingUp
-        ViewNewSignUp signUp = new ViewNewSignUp();
-        Views.openWindows(signUp, this);
+        this.getLoginController().signUp();
     }//GEN-LAST:event_openSingUp
 
     private void openHome(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_openHome
-        String currentTextPass = String.valueOf(inputPass.getPassword());
-        String currentTextUser = inputUser.getText();
-        
-        String title = "MotorTech - Inicio de Sesion";
-        
-        
-        if(currentTextPass.equals(textPassUser)){
-            Inputs.dialogMessageDialog(this, inputPass, title, "La contraseña no puede estar vacía");
-            return;
-        }
-        
-        if(currentTextUser.equals(textUser)) {
-            Inputs.dialogMessageDialog(this, inputUser, title, "El usuario no puede estar vacío");
-            return;
-        }
-        
-        if(!currentTextUser.equals("Admin")) {
-            Inputs.dialogMessageDialog(this, inputUser, title, "El usuario Es incorrecto");
-            return;
-        }
-        
-        
-        if(!currentTextPass.equals("Admin")){
-            Inputs.dialogMessageDialog(this, inputPass, title, "La contraseña es erronia");
-            return;
-        }
-        
-        Home home = new Home();
-        Views.openWindows(home, this);
+        this.getLoginController().home(inputUser, textUser, inputPass, textPassUser);
     }//GEN-LAST:event_openHome
 
     private void lblBtnHomeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBtnHomeMouseClicked
@@ -346,7 +338,7 @@ public class ViewLogin extends javax.swing.JFrame {
     }//GEN-LAST:event_lblBtnHomeMouseExited
 
     private void inputUserFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputUserFocusGained
-       Inputs.inputTextFocus(inputUser, "Ingrese su usuario");
+        Inputs.inputTextFocus(inputUser, "Ingrese su usuario");
     }//GEN-LAST:event_inputUserFocusGained
 
     private void inputUserFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputUserFocusLost
@@ -360,6 +352,18 @@ public class ViewLogin extends javax.swing.JFrame {
     private void inputPassFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputPassFocusLost
         Inputs.inputPassFocus(inputPass, "Contraseña", true);
     }//GEN-LAST:event_inputPassFocusLost
+
+    private void inputUserKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_inputUserKeyPressed
+        if (evt.getKeyCode() == 10) {
+            this.getLoginController().home(inputUser, textUser, inputPass, textPassUser);
+        }
+    }//GEN-LAST:event_inputUserKeyPressed
+
+    private void inputPassKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_inputPassKeyPressed
+        if (evt.getKeyCode() == 10) {
+            this.getLoginController().home(inputUser, textUser, inputPass, textPassUser);
+        }
+    }//GEN-LAST:event_inputPassKeyPressed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

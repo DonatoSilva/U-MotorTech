@@ -1,8 +1,12 @@
 package motortech;
 
+import controller.LoginController;
+import dao.UserDAO;
 import database.MyConnection;
 import igu.ViewLogin;
 import java.awt.Color;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 public class MotorTech {
 
@@ -15,10 +19,30 @@ public class MotorTech {
     public static void main(String[] args) {
         if (MyConnection.setupDatabase(DATABASE)) {
             if (MyConnection.setupTables(DATABASE)) {
-                ViewLogin login = new ViewLogin();
-                Views.openWindows(login);
+                new LoginController(new ViewLogin(), new UserDAO());
             }
         }
+    }
+    
+    public void btnOutSesionMouseClicked(JFrame view, java.awt.event.MouseEvent evt) {                                          
+        ViewLogin login = new ViewLogin();
+
+        int opcion = JOptionPane.showOptionDialog(
+                view,
+                "¿Esta seguro que desea cerrar sesión?",
+                "MotorTech - Inicio",
+                JOptionPane.YES_NO_OPTION,
+                JOptionPane.WARNING_MESSAGE,
+                null,
+                new String[]{"Cerrar sesión", "Cancelar"},
+                "Cancelar"
+        );
+
+        if (opcion == 1) {
+            return;
+        }
+
+        Views.openWindows(login, view);
     }
 
     /// App status
