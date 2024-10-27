@@ -17,9 +17,10 @@ public class SignUpController {
 
     private JFrame callerView;
 
-    public static void SignUpController() {}
+    public SignUpController() {
+    }
 
-    public void SignUpController(ViewNewSignUp view, UserDAO model, JFrame callerView) {
+    public SignUpController(ViewNewSignUp view, UserDAO model, JFrame callerView) {
         this.view = view;
         this.model = model;
         this.callerView = callerView;
@@ -55,7 +56,7 @@ public class SignUpController {
                 if (view.isPopupWindow) {
                     view.dispose();
                 }
-                
+
                 new LoginController(new ViewLogin(), new UserDAO(), view);
                 return;
             }
@@ -66,7 +67,7 @@ public class SignUpController {
 
     public void updateUser() {
         String title = "MotorTect - Editar usuario";
-        
+
         User user = new User();
         user.setNombresApellidos(view.inputNameUser.getText());
         user.setTelefono(view.inputCellUser.getText());
@@ -78,8 +79,8 @@ public class SignUpController {
 
         if (isUpdate) {
             JOptionPane.showMessageDialog(view, "Usuario modificado " + user.getUsuario());
-            if (callerView instanceof ViewUsers){
-                ViewUsers viewUsers = (ViewUsers)callerView;
+            if (callerView instanceof ViewUsers) {
+                ViewUsers viewUsers = (ViewUsers) callerView;
                 UsersController usersController = viewUsers.getUsersController();
                 usersController.resetTable(true);
                 usersController.setEnabledTable(true);
@@ -137,5 +138,18 @@ public class SignUpController {
         }
 
         return isValidate;
+    }
+
+    public void CloseView(boolean isPopupWindow) {
+        if (!isPopupWindow) {
+            Views.closeWindows();
+            return;
+        }
+
+        ViewUsers viewUsers = (ViewUsers) callerView;
+        UsersController usersController = viewUsers.getUsersController();
+        usersController.resetTable(true);
+        usersController.setEnabledTable(true);
+        view.dispose();
     }
 }

@@ -93,9 +93,8 @@ public final class UsersController {
             if (opcion == 2) {
                 UserDAO userDAO = new UserDAO();
                 User user = userDAO.getUser(telefono.toString());
-                ViewNewSignUp signUp = new ViewNewSignUp(true, true, user);
-                SignUpController signUpController = new SignUpController();
-                signUpController.SignUpController(signUp, model, view);
+                
+                SignUpController signUpController = new SignUpController(new ViewNewSignUp(true, true, user), model, view);
                 return;
             }
 

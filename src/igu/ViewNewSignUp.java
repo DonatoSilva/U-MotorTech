@@ -553,12 +553,7 @@ public class ViewNewSignUp extends javax.swing.JFrame {
     }//GEN-LAST:event_moveWindow
 
     private void closeWindow(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_closeWindow
-        if (!isPopupWindow) {
-            Views.closeWindows();
-            return;
-        }
-
-        this.dispose();
+        signUpController.CloseView(isPopupWindow);
     }//GEN-LAST:event_closeWindow
 
     private void minimizeWinodw(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_minimizeWinodw
