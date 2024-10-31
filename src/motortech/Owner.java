@@ -1,17 +1,9 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package motortech;
 
-/**
- *
- * @author figue
- */
+
 public class Owner {
     private int cedula;
     private String nombresApellidos;
-    private String numeroTarjetaPropiedad;
     private String direccion;
     private String telefono;
     private String correoElectronico;
@@ -19,10 +11,9 @@ public class Owner {
     // Constructor
     public Owner() {}
 
-    public Owner(int cedula, String nombresApellidos, String numeroTarjetaPropiedad, String direccion, String telefono, String correoElectronico) {
+    public Owner(int cedula, String nombresApellidos, String direccion, String telefono, String correoElectronico) {
         this.cedula = cedula;
         this.nombresApellidos = nombresApellidos;
-        this.numeroTarjetaPropiedad = numeroTarjetaPropiedad;
         this.direccion = direccion;
         this.telefono = telefono;
         this.correoElectronico = correoElectronico;
@@ -43,14 +34,6 @@ public class Owner {
 
     public void setNombresApellidos(String nombresApellidos) {
         this.nombresApellidos = nombresApellidos;
-    }
-
-    public String getNumeroTarjetaPropiedad() {
-        return numeroTarjetaPropiedad;
-    }
-
-    public void setNumeroTarjetaPropiedad(String numeroTarjetaPropiedad) {
-        this.numeroTarjetaPropiedad = numeroTarjetaPropiedad;
     }
 
     public String getDireccion() {

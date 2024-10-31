@@ -1,5 +1,6 @@
 package igu;
 
+import controller.AutomobileController;
 import motortech.Inputs;
 import motortech.MotorTech;
 import motortech.Views;
@@ -11,48 +12,56 @@ public class ViewNewAutomobile extends javax.swing.JFrame {
     private String textPlates;
     private String textNumber;
     private String textNumber1;
+    
+    private AutomobileController automobileController;
 
-    boolean isPopupWindow = false;
-    private int idOwner = -1;
     
-    public ViewNewAutomobile() {
+    private boolean isEdit = false;
+
+    public ViewNewAutomobile(boolean isEdit) {
         initComponents();
         
+        this.isEdit = isEdit;
         initApp();
     }
-    
-    public ViewNewAutomobile(boolean isPopup) {
-        initComponents();
-        
-        isPopupWindow = isPopup;        
-        initApp();
-    }
-    
-    public ViewNewAutomobile(boolean isPopup, int idOwner) {
-        initComponents();
-        
-        isPopupWindow = isPopup;
-        this.idOwner = idOwner;
-        
-        initApp();
-    }
-    
-    private void initApp(){
-        buttonGroup.add(jRadioButton1);
-        buttonGroup.add(jRadioButton2);
-        
-        if(this.idOwner != -1){
-            Sepuser2.setVisible(false);
-            inputNumber1.setVisible(false);
-            lblUser2.setVisible(false);
-        }
-        
+
+    private void initApp() {
+        buttonGroup.add(rbtnAuto);
+        buttonGroup.add(rbtnCamioneta);
+
         textPlates = inputPlate.getText();
         textNumber = inputNumber.getText();
-        textNumber1 = inputNumber1.getText();
+        textNumber1 = inputIdOwner.getText();
+    }
+    
+    public boolean getIsEdit(){
+        return this.isEdit;
+    }
+    
+    public void setTitleWindows(String title){
+        this.titleWindow.setText(title);
+    }
+    
+    public void setlblAction(String text){
+        this.lblBtnSave.setText(text);
+    }
+    
+    public void setAutomobileController(AutomobileController automobileController){
+        this.automobileController = automobileController;
+    }
+    
+    public AutomobileController getAutomobileController(){
+        return this.automobileController;
     }
 
-   
+    public void hideIdCard(int idOwner) {
+        if (idOwner != 0) {
+            Sepuser2.setVisible(false);
+            inputIdOwner.setVisible(false);
+            lblUser2.setVisible(false);
+        }
+    }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -73,13 +82,13 @@ public class ViewNewAutomobile extends javax.swing.JFrame {
         lblMinimize = new java.awt.Label();
         jLabel1 = new javax.swing.JLabel();
         inputPlate = new javax.swing.JTextField();
-        jRadioButton1 = new javax.swing.JRadioButton();
-        jRadioButton2 = new javax.swing.JRadioButton();
+        rbtnAuto = new javax.swing.JRadioButton();
+        rbtnCamioneta = new javax.swing.JRadioButton();
         lblUser1 = new java.awt.Label();
         inputNumber = new javax.swing.JTextField();
         Sepuser1 = new javax.swing.JSeparator();
         Sepuser2 = new javax.swing.JSeparator();
-        inputNumber1 = new javax.swing.JTextField();
+        inputIdOwner = new javax.swing.JTextField();
         lblUser2 = new java.awt.Label();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -266,17 +275,17 @@ public class ViewNewAutomobile extends javax.swing.JFrame {
         inputPlate.getAccessibleContext().setAccessibleName("Placa del carro");
         inputPlate.getAccessibleContext().setAccessibleDescription("introdusca la placa del carro para continuar con el formulario");
 
-        jRadioButton1.setBackground(new java.awt.Color(255, 255, 255));
-        jRadioButton1.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        jRadioButton1.setForeground(new java.awt.Color(0, 0, 0));
-        jRadioButton1.setText("Automóvil");
-        Container.add(jRadioButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 310, -1, -1));
+        rbtnAuto.setBackground(new java.awt.Color(255, 255, 255));
+        rbtnAuto.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        rbtnAuto.setForeground(new java.awt.Color(0, 0, 0));
+        rbtnAuto.setText("Automóvil");
+        Container.add(rbtnAuto, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 310, -1, -1));
 
-        jRadioButton2.setBackground(new java.awt.Color(255, 255, 255));
-        jRadioButton2.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        jRadioButton2.setForeground(new java.awt.Color(0, 0, 0));
-        jRadioButton2.setText("Camioneta");
-        Container.add(jRadioButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 310, -1, -1));
+        rbtnCamioneta.setBackground(new java.awt.Color(255, 255, 255));
+        rbtnCamioneta.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        rbtnCamioneta.setForeground(new java.awt.Color(0, 0, 0));
+        rbtnCamioneta.setText("Camioneta");
+        Container.add(rbtnCamioneta, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 310, -1, -1));
 
         lblUser1.setFont(new java.awt.Font("Century Gothic", 0, 10)); // NOI18N
         lblUser1.setText("Targeta de propiedad");
@@ -305,20 +314,20 @@ public class ViewNewAutomobile extends javax.swing.JFrame {
         Sepuser2.setPreferredSize(new java.awt.Dimension(290, 10));
         Container.add(Sepuser2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 270, -1, -1));
 
-        inputNumber1.setBackground(new java.awt.Color(255, 255, 255));
-        inputNumber1.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        inputNumber1.setForeground(new java.awt.Color(204, 204, 204));
-        inputNumber1.setText("Ingrese la Cedula");
-        inputNumber1.setBorder(null);
-        inputNumber1.addFocusListener(new java.awt.event.FocusAdapter() {
+        inputIdOwner.setBackground(new java.awt.Color(255, 255, 255));
+        inputIdOwner.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        inputIdOwner.setForeground(new java.awt.Color(204, 204, 204));
+        inputIdOwner.setText("Ingrese la Cedula");
+        inputIdOwner.setBorder(null);
+        inputIdOwner.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
-                inputNumber1FocusGained(evt);
+                inputIdOwnerFocusGained(evt);
             }
             public void focusLost(java.awt.event.FocusEvent evt) {
-                inputNumber1FocusLost(evt);
+                inputIdOwnerFocusLost(evt);
             }
         });
-        Container.add(inputNumber1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 240, 290, 30));
+        Container.add(inputIdOwner, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 240, 290, 30));
 
         lblUser2.setFont(new java.awt.Font("Century Gothic", 0, 10)); // NOI18N
         lblUser2.setText("Cedula del propietario");
@@ -372,11 +381,7 @@ public class ViewNewAutomobile extends javax.swing.JFrame {
     }//GEN-LAST:event_lblExitMouseEntered
 
     private void lblExitcloseApp(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblExitcloseApp
-        if (!isPopupWindow) {
-            Views.closeWindows();
-        }
-
-        this.dispose();
+        getAutomobileController().CloseApp();
     }//GEN-LAST:event_lblExitcloseApp
 
     private void lblBtnCancelopenSingUp(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBtnCancelopenSingUp
@@ -384,7 +389,7 @@ public class ViewNewAutomobile extends javax.swing.JFrame {
     }//GEN-LAST:event_lblBtnCancelopenSingUp
 
     private void btnSaveopenHome(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSaveopenHome
-        
+        getAutomobileController().Action();
     }//GEN-LAST:event_btnSaveopenHome
 
     private void lblBtnSaveMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBtnSaveMouseExited
@@ -396,7 +401,7 @@ public class ViewNewAutomobile extends javax.swing.JFrame {
     }//GEN-LAST:event_lblBtnSaveMouseEntered
 
     private void lblBtnSaveMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBtnSaveMouseClicked
-        lblExitcloseApp(evt);
+        btnSaveopenHome(evt);
     }//GEN-LAST:event_lblBtnSaveMouseClicked
 
     private void inputNumberFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputNumberFocusGained
@@ -407,13 +412,13 @@ public class ViewNewAutomobile extends javax.swing.JFrame {
         Inputs.inputTextFocus(inputNumber, textNumber, true);
     }//GEN-LAST:event_inputNumberFocusLost
 
-    private void inputNumber1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputNumber1FocusGained
-        Inputs.inputTextFocus(inputNumber1, textNumber1, true);
-    }//GEN-LAST:event_inputNumber1FocusGained
+    private void inputIdOwnerFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputIdOwnerFocusGained
+        Inputs.inputTextFocus(inputIdOwner, textNumber1, true);
+    }//GEN-LAST:event_inputIdOwnerFocusGained
 
-    private void inputNumber1FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputNumber1FocusLost
-        Inputs.inputTextFocus(inputNumber1, textNumber1);
-    }//GEN-LAST:event_inputNumber1FocusLost
+    private void inputIdOwnerFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputIdOwnerFocusLost
+        Inputs.inputTextFocus(inputIdOwner, textNumber1);
+    }//GEN-LAST:event_inputIdOwnerFocusLost
 
     /**
      * @param args the command line arguments
@@ -429,12 +434,10 @@ public class ViewNewAutomobile extends javax.swing.JFrame {
     private javax.swing.JPanel btnMinimize;
     private javax.swing.JPanel btnSave;
     private javax.swing.ButtonGroup buttonGroup;
+    private javax.swing.JTextField inputIdOwner;
     private javax.swing.JTextField inputNumber;
-    private javax.swing.JTextField inputNumber1;
     private javax.swing.JTextField inputPlate;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton2;
     private java.awt.Label lblBtnCancel;
     private java.awt.Label lblBtnSave;
     private javax.swing.JLabel lblExit;
@@ -443,6 +446,8 @@ public class ViewNewAutomobile extends javax.swing.JFrame {
     private java.awt.Label lblUser;
     private java.awt.Label lblUser1;
     private java.awt.Label lblUser2;
+    private javax.swing.JRadioButton rbtnAuto;
+    private javax.swing.JRadioButton rbtnCamioneta;
     private java.awt.Label titleWindow;
     // End of variables declaration//GEN-END:variables
 }

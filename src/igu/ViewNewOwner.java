@@ -1,47 +1,92 @@
 package igu;
 
+import controller.NewOwnerController;
 import java.awt.Color;
-import javax.swing.JFrame;
+import java.awt.Toolkit;
+import java.awt.event.KeyEvent;
+import javax.swing.JTextField;
 import motortech.Inputs;
 import motortech.MotorTech;
+import motortech.Owner;
 import motortech.Views;
-
 
 public class ViewNewOwner extends javax.swing.JFrame {
 
     private int xMouse;
     private int yMouse;
-    
+
     private String textNameOwner;
     private String textCellOwner;
     private String textEmailOwner;
     private String textIDCard;
     private String textAdressOwner;
-    
-    private boolean isPopupWindow = false;
+
+    public boolean isEdit = false;
+
+    private NewOwnerController NewOwnerController;
 
     public ViewNewOwner() {
         initComponents();
-        
+
         initApp();
     }
 
-    public ViewNewOwner(boolean isPopupWindow) {
+    public ViewNewOwner(Owner owner) {
         initComponents();
-        
-        this.isPopupWindow = isPopupWindow;
+
+        this.isEdit = true;
+
+        inputIDCard.setText(Integer.toString(owner.getCedula()));
+        inputNameOwner.setText(owner.getNombresApellidos());
+        inputCellOwner.setText(owner.getTelefono());
+        inputAdressOwner.setText(owner.getDireccion());
+        inputEmailOwner.setText(owner.getCorreoElectronico());
+
         initApp();
     }
-    
+
     private void initApp() {
+        
+        if(isEdit) {
+            this.titleWindow.setText("Editar propietario");
+            this.lblBtnOwner.setText("Guardar");
+        }
+        
         textNameOwner = inputNameOwner.getText();
-        textAdressOwner = inputAdressOwner.getText(); 
+        textAdressOwner = inputAdressOwner.getText();
         textCellOwner = inputCellOwner.getText();
         textEmailOwner = inputEmailOwner.getText();
         textIDCard = inputIDCard.getText();
     }
 
-    
+    public void setSignUpController(NewOwnerController newOwnerController) {
+        this.NewOwnerController = newOwnerController;
+    }
+
+    public NewOwnerController getNewOwnerController() {
+        return NewOwnerController;
+    }
+
+    public String getTxtInputAdressOwner() {
+        return inputAdressOwner.getText();
+    }
+
+    public String getTxtInputCellOwner() {
+        return inputCellOwner.getText();
+    }
+
+    public String getTxtInputEmailOwner() {
+        return inputEmailOwner.getText();
+    }
+
+    public int getTxtInputIDCard() {
+        return Integer.parseInt(inputIDCard.getText());
+    }
+
+    public String getTxtInputNameOwner() {
+        return inputNameOwner.getText();
+    }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -334,6 +379,11 @@ public class ViewNewOwner extends javax.swing.JFrame {
                 inputIDCardFocusLost(evt);
             }
         });
+        inputIDCard.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                inputIDCardKeyTyped(evt);
+            }
+        });
 
         SepUser.setForeground(new java.awt.Color(153, 153, 153));
         SepUser.setPreferredSize(new java.awt.Dimension(310, 10));
@@ -423,6 +473,7 @@ public class ViewNewOwner extends javax.swing.JFrame {
         lblCancel.setForeground(new java.awt.Color(0, 0, 0));
         lblCancel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblCancel.setText("Cancelar");
+        lblCancel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         lblCancel.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 lblCancelFocusGained(evt);
@@ -453,11 +504,7 @@ public class ViewNewOwner extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void lblBtnClosecloseWindow(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBtnClosecloseWindow
-        if (!isPopupWindow) {
-            Views.closeWindows();
-        }
-
-        this.dispose();
+        getNewOwnerController().CloseView();
     }//GEN-LAST:event_lblBtnClosecloseWindow
 
     private void lblBtnCloseMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBtnCloseMouseEntered
@@ -524,34 +571,34 @@ public class ViewNewOwner extends javax.swing.JFrame {
     private void lblBtnOwnerMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBtnOwnerMouseClicked
         String title = "MotorTect - Registar usuario";
 
-        if (textAdressOwner.equals(inputAdressOwner.getText())) {
-            Inputs.dialogMessageDialog(this, inputAdressOwner, title, "La direcccón no puede estar vacía");
-            return;
-        }
-        
-        if (textNameOwner.equals(inputNameOwner.getText())) {
-            Inputs.dialogMessageDialog(this, inputNameOwner, title, "El nombre no puede estar vacío");
-            return;
+        if (!isEdit) {
+            if (textAdressOwner.equals(inputAdressOwner.getText())) {
+                Inputs.dialogMessageDialog(this, inputAdressOwner, title, "La direcccón no puede estar vacía");
+                return;
+            }
+
+            if (textNameOwner.equals(inputNameOwner.getText())) {
+                Inputs.dialogMessageDialog(this, inputNameOwner, title, "El nombre no puede estar vacío");
+                return;
+            }
+
+            if (inputCellOwner.getText().equals(textCellOwner)) {
+                Inputs.dialogMessageDialog(this, inputCellOwner, title, "El campo del celular no puede estar vacío");
+                return;
+            }
+
+            if (textEmailOwner.equals(inputEmailOwner.getText())) {
+                Inputs.dialogMessageDialog(this, inputEmailOwner, title, "El correo electronico no puede estar vacío");
+                return;
+            }
+
+            if (textIDCard.equals(inputIDCard.getText())) {
+                Inputs.dialogMessageDialog(this, inputIDCard, title, "El número de cédula es obligatorio");
+                return;
+            }
         }
 
-        if (inputCellOwner.getText().equals(textCellOwner)) {
-            Inputs.dialogMessageDialog(this, inputCellOwner, title, "El campo del celular no puede estar vacío");
-            return;
-        }
-
-        if (textEmailOwner.equals(inputEmailOwner.getText())) {
-            Inputs.dialogMessageDialog(this, inputEmailOwner, title, "El correo electronico no puede estar vacío");
-            return;
-        }
-
-        if (textIDCard.equals(inputIDCard.getText())) {
-            Inputs.dialogMessageDialog(this, inputIDCard, title, "El número de cédula es obligatorio");
-            return;
-        }
-
- 
-
-        this.dispose();
+        this.getNewOwnerController().Action();
     }//GEN-LAST:event_lblBtnOwnerMouseClicked
 
     private void lblBtnOwnerMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBtnOwnerMouseEntered
@@ -579,8 +626,22 @@ public class ViewNewOwner extends javax.swing.JFrame {
     }//GEN-LAST:event_lblCancelFocusLost
 
     private void lblCancelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCancelMouseClicked
-        this.dispose();
+        getNewOwnerController().CloseView();
     }//GEN-LAST:event_lblCancelMouseClicked
+
+    private void inputIDCardKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_inputIDCardKeyTyped
+        char c = evt.getKeyChar();
+
+        if (c == KeyEvent.VK_BACK_SPACE || c == KeyEvent.VK_DELETE || Character.isDigit(c)) {
+            return;
+        }
+
+        if (!Character.isDigit(c)) {
+            evt.consume();
+            Toolkit.getDefaultToolkit().beep(); 
+            return;
+        }
+    }//GEN-LAST:event_inputIDCardKeyTyped
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -615,4 +676,5 @@ public class ViewNewOwner extends javax.swing.JFrame {
     private java.awt.Label lblUser;
     private java.awt.Label titleWindow;
     // End of variables declaration//GEN-END:variables
+
 }

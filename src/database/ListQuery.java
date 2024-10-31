@@ -9,7 +9,6 @@ public class ListQuery {
         String propietariosQuery = "CREATE TABLE Propietarios ("
                 + "Cedula INT PRIMARY KEY, "
                 + "NombresApellidos VARCHAR(100) NOT NULL, "
-                + "NumeroTarjetaPropiedad VARCHAR(50) NOT NULL, "
                 + "Direccion VARCHAR(150) NOT NULL, "
                 + "Telefono VARCHAR(20) NOT NULL, "
                 + "CorreoElectronico VARCHAR(100))";
@@ -52,16 +51,34 @@ public class ListQuery {
         String getUserByPhoneQuery = "SELECT * FROM Usuarios WHERE Telefono = ?";
         String getUsersByPhoneQuery = "SELECT * FROM Usuarios WHERE Telefono LIKE ?";
         
-         String isLogin = "SELECT * FROM Usuarios WHERE Usuario = ? AND Contrasena = ?";
+        String isLogin = "SELECT * FROM Usuarios WHERE Usuario = ? AND Contrasena = ?";
+        
+        String allOwnersQuery = "SELECT * FROM Propietarios";
+        String deleteOwnerQuery = "DELETE FROM Propietarios WHERE Cedula = ?";
+        String insertOwnerQuery = "INSERT INTO Propietarios (Cedula, NombresApellidos, Direccion, Telefono, CorreoElectronico) VALUES (?, ?, ?, ?, ?)";
+        String updateOwnerQuery = "UPDATE Propietarios SET NombresApellidos = ?, Direccion = ?, Telefono = ?, CorreoElectronico = ? WHERE Cedula = ?";
+        String getOwnerByCedulaQuery = "SELECT * FROM Propietarios WHERE Cedula = ?";
+        String getOwnersByCedulaQuery = "SELECT * FROM Propietarios WHERE Cedula LIKE ?";
+        
+        String insertAutomobileQuery = "INSERT INTO Vehiculos (Placa, TarjetaPropiedad, TipoVehiculo, PropietarioID) VALUES (?, ?, ?, ?)";
+        String updateAutomobileQuery = "UPDATE Vehiculos SET TarjetaPropiedad = ?, TipoVehiculo = ?, PropietarioID = ? WHERE Placa = ?";
+        String deleteAutomobileQuery = "DELETE FROM Vehiculos WHERE Placa = ?";
+        String getAutomobileByPlacaQuery = "SELECT * FROM Vehiculos WHERE Placa = ?";
+        String allAutomobilesByOwnerIDQuery = "SELECT * FROM Vehiculos WHERE PropietarioID = ?";
+
+
+
         
         // Crear el diccionario y almacenar las consultas
         Map<String, String> listQuery = new HashMap<>();
         
+        /// Tablas
         listQuery.put("Propietarios", propietariosQuery);
         listQuery.put("Vehiculos", vehiculosQuery);
         listQuery.put("Usuarios", usuariosQuery);
         listQuery.put("Servicios", serviciosQuery);
         
+        ///Users
         listQuery.put("AllUsers", allUsersQuery);
         listQuery.put("DeleteUser", deleteUserQuery);
         listQuery.put("InsertUser", insertUserQuery);
@@ -69,8 +86,23 @@ public class ListQuery {
         listQuery.put("GetUserByPhone", getUserByPhoneQuery);
         listQuery.put("GetUsersByPhone", getUsersByPhoneQuery);
         
+        /// Login 
         listQuery.put("IsLogin", isLogin);
         
+        /// Owners
+        listQuery.put("AllOwners", allOwnersQuery);
+        listQuery.put("DeleteOwner", deleteOwnerQuery);
+        listQuery.put("InsertOwner", insertOwnerQuery);
+        listQuery.put("UpdateOwner", updateOwnerQuery);
+        listQuery.put("GetOwnerByCedula", getOwnerByCedulaQuery); 
+        listQuery.put("GetOwnersByCedula", getOwnersByCedulaQuery);
+        
+        //Automobiles
+        listQuery.put("AllAutomobilesByOwnerID", allAutomobilesByOwnerIDQuery);
+        listQuery.put("GetAutomobile", getAutomobileByPlacaQuery);
+        listQuery.put("DeleteAutomobile", deleteAutomobileQuery);
+        listQuery.put("UpdateAutomobile", updateAutomobileQuery);
+        listQuery.put("InsertAutomobile", insertAutomobileQuery);
         return listQuery;
     }
 }

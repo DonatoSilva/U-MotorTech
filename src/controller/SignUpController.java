@@ -10,7 +10,7 @@ import motortech.Inputs;
 import motortech.User;
 import motortech.Views;
 
-public class SignUpController {
+public final class SignUpController {
 
     private ViewNewSignUp view;
     private UserDAO model;
@@ -53,11 +53,11 @@ public class SignUpController {
 
             if (isInsert) {
                 JOptionPane.showMessageDialog(view, "Usuario creado " + user.getUsuario());
-                if (view.isPopupWindow) {
-                    view.dispose();
+                if (!view.isPopupWindow) {
+                    new LoginController(new ViewLogin(), new UserDAO(), view);
                 }
-
-                new LoginController(new ViewLogin(), new UserDAO(), view);
+                
+                this.CloseView(view.isPopupWindow);
                 return;
             }
 
@@ -80,11 +80,7 @@ public class SignUpController {
         if (isUpdate) {
             JOptionPane.showMessageDialog(view, "Usuario modificado " + user.getUsuario());
             if (callerView instanceof ViewUsers) {
-                ViewUsers viewUsers = (ViewUsers) callerView;
-                UsersController usersController = viewUsers.getUsersController();
-                usersController.resetTable(true);
-                usersController.setEnabledTable(true);
-                view.dispose();
+                this.CloseView(view.isPopupWindow);
             } else {
                 System.out.println("El objeto no es una instancia de ViewUser");
             }

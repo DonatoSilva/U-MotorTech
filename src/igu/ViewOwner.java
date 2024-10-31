@@ -1,8 +1,7 @@
 package igu;
 
+import controller.OwnerController;
 import java.awt.Color;
-import javax.swing.JFrame;
-import javax.swing.JOptionPane;
 import motortech.MotorTech;
 import motortech.Views;
 
@@ -10,16 +9,59 @@ public class ViewOwner extends javax.swing.JFrame {
 
     private int xMouse;
     private int yMouse;
-
-    private JFrame callerOrigin;
+    
+    public OwnerController ownerController;
 
     public ViewOwner() {
         initComponents();
     }
-
-    public ViewOwner(JFrame callerOrigin) {
-        initComponents();
-        this.callerOrigin = callerOrigin;
+    
+    public OwnerController getOwnerController() {
+        return ownerController;
+    }
+    
+    public void setOwnerController(OwnerController ownerController) {
+        this.ownerController = ownerController;
+    }
+    
+    public int getIdCard(){
+        return Integer.parseInt(lblIdCard.getText());
+    }
+    
+    public void setIdCard(String idCard){
+        this.lblIdCard.setText(idCard);
+    }
+    
+    public String getTxtName() {
+        return lblName.getText();
+    }
+    
+    public void setTxtName(String name) {
+        lblName.setText(name);
+    }
+    
+    public String getTxtAddres(){
+        return lblAddress.getText();
+    }
+    
+    public void setTxtAddres(String addres){
+        lblAddress.setText(addres);
+    }
+    
+    public String getTxtCell(){
+        return lblCell.getText();
+    }
+    
+    public void setTxtCell(String cell){
+        lblCell.setText(cell);
+    }
+    
+    public String getTxtEmail(){
+        return lblEmail.getText();
+    }
+    
+    public void setTxtEmail(String email){
+        lblEmail.setText(email);
     }
 
     @SuppressWarnings("unchecked")
@@ -29,19 +71,19 @@ public class ViewOwner extends javax.swing.JFrame {
         Container = new javax.swing.JPanel();
         jPanel6 = new javax.swing.JPanel();
         jLabel14 = new javax.swing.JLabel();
-        jLabel15 = new javax.swing.JLabel();
+        lblEmail = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
         jLabel12 = new javax.swing.JLabel();
-        jLabel13 = new javax.swing.JLabel();
+        lblAddress = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
+        lblName = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
+        lblIdCard = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         jLabel10 = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
+        lblCell = new javax.swing.JLabel();
         lblTitle = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         btnMinimize = new javax.swing.JPanel();
@@ -55,7 +97,8 @@ public class ViewOwner extends javax.swing.JFrame {
         lblBtnEditar = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
-        tableWork = new javax.swing.JTable();
+        tableAutos = new javax.swing.JTable();
+        lblBtnNewAuto = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -85,10 +128,10 @@ public class ViewOwner extends javax.swing.JFrame {
         jLabel14.setText("Correo");
         jPanel6.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 90, -1));
 
-        jLabel15.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
-        jLabel15.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel15.setText("colorAlpino@gmail.com");
-        jPanel6.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 180, -1));
+        lblEmail.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        lblEmail.setForeground(new java.awt.Color(0, 0, 0));
+        lblEmail.setText("colorAlpino@gmail.com");
+        jPanel6.add(lblEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 310, -1));
 
         Container.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(497, 89, 169, -1));
 
@@ -100,10 +143,10 @@ public class ViewOwner extends javax.swing.JFrame {
         jLabel12.setText("Dirección");
         jPanel5.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 70, -1));
 
-        jLabel13.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
-        jLabel13.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel13.setText("Carrea 8 # 10 - 32");
-        jPanel5.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, -1, -1));
+        lblAddress.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        lblAddress.setForeground(new java.awt.Color(0, 0, 0));
+        lblAddress.setText("Carrea 8 # 10 - 32");
+        jPanel5.add(lblAddress, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, -1, -1));
 
         Container.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(265, 89, 169, -1));
 
@@ -115,10 +158,10 @@ public class ViewOwner extends javax.swing.JFrame {
         jLabel4.setText("Nombre");
         jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 60, -1));
 
-        jLabel5.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel5.setText("Leonardo alpino");
-        jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, -1, -1));
+        lblName.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        lblName.setForeground(new java.awt.Color(0, 0, 0));
+        lblName.setText("Leonardo alpino");
+        jPanel2.add(lblName, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, -1, -1));
 
         Container.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(13, 89, 169, -1));
 
@@ -130,10 +173,10 @@ public class ViewOwner extends javax.swing.JFrame {
         jLabel6.setText("Cédula");
         jPanel3.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 70, -1));
 
-        jLabel7.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel7.setText("1005251123");
-        jPanel3.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, -1, -1));
+        lblIdCard.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        lblIdCard.setForeground(new java.awt.Color(0, 0, 0));
+        lblIdCard.setText("1005251123");
+        jPanel3.add(lblIdCard, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, -1, -1));
 
         Container.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(13, 124, 169, -1));
 
@@ -145,10 +188,10 @@ public class ViewOwner extends javax.swing.JFrame {
         jLabel10.setText("Teléfono");
         jPanel4.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 80, -1));
 
-        jLabel11.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
-        jLabel11.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel11.setText("3160548990");
-        jPanel4.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, -1, -1));
+        lblCell.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        lblCell.setForeground(new java.awt.Color(0, 0, 0));
+        lblCell.setText("3160548990");
+        jPanel4.add(lblCell, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, -1, -1));
 
         Container.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(265, 124, 169, -1));
 
@@ -334,9 +377,9 @@ public class ViewOwner extends javax.swing.JFrame {
         jLabel2.setText("Datos del Propetario");
         Container.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(7, 58, -1, -1));
 
-        tableWork.setBackground(new java.awt.Color(255, 255, 255));
-        tableWork.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        tableWork.setModel(new javax.swing.table.DefaultTableModel(
+        tableAutos.setBackground(new java.awt.Color(255, 255, 255));
+        tableAutos.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        tableAutos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -352,19 +395,39 @@ public class ViewOwner extends javax.swing.JFrame {
                 return types [columnIndex];
             }
         });
-        tableWork.setGridColor(new java.awt.Color(238, 238, 238));
-        tableWork.setSelectionBackground(new java.awt.Color(0, 153, 153));
-        tableWork.setSelectionForeground(new java.awt.Color(255, 255, 255));
-        tableWork.setShowGrid(false);
-        tableWork.setShowHorizontalLines(true);
-        tableWork.addMouseListener(new java.awt.event.MouseAdapter() {
+        tableAutos.setGridColor(new java.awt.Color(238, 238, 238));
+        tableAutos.setSelectionBackground(new java.awt.Color(0, 153, 153));
+        tableAutos.setSelectionForeground(new java.awt.Color(255, 255, 255));
+        tableAutos.setShowGrid(false);
+        tableAutos.setShowHorizontalLines(true);
+        tableAutos.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tableWorkMouseClicked(evt);
+                tableAutosMouseClicked(evt);
             }
         });
-        jScrollPane3.setViewportView(tableWork);
+        jScrollPane3.setViewportView(tableAutos);
 
         Container.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 210, 880, 320));
+
+        lblBtnNewAuto.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        lblBtnNewAuto.setForeground(new java.awt.Color(0, 0, 0));
+        lblBtnNewAuto.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblBtnNewAuto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/boton-circular-plus (1).png"))); // NOI18N
+        lblBtnNewAuto.setText("Crear Vehiculo");
+        lblBtnNewAuto.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblBtnNewAuto.setPreferredSize(new java.awt.Dimension(55, 35));
+        lblBtnNewAuto.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblBtnNewAutoMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                lblBtnNewAutoMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                lblBtnNewAutoMouseExited(evt);
+            }
+        });
+        Container.add(lblBtnNewAuto, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 150, 130, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -389,7 +452,7 @@ public class ViewOwner extends javax.swing.JFrame {
     }//GEN-LAST:event_btnMinimizeminimizeApp
 
     private void lblExitcloseApp(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblExitcloseApp
-        Views.closeWindows();
+        getOwnerController().CloseView();
     }//GEN-LAST:event_lblExitcloseApp
 
     private void lblExitMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblExitMouseEntered
@@ -413,15 +476,7 @@ public class ViewOwner extends javax.swing.JFrame {
     }//GEN-LAST:event_lblBtnDeleteMouseExited
 
     private void btnDeleteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDeleteMouseClicked
-        String title = "MotorTech - Trabajo";
-        String message = "Seguro quiere eliminar este propietario";
-        int option = Views.showDialogDelete(this, title, message);
-
-        if (option == 0) {
-            Views.openWindows(callerOrigin, this);
-        }
-
-        return;
+        getOwnerController().DeleteOwner();
     }//GEN-LAST:event_btnDeleteMouseClicked
 
     private void btnDeleteMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDeleteMouseEntered
@@ -445,14 +500,7 @@ public class ViewOwner extends javax.swing.JFrame {
     }//GEN-LAST:event_lblBtnPrevMouseExited
 
     private void btnPrevMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPrevMouseClicked
-        if (callerOrigin == null) {
-            Home home = new Home();
-            Views.openWindows(home, this);
-
-            return;
-        }
-
-        Views.openWindows(callerOrigin, this);
+       getOwnerController().PrevView();
     }//GEN-LAST:event_btnPrevMouseClicked
 
     private void btnPrevMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPrevMouseEntered
@@ -464,9 +512,7 @@ public class ViewOwner extends javax.swing.JFrame {
     }//GEN-LAST:event_btnPrevMouseExited
 
     private void lblBtnEditarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBtnEditarMouseClicked
-        ViewNewOwner newOwner = new ViewNewOwner(true);
-
-        Views.openWindows(newOwner);
+        getOwnerController().EditOwner();
     }//GEN-LAST:event_lblBtnEditarMouseClicked
 
     private void lblBtnEditarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBtnEditarMouseEntered
@@ -477,49 +523,12 @@ public class ViewOwner extends javax.swing.JFrame {
         lblBtnEditar.setForeground(Color.BLACK);
     }//GEN-LAST:event_lblBtnEditarMouseExited
 
-    private void tableWorkMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableWorkMouseClicked
-        tableWork.setEnabled(false);
+    private void tableAutosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableAutosMouseClicked
+        tableAutos.setEnabled(false);
         if (evt.getClickCount() == 2) {
-
-            int opcion = JOptionPane.showOptionDialog(
-                    this,
-                    "¿Seleccione lo que desea hacaer con este propietario?",
-                    "MotorTech - Usuario",
-                    JOptionPane.YES_NO_OPTION,
-                    JOptionPane.WARNING_MESSAGE,
-                    null,
-                    new String[]{"Cancelar", "Eliminar", "Editar"},
-                    "Cancelar"
-            );
-
-            if (opcion == 0) {
-                return;
-            }
-
-            if (opcion == 2) {
-                ViewNewAutomobile automobile = new ViewNewAutomobile(true);
-                Views.openWindows(automobile);
-                return;
-            }
-
-            int deleteModal = JOptionPane.showOptionDialog(
-                    this,
-                    "¿Seguro que desea eliminar este propietario?",
-                    "MotorTech - Usuario",
-                    JOptionPane.YES_NO_OPTION,
-                    JOptionPane.WARNING_MESSAGE,
-                    null,
-                    new String[]{"Cancelar", "Eliminar"},
-                    "Cancelar"
-            );
-
-            if (deleteModal == 0) {
-                return;
-            }
-
-            return;
+            
         }
-    }//GEN-LAST:event_tableWorkMouseClicked
+    }//GEN-LAST:event_tableAutosMouseClicked
 
     private void ContainerMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ContainerMousePressed
         xMouse = evt.getX();
@@ -530,6 +539,18 @@ public class ViewOwner extends javax.swing.JFrame {
         Views.moveWindows(this, evt, xMouse, yMouse);
     }//GEN-LAST:event_ContainerMouseDragged
 
+    private void lblBtnNewAutoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBtnNewAutoMouseClicked
+        return;
+    }//GEN-LAST:event_lblBtnNewAutoMouseClicked
+
+    private void lblBtnNewAutoMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBtnNewAutoMouseEntered
+        lblBtnNewAuto.setForeground(MotorTech.getBgPrimary());
+    }//GEN-LAST:event_lblBtnNewAutoMouseEntered
+
+    private void lblBtnNewAutoMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBtnNewAutoMouseExited
+        lblBtnNewAuto.setForeground(Color.BLACK);
+    }//GEN-LAST:event_lblBtnNewAutoMouseExited
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Container;
     private javax.swing.JPanel btnDelete;
@@ -538,28 +559,29 @@ public class ViewOwner extends javax.swing.JFrame {
     private javax.swing.JPanel btnPrev;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JLabel lblAddress;
     private javax.swing.JLabel lblBtnDelete;
     private javax.swing.JLabel lblBtnEditar;
+    private javax.swing.JLabel lblBtnNewAuto;
     private javax.swing.JLabel lblBtnPrev;
+    private javax.swing.JLabel lblCell;
+    private javax.swing.JLabel lblEmail;
     private javax.swing.JLabel lblExit;
+    private javax.swing.JLabel lblIdCard;
     private java.awt.Label lblMinimize;
+    private javax.swing.JLabel lblName;
     private javax.swing.JLabel lblTitle;
-    private javax.swing.JTable tableWork;
+    private javax.swing.JTable tableAutos;
     // End of variables declaration//GEN-END:variables
 }

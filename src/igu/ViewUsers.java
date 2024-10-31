@@ -454,8 +454,7 @@ public class ViewUsers extends javax.swing.JFrame {
     private void btnNewUserMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnNewUserMouseClicked
         ViewNewSignUp signUp = new ViewNewSignUp(true);
         UserDAO userDAO = new UserDAO();
-        SignUpController signController = new SignUpController();
-        signController.SignUpController(signUp, userDAO, this);
+        SignUpController signController = new SignUpController(signUp, userDAO, this);
     }//GEN-LAST:event_btnNewUserMouseClicked
 
     private void btnNewUserMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnNewUserMouseEntered

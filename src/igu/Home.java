@@ -545,8 +545,7 @@ public class Home extends javax.swing.JFrame {
     private void btnNewUserMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnNewUserMouseClicked
         ViewNewSignUp signUp = new ViewNewSignUp(true);
         UserDAO userDAO = new UserDAO();
-        SignUpController signUpController = new SignUpController();
-        signUpController.SignUpController(signUp, userDAO, this);
+        new SignUpController(signUp, userDAO, this);
     }//GEN-LAST:event_btnNewUserMouseClicked
 
     private void lblNewUserMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblNewUserMouseClicked
@@ -599,8 +598,7 @@ public class Home extends javax.swing.JFrame {
     }//GEN-LAST:event_btnMinimizeminimizeApp
 
     private void btnOwnerMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnOwnerMouseClicked
-        ViewOwners owner = new ViewOwners(this);
-        Views.openWindows(owner, this);
+        getHomeController().owners();
     }//GEN-LAST:event_btnOwnerMouseClicked
 
     private void lblBtnOwnerMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBtnOwnerMouseClicked

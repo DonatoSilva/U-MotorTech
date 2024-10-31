@@ -16,7 +16,7 @@ public final class UsersController {
     private ViewUsers view;
     private UserDAO model;
 
-    private JFrame callerView;
+    private JFrame callerView; 
 
     public UsersController() {
     }
@@ -29,14 +29,14 @@ public final class UsersController {
         initView();
     }
 
-    public void initView() {
+    private void initView() {
         insetDataTable(true);
 
         view.setUsersController(this);
         Views.openWindows(view, callerView);
     }
 
-    public void insetDataTable(boolean a) {
+    private void insetDataTable(boolean a) {
         if (a) {
             List<User> users = model.getAllUsers();
             for (User user : users) {
@@ -91,10 +91,9 @@ public final class UsersController {
             }
 
             if (opcion == 2) {
-                UserDAO userDAO = new UserDAO();
-                User user = userDAO.getUser(telefono.toString());
+                User user = model.getUser(telefono.toString());
                 
-                SignUpController signUpController = new SignUpController(new ViewNewSignUp(true, true, user), model, view);
+                new SignUpController(new ViewNewSignUp(true, true, user), model, view);
                 return;
             }
 

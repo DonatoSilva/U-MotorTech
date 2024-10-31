@@ -93,7 +93,6 @@ public class LoginController {
 
     public void signUp() {
         ViewNewSignUp viewNewSignUp = new ViewNewSignUp();
-        SignUpController signUpController = new SignUpController();
-        signUpController.SignUpController(viewNewSignUp, modal, view);
+        SignUpController signUpController = new SignUpController(viewNewSignUp, modal, view);
     }
 }

@@ -1,9 +1,11 @@
 package controller;
 
+import dao.OwnerDAO;
 import dao.UserDAO;
 import dao.WorkDAO;
 import igu.Home;
 import igu.ViewLogin;
+import igu.ViewOwners;
 import igu.ViewUsers;
 import javax.swing.JFrame;
 import motortech.Views;
@@ -35,5 +37,9 @@ public class HomeController {
     
     public void users() {
         new UsersController(new ViewUsers(), new UserDAO(), view);
+    }
+    
+    public void owners() {
+        new OwnersController(new ViewOwners(), new OwnerDAO(), view);
     }
 }
