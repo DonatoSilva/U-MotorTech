@@ -16,7 +16,7 @@ public final class UsersController {
     private ViewUsers view;
     private UserDAO model;
 
-    private JFrame callerView; 
+    private JFrame callerView;
 
     public UsersController() {
     }
@@ -92,31 +92,33 @@ public final class UsersController {
 
             if (opcion == 2) {
                 User user = model.getUser(telefono.toString());
-                
+
                 new SignUpController(new ViewNewSignUp(true, true, user), model, view);
                 return;
             }
 
-            int deleteModal = JOptionPane.showOptionDialog(
-                    view,
-                    "¿Seguro que desea eliminar este usuario?",
-                    "MotorTech - Usuario",
-                    JOptionPane.YES_NO_OPTION,
-                    JOptionPane.WARNING_MESSAGE,
-                    null,
-                    new String[]{"Cancelar", "Eliminar"},
-                    "Cancelar"
-            );
+            if (opcion == 1) {
+                int deleteModal = JOptionPane.showOptionDialog(
+                        view,
+                        "¿Seguro que desea eliminar este usuario?",
+                        "MotorTech - Usuario",
+                        JOptionPane.YES_NO_OPTION,
+                        JOptionPane.WARNING_MESSAGE,
+                        null,
+                        new String[]{"Cancelar", "Eliminar"},
+                        "Cancelar"
+                );
 
-            if (deleteModal == 1) {
-                boolean isDelete = model.deleteUser(telefono.toString());
+                if (deleteModal == 1) {
+                    boolean isDelete = model.deleteUser(telefono.toString());
 
-                if (!isDelete) {
-                    JOptionPane.showMessageDialog(view, "No se logro eliminar al usuario con numero " + telefono);
-                    return;
+                    if (!isDelete) {
+                        JOptionPane.showMessageDialog(view, "No se logro eliminar al usuario con numero " + telefono);
+                        return;
+                    }
+
+                    view.removeRow(row);
                 }
-
-                view.removeRow(row);
             }
 
             this.setEnabledTable(true);

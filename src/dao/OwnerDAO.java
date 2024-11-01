@@ -57,15 +57,17 @@ public class OwnerDAO {
         return owner;
     }
     
-    public List<Owner> getOwners(int cedula) {
+    public List<Owner> getOwners(String cedula) {
         List<Owner> owners = new ArrayList<>();
         Map<String, String> Querys = ListQuery.getListQuery();
         try (Connection connection = MyConnection.getConnection(DATABASE);
              PreparedStatement preparedStatement = connection.prepareStatement(Querys.get("GetOwnersByCedula"))) {
 
-            preparedStatement.setInt(1, cedula);
+            preparedStatement.setString(1, cedula + "%");
+            
             String query = preparedStatement.toString();
             query = query.substring(query.indexOf(": ") + 2);
+            
             List<Map<String, Object>> resultList = MyConnection.fetchData(DATABASE, query);
 
             if (resultList.isEmpty()) {

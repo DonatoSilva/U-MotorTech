@@ -9,13 +9,13 @@ import java.util.Map;
 import motortech.Automobile;
 
 public class AutomobileDAO {
+
     private final static String DATABASE = "MotorTechDB";
 
     public Automobile getAutomobile(String placa) {
         Automobile automobile = new Automobile();
         Map<String, String> Querys = ListQuery.getListQuery();
-        try (Connection connection = MyConnection.getConnection(DATABASE);
-             PreparedStatement preparedStatement = connection.prepareStatement(Querys.get("GetAutomobile"))) {
+        try (Connection connection = MyConnection.getConnection(DATABASE); PreparedStatement preparedStatement = connection.prepareStatement(Querys.get("GetAutomobile"))) {
             preparedStatement.setString(1, placa);
             String query = preparedStatement.toString();
             query = query.substring(query.indexOf(": ") + 2);
@@ -39,8 +39,7 @@ public class AutomobileDAO {
     public List<Automobile> getAllAutomobiles(int IdCard) {
         List<Automobile> automobiles = new ArrayList<>();
         Map<String, String> Querys = ListQuery.getListQuery();
-        try (Connection connection = MyConnection.getConnection(DATABASE);
-             PreparedStatement preparedStatement = connection.prepareStatement(Querys.get("AllAutomobilesByOwnerID"))) {
+        try (Connection connection = MyConnection.getConnection(DATABASE); PreparedStatement preparedStatement = connection.prepareStatement(Querys.get("AllAutomobilesByOwnerID"))) {
             preparedStatement.setInt(1, IdCard);
             String query = preparedStatement.toString();
             query = query.substring(query.indexOf(": ") + 2);
@@ -66,8 +65,7 @@ public class AutomobileDAO {
 
     public boolean createAutomobile(Automobile automobile) {
         Map<String, String> Querys = ListQuery.getListQuery();
-        try (Connection connection = MyConnection.getConnection(DATABASE);
-             PreparedStatement preparedStatement = connection.prepareStatement(Querys.get("InsertAutomobile"))) {
+        try (Connection connection = MyConnection.getConnection(DATABASE); PreparedStatement preparedStatement = connection.prepareStatement(Querys.get("InsertAutomobile"))) {
             preparedStatement.setString(1, automobile.getPlaca());
             preparedStatement.setString(2, automobile.getTarjetaPropiedad());
             preparedStatement.setString(3, automobile.getTipoVehiculo());
@@ -84,8 +82,7 @@ public class AutomobileDAO {
 
     public boolean updateAutomobile(Automobile automobile) {
         Map<String, String> Querys = ListQuery.getListQuery();
-        try (Connection connection = MyConnection.getConnection(DATABASE);
-             PreparedStatement preparedStatement = connection.prepareStatement(Querys.get("UpdateAutomobile"))) {
+        try (Connection connection = MyConnection.getConnection(DATABASE); PreparedStatement preparedStatement = connection.prepareStatement(Querys.get("UpdateAutomobile"))) {
             preparedStatement.setString(1, automobile.getTarjetaPropiedad());
             preparedStatement.setString(2, automobile.getTipoVehiculo());
             preparedStatement.setInt(3, automobile.getPropietarioID());
@@ -102,8 +99,7 @@ public class AutomobileDAO {
 
     public boolean deleteAutomobile(String placa) {
         Map<String, String> Querys = ListQuery.getListQuery();
-        try (Connection connection = MyConnection.getConnection(DATABASE);
-             PreparedStatement preparedStatement = connection.prepareStatement(Querys.get("DeleteAutomobile"))) {
+        try (Connection connection = MyConnection.getConnection(DATABASE); PreparedStatement preparedStatement = connection.prepareStatement(Querys.get("DeleteAutomobile"))) {
             preparedStatement.setString(1, placa);
             String query = preparedStatement.toString();
             query = query.substring(query.indexOf(": ") + 2);
@@ -114,5 +110,18 @@ public class AutomobileDAO {
             return false;
         }
     }
-}
 
+    public boolean deleteAutomobiles(int IdCard) {
+        Map<String, String> Querys = ListQuery.getListQuery();
+        try (Connection connection = MyConnection.getConnection(DATABASE); PreparedStatement preparedStatement = connection.prepareStatement(Querys.get("DeleteAutomobiles"))) {
+            preparedStatement.setInt(1, IdCard);
+            String query = preparedStatement.toString();
+            query = query.substring(query.indexOf(": ") + 2);
+            return MyConnection.executeQuery(DATABASE, query);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println("Error al eliminar los vehiculos: " + e.getMessage());
+            return false;
+        }
+    }
+}

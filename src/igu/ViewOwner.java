@@ -2,6 +2,8 @@ package igu;
 
 import controller.OwnerController;
 import java.awt.Color;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 import motortech.MotorTech;
 import motortech.Views;
 
@@ -9,58 +11,73 @@ public class ViewOwner extends javax.swing.JFrame {
 
     private int xMouse;
     private int yMouse;
-    
+
     public OwnerController ownerController;
 
     public ViewOwner() {
         initComponents();
     }
-    
+
     public OwnerController getOwnerController() {
         return ownerController;
     }
-    
+
     public void setOwnerController(OwnerController ownerController) {
         this.ownerController = ownerController;
     }
-    
-    public int getIdCard(){
+
+    public void addRow(Object[] rowData) {
+        DefaultTableModel table = (DefaultTableModel) tableAutos.getModel();
+        table.addRow(rowData);
+    }
+
+    public void removeRow(int row) {
+        DefaultTableModel table = (DefaultTableModel) tableAutos.getModel();
+        table.removeRow(row);
+    }
+
+    public void resetTableAuto() {
+        DefaultTableModel table = (DefaultTableModel) tableAutos.getModel();
+        table.setRowCount(0);
+    }
+
+    public int getIdCard() {
         return Integer.parseInt(lblIdCard.getText());
     }
-    
-    public void setIdCard(String idCard){
+
+    public void setIdCard(String idCard) {
         this.lblIdCard.setText(idCard);
     }
-    
+
     public String getTxtName() {
         return lblName.getText();
     }
-    
+
     public void setTxtName(String name) {
         lblName.setText(name);
     }
-    
-    public String getTxtAddres(){
+
+    public String getTxtAddres() {
         return lblAddress.getText();
     }
-    
-    public void setTxtAddres(String addres){
+
+    public void setTxtAddres(String addres) {
         lblAddress.setText(addres);
     }
-    
-    public String getTxtCell(){
+
+    public String getTxtCell() {
         return lblCell.getText();
     }
-    
-    public void setTxtCell(String cell){
+
+    public void setTxtCell(String cell) {
         lblCell.setText(cell);
     }
-    
-    public String getTxtEmail(){
+
+    public String getTxtEmail() {
         return lblEmail.getText();
     }
-    
-    public void setTxtEmail(String email){
+
+    public void setTxtEmail(String email) {
         lblEmail.setText(email);
     }
 
@@ -384,11 +401,11 @@ public class ViewOwner extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Id", "Placa", "Tipo", "Targeta de propiedad"
+                "Placa", "Tipo", "Targeta de propiedad"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -500,7 +517,7 @@ public class ViewOwner extends javax.swing.JFrame {
     }//GEN-LAST:event_lblBtnPrevMouseExited
 
     private void btnPrevMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPrevMouseClicked
-       getOwnerController().PrevView();
+        getOwnerController().PrevView();
     }//GEN-LAST:event_btnPrevMouseClicked
 
     private void btnPrevMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPrevMouseEntered
@@ -524,9 +541,17 @@ public class ViewOwner extends javax.swing.JFrame {
     }//GEN-LAST:event_lblBtnEditarMouseExited
 
     private void tableAutosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableAutosMouseClicked
-        tableAutos.setEnabled(false);
         if (evt.getClickCount() == 2) {
+            tableAutos.setEnabled(false);
+            JTable table = (JTable) evt.getSource();
+
+            int row = table.getSelectedRow();
+            Object placa = table.getValueAt(row, 0);
+            Object tipo = table.getValueAt(row, 1);
+            Object TNumber = table.getValueAt(row, 2);
             
+            getOwnerController().tableAutos(placa.toString(), tipo.toString(), TNumber.toString(), row);
+            tableAutos.setEnabled(true);
         }
     }//GEN-LAST:event_tableAutosMouseClicked
 
@@ -540,7 +565,8 @@ public class ViewOwner extends javax.swing.JFrame {
     }//GEN-LAST:event_ContainerMouseDragged
 
     private void lblBtnNewAutoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBtnNewAutoMouseClicked
-        return;
+        int idCard = this.getIdCard();
+        this.getOwnerController().NewAuto(idCard);
     }//GEN-LAST:event_lblBtnNewAutoMouseClicked
 
     private void lblBtnNewAutoMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBtnNewAutoMouseEntered

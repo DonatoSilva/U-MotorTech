@@ -423,9 +423,8 @@ public class ViewOwners extends javax.swing.JFrame {
     }//GEN-LAST:event_ContainerMousePressed
 
     private void inputSearchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_inputSearchKeyReleased
-        if (!inputSearch.getText().trim().isEmpty()) {
-            getOwnersController().searchOwnersByCedula(getInputSearch());
-        }
+        String cedula = inputSearch.getText().trim();
+        getOwnersController().searchOwnersByCedula(cedula);
     }//GEN-LAST:event_inputSearchKeyReleased
 
     private void inputSearchKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_inputSearchKeyTyped

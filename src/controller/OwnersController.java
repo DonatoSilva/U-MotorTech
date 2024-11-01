@@ -1,5 +1,6 @@
 package controller;
 
+import dao.AutomobileDAO;
 import dao.OwnerDAO;
 import igu.ViewNewOwner;
 import igu.ViewOwner;
@@ -53,7 +54,7 @@ public class OwnersController {
         }
     }
 
-    public void searchOwnersByCedula(int cedula) {
+    public void searchOwnersByCedula(String cedula) {
         this.resetTable(false);
 
         List<Owner> owners = model.getOwners(cedula);
@@ -98,15 +99,36 @@ public class OwnersController {
             );
 
             if (deleteModal == 1) {
-                boolean isDelete = model.deleteOwner(cedula);
+                int deleteAutos = JOptionPane.showOptionDialog(
+                        view,
+                        "Esta acción eliminara todos los vehiculos asociados a este propietario",
+                        "MotorTech - Propietario",
+                        JOptionPane.YES_NO_OPTION,
+                        JOptionPane.WARNING_MESSAGE,
+                        null,
+                        new Object[]{"Sí", "No"},
+                        "Sí"
+                );
 
-                if (!isDelete) {
-                    JOptionPane.showMessageDialog(view, "No se logro eliminar al propietario con la cédula " + cedula);
-                    return;
+                if (deleteAutos == JOptionPane.YES_OPTION) {
+                    AutomobileDAO automobileDAO = new AutomobileDAO();
+                    boolean isAutosDelete = automobileDAO.deleteAutomobiles(cedula);
+                    
+                    if (!isAutosDelete) {
+                        JOptionPane.showMessageDialog(view, "Algo salio mal al intentar eliminar los vehiculos asociados al propietario: " + cedula);
+                        return;
+                    }
+                    
+                    boolean isDelete = model.deleteOwner(cedula);
+
+                    if (!isDelete) {
+                        JOptionPane.showMessageDialog(view, "No se logro eliminar al propietario con la cédula: " + cedula);
+                        return;
+                    }
+
+                    JOptionPane.showMessageDialog(view, "Se logro eliminar al propietario con la cédula: " + cedula);
+                    view.removeRow(row);
                 }
-                
-                JOptionPane.showMessageDialog(view, "Se logro eliminar al propietario con la cédula " + cedula);
-                view.removeRow(row);
             }
         }
 
@@ -124,7 +146,7 @@ public class OwnersController {
     public void OpenHome() {
         Views.openWindows(callerView, view);
     }
-    
+
     private void ViewOwner(int cedula) {
         Owner owner = model.getOwner(cedula);
         new OwnerController(new ViewOwner(), model, view, owner);

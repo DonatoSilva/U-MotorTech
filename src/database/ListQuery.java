@@ -62,6 +62,7 @@ public class ListQuery {
         
         String insertAutomobileQuery = "INSERT INTO Vehiculos (Placa, TarjetaPropiedad, TipoVehiculo, PropietarioID) VALUES (?, ?, ?, ?)";
         String updateAutomobileQuery = "UPDATE Vehiculos SET TarjetaPropiedad = ?, TipoVehiculo = ?, PropietarioID = ? WHERE Placa = ?";
+        String deleteAutomobilesQuery = "DELETE FROM Vehiculos WHERE PropietarioID = ?;";
         String deleteAutomobileQuery = "DELETE FROM Vehiculos WHERE Placa = ?";
         String getAutomobileByPlacaQuery = "SELECT * FROM Vehiculos WHERE Placa = ?";
         String allAutomobilesByOwnerIDQuery = "SELECT * FROM Vehiculos WHERE PropietarioID = ?";
@@ -100,6 +101,7 @@ public class ListQuery {
         //Automobiles
         listQuery.put("AllAutomobilesByOwnerID", allAutomobilesByOwnerIDQuery);
         listQuery.put("GetAutomobile", getAutomobileByPlacaQuery);
+        listQuery.put("DeleteAutomobiles", deleteAutomobilesQuery);
         listQuery.put("DeleteAutomobile", deleteAutomobileQuery);
         listQuery.put("UpdateAutomobile", updateAutomobileQuery);
         listQuery.put("InsertAutomobile", insertAutomobileQuery);

@@ -1,6 +1,9 @@
 package igu;
 
 import controller.AutomobileController;
+import java.util.Enumeration;
+import javax.swing.AbstractButton;
+import javax.swing.ButtonModel;
 import motortech.Inputs;
 import motortech.MotorTech;
 import motortech.Views;
@@ -12,45 +15,92 @@ public class ViewNewAutomobile extends javax.swing.JFrame {
     private String textPlates;
     private String textNumber;
     private String textNumber1;
-    
+
     private AutomobileController automobileController;
 
-    
     private boolean isEdit = false;
 
     public ViewNewAutomobile(boolean isEdit) {
         initComponents();
-        
+
         this.isEdit = isEdit;
         initApp();
     }
 
     private void initApp() {
-        buttonGroup.add(rbtnAuto);
-        buttonGroup.add(rbtnCamioneta);
+        rbtnAuto.setActionCommand("Automóvil");
+        rbtnCamioneta.setActionCommand("Camioneta");
+        
+        if(isEdit){
+            inputPlate.setEnabled(false);
+        }
 
         textPlates = inputPlate.getText();
-        textNumber = inputNumber.getText();
+        textNumber = inputTNumber.getText();
         textNumber1 = inputIdOwner.getText();
     }
+
+    public void setTxtInputPlate(String plate) {
+        this.inputPlate.setText(plate);
+    }
+
+    public String getTxtInputPlate() {
+        return this.inputPlate.getText();
+
+    }
+
+    public void setTxtTInputNumber(String TNumber) {
+        this.inputTNumber.setText(TNumber);
+    }
+
+    public String getTxtTInputNumber() {
+        return this.inputTNumber.getText();
+    }
+
+    public void setTxtInputIdOwner(String IdOwner) {
+        this.inputIdOwner.setText(IdOwner);
+    }
+
+    public int getTxtInputIdOwner() {
+        return Integer.parseInt(this.inputIdOwner.getText());
+    }
+
+    public void setSelectRadioButton(String actionCommand) {
+        Enumeration<AbstractButton> buttons = buttonGroup.getElements();
+        while (buttons.hasMoreElements()) {
+            AbstractButton button = buttons.nextElement();
+            if (button.getActionCommand().equals(actionCommand)) {
+                button.setSelected(true);
+                break;
+            }
+        }
+    }
     
-    public boolean getIsEdit(){
+    public String getSelectRadioButton() {
+        ButtonModel selectModel = buttonGroup.getSelection();
+        if (selectModel != null) {
+            return selectModel.getActionCommand();
+        }
+        return null;
+    }
+
+    public boolean getIsEdit() {
         return this.isEdit;
     }
-    
-    public void setTitleWindows(String title){
+
+    public void setTitleWindows(String title) {
         this.titleWindow.setText(title);
     }
-    
-    public void setlblAction(String text){
+
+    public void setlblAction(String text) {
         this.lblBtnSave.setText(text);
     }
-    
-    public void setAutomobileController(AutomobileController automobileController){
+
+    public void setAutomobileController(AutomobileController automobileController) {
         this.automobileController = automobileController;
     }
-    
-    public AutomobileController getAutomobileController(){
+
+    public AutomobileController getAutomobileController() {
         return this.automobileController;
     }
 
@@ -85,7 +135,7 @@ public class ViewNewAutomobile extends javax.swing.JFrame {
         rbtnAuto = new javax.swing.JRadioButton();
         rbtnCamioneta = new javax.swing.JRadioButton();
         lblUser1 = new java.awt.Label();
-        inputNumber = new javax.swing.JTextField();
+        inputTNumber = new javax.swing.JTextField();
         Sepuser1 = new javax.swing.JSeparator();
         Sepuser2 = new javax.swing.JSeparator();
         inputIdOwner = new javax.swing.JTextField();
@@ -124,7 +174,7 @@ public class ViewNewAutomobile extends javax.swing.JFrame {
         lblBtnSave.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         lblBtnSave.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         lblBtnSave.setForeground(new java.awt.Color(255, 255, 255));
-        lblBtnSave.setText("Guardar");
+        lblBtnSave.setText("Añadir");
         lblBtnSave.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 lblBtnSaveMouseClicked(evt);
@@ -276,12 +326,14 @@ public class ViewNewAutomobile extends javax.swing.JFrame {
         inputPlate.getAccessibleContext().setAccessibleDescription("introdusca la placa del carro para continuar con el formulario");
 
         rbtnAuto.setBackground(new java.awt.Color(255, 255, 255));
+        buttonGroup.add(rbtnAuto);
         rbtnAuto.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         rbtnAuto.setForeground(new java.awt.Color(0, 0, 0));
         rbtnAuto.setText("Automóvil");
         Container.add(rbtnAuto, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 310, -1, -1));
 
         rbtnCamioneta.setBackground(new java.awt.Color(255, 255, 255));
+        buttonGroup.add(rbtnCamioneta);
         rbtnCamioneta.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         rbtnCamioneta.setForeground(new java.awt.Color(0, 0, 0));
         rbtnCamioneta.setText("Camioneta");
@@ -291,20 +343,20 @@ public class ViewNewAutomobile extends javax.swing.JFrame {
         lblUser1.setText("Targeta de propiedad");
         Container.add(lblUser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 160, 180, -1));
 
-        inputNumber.setBackground(new java.awt.Color(255, 255, 255));
-        inputNumber.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        inputNumber.setForeground(new java.awt.Color(204, 204, 204));
-        inputNumber.setText("Ingrese su tarjeta de propiedad");
-        inputNumber.setBorder(null);
-        inputNumber.addFocusListener(new java.awt.event.FocusAdapter() {
+        inputTNumber.setBackground(new java.awt.Color(255, 255, 255));
+        inputTNumber.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        inputTNumber.setForeground(new java.awt.Color(204, 204, 204));
+        inputTNumber.setText("Ingrese su tarjeta de propiedad");
+        inputTNumber.setBorder(null);
+        inputTNumber.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
-                inputNumberFocusGained(evt);
+                inputTNumberFocusGained(evt);
             }
             public void focusLost(java.awt.event.FocusEvent evt) {
-                inputNumberFocusLost(evt);
+                inputTNumberFocusLost(evt);
             }
         });
-        Container.add(inputNumber, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 180, 290, 30));
+        Container.add(inputTNumber, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 180, 290, 30));
 
         Sepuser1.setForeground(new java.awt.Color(153, 153, 153));
         Sepuser1.setPreferredSize(new java.awt.Dimension(290, 10));
@@ -404,13 +456,13 @@ public class ViewNewAutomobile extends javax.swing.JFrame {
         btnSaveopenHome(evt);
     }//GEN-LAST:event_lblBtnSaveMouseClicked
 
-    private void inputNumberFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputNumberFocusGained
-        Inputs.inputTextFocus(inputNumber, textNumber);
-    }//GEN-LAST:event_inputNumberFocusGained
+    private void inputTNumberFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputTNumberFocusGained
+        Inputs.inputTextFocus(inputTNumber, textNumber);
+    }//GEN-LAST:event_inputTNumberFocusGained
 
-    private void inputNumberFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputNumberFocusLost
-        Inputs.inputTextFocus(inputNumber, textNumber, true);
-    }//GEN-LAST:event_inputNumberFocusLost
+    private void inputTNumberFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputTNumberFocusLost
+        Inputs.inputTextFocus(inputTNumber, textNumber, true);
+    }//GEN-LAST:event_inputTNumberFocusLost
 
     private void inputIdOwnerFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputIdOwnerFocusGained
         Inputs.inputTextFocus(inputIdOwner, textNumber1, true);
@@ -435,8 +487,8 @@ public class ViewNewAutomobile extends javax.swing.JFrame {
     private javax.swing.JPanel btnSave;
     private javax.swing.ButtonGroup buttonGroup;
     private javax.swing.JTextField inputIdOwner;
-    private javax.swing.JTextField inputNumber;
     private javax.swing.JTextField inputPlate;
+    private javax.swing.JTextField inputTNumber;
     private javax.swing.JLabel jLabel1;
     private java.awt.Label lblBtnCancel;
     private java.awt.Label lblBtnSave;
