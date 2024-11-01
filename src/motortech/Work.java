@@ -1,9 +1,13 @@
 package motortech;
 
+import java.sql.Timestamp;
+import java.sql.Date;
+
+
 public class Work {
     private int idServicio;
-    private String fechaIngreso;
-    private String fechaEntrega;
+    private Timestamp fechaIngreso;
+    private Date fechaEntrega;
     private double costoManoObra;
     private double costoRepuestos;
     private int horasTrabajo;
@@ -17,7 +21,7 @@ public class Work {
     // Constructor
     public Work() {}
 
-    public Work(int idServicio, String fechaIngreso, String fechaEntrega, double costoManoObra, double costoRepuestos, int horasTrabajo, int propietarioID, String vehiculoPlaca, String estadoVehiculo, String motivoIngreso, String estadoServicio, String usuarioID) {
+    public Work(int idServicio, Timestamp fechaIngreso, Date fechaEntrega, double costoManoObra, double costoRepuestos, int horasTrabajo, int propietarioID, String vehiculoPlaca, String estadoVehiculo, String motivoIngreso, String estadoServicio, String usuarioID) {
         this.idServicio = idServicio;
         this.fechaIngreso = fechaIngreso;
         this.fechaEntrega = fechaEntrega;
@@ -40,19 +44,19 @@ public class Work {
         this.idServicio = idServicio;
     }
 
-    public String getFechaIngreso() {
+    public Timestamp getFechaIngreso() {
         return fechaIngreso;
     }
 
-    public void setFechaIngreso(String fechaIngreso) {
+    public void setFechaIngreso(Timestamp fechaIngreso) {
         this.fechaIngreso = fechaIngreso;
     }
 
-    public String getFechaEntrega() {
+    public Date getFechaEntrega() {
         return fechaEntrega;
     }
 
-    public void setFechaEntrega(String fechaEntrega) {
+    public void setFechaEntrega(Date fechaEntrega) {
         this.fechaEntrega = fechaEntrega;
     }
 

@@ -67,8 +67,11 @@ public class ListQuery {
         String getAutomobileByPlacaQuery = "SELECT * FROM Vehiculos WHERE Placa = ?";
         String allAutomobilesByOwnerIDQuery = "SELECT * FROM Vehiculos WHERE PropietarioID = ?";
 
-
-
+        String getAllServiciosQuery = "SELECT * FROM Servicios";
+        String getServicioByIdQuery = "SELECT * FROM Servicios WHERE IdServicio = ?";
+        String deleteServicioQuery = "DELETE FROM Servicios WHERE IdServicio = ?";
+        String updateServicioQuery = "UPDATE Servicios SET FechaEntrega = ?, CostoManoObra = ?, CostoRepuestos = ?, HorasTrabajo = ?, PropietarioID = ?, VehiculoPlaca = ?, EstadoVehiculo = ?, MotivoIngreso = ?, EstadoServicio = ?, UsuarioID = ? WHERE IdServicio = ?";
+        String insertServicioQuery = "INSERT INTO Servicios (FechaEntrega, CostoManoObra, CostoRepuestos, HorasTrabajo, PropietarioID, VehiculoPlaca, EstadoVehiculo, MotivoIngreso, EstadoServicio, UsuarioID) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         
         // Crear el diccionario y almacenar las consultas
         Map<String, String> listQuery = new HashMap<>();
