@@ -14,8 +14,6 @@ import motortech.Views;
 
 public class ViewOwners extends javax.swing.JFrame {
 
-    MotorTech motorTech;
-
     private int xMouse;
     private int yMouse;
 
@@ -52,13 +50,7 @@ public class ViewOwners extends javax.swing.JFrame {
         table.setRowCount(0);
     }
 
-    private String getTxtInputSearch() {
-        return inputSearch.getText().trim();
-    }
 
-    private int getInputSearch() {
-        return Integer.parseInt(getTxtInputSearch());
-    }
 
     public void setEnabledTable(boolean a) {
         tableOwners.setEnabled(a);

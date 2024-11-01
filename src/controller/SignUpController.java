@@ -1,6 +1,7 @@
 package controller;
 
 import dao.UserDAO;
+import igu.Home;
 import igu.ViewLogin;
 import igu.ViewNewSignUp;
 import igu.ViewUsers;
@@ -56,7 +57,7 @@ public final class SignUpController {
                 if (!view.isPopupWindow) {
                     new LoginController(new ViewLogin(), new UserDAO(), view);
                 }
-                
+
                 this.CloseView(view.isPopupWindow);
                 return;
             }
@@ -138,14 +139,19 @@ public final class SignUpController {
 
     public void CloseView(boolean isPopupWindow) {
         if (!isPopupWindow) {
-            Views.closeWindows();
+            new LoginController(new ViewLogin(), new UserDAO());
             return;
         }
 
-        ViewUsers viewUsers = (ViewUsers) callerView;
-        UsersController usersController = viewUsers.getUsersController();
-        usersController.resetTable(true);
-        usersController.setEnabledTable(true);
+        if (callerView instanceof ViewUsers) {
+            ViewUsers viewUsers = (ViewUsers) callerView;
+            UsersController usersController = viewUsers.getUsersController();
+            usersController.resetTable(true);
+            usersController.setEnabledTable(true);
+            view.dispose();
+            return;
+        }
+        
         view.dispose();
     }
 }

@@ -1,6 +1,5 @@
 package database;
 
-import database.ListQuery;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.HashMap;
