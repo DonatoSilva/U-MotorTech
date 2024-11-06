@@ -2,6 +2,9 @@ package igu;
 
 import controller.WorkController;
 import java.awt.Color;
+import javax.swing.BorderFactory;
+import javax.swing.border.Border;
+import javax.swing.border.CompoundBorder;
 import motortech.MotorTech;
 import motortech.Views;
 
@@ -98,9 +101,18 @@ public class ViewWork extends javax.swing.JFrame {
     
     public void btnFinalEnable(boolean a){
         btnEnd.setEnabled(a);
+        lblBtnEnd.setEnabled(a);
         
         if(!a){
-            btnEnd.setForeground(Color.GRAY);
+            Color color = motortech.MotorTech.getBgPrimary();
+            
+            Border outerBorder = BorderFactory.createLineBorder(color, 1); 
+            Border innerBorder = BorderFactory.createEmptyBorder(5, 10, 5, 10); 
+            CompoundBorder compoundBorder = BorderFactory.createCompoundBorder(outerBorder, innerBorder); 
+            lblStatus.setBorder(compoundBorder);
+            lblStatus.setForeground(color);
+            
+            btnEnd.setBackground(Color.GRAY);
         }
     }
     

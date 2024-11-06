@@ -9,6 +9,7 @@ import igu.ViewWork;
 import java.awt.GridLayout;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -39,11 +40,12 @@ public class WorkController {
     private void init() {
         view.setWorkController(this);
         Views.openWindows(view, callerView);
+        
+        if(this.work.getEstadoServicio().equals("Terminado")){
+            view.btnFinalEnable(false);
+        }
+        
         this.resetDataView();
-    }
-    
-    private LocalDateTime getNowDate(){
-        return LocalDateTime.now();
     }
 
     public void Prev() {
@@ -170,6 +172,7 @@ public class WorkController {
         int cost = this.calculateHandCost();
         model.updateHandCostWork(cost, idServicio);
         this.work.setHorasTrabajo(number);
+        this.work.setCostoManoObra(cost);
         
         view.setTextHours(Integer.toString(this.work.getHorasTrabajo()));
         view.setTextHandCost(Integer.toString(cost));
@@ -197,19 +200,26 @@ public class WorkController {
     }
     
     public void stateFinal(){
+        int idServicio = this.work.getIdServicio();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        
         LocalDateTime nowDate = LocalDateTime.now();
         String nowState = "Terminado";
         
-        boolean isUpdate = model.updateDateAndStateWork(nowDate, nowState, 0);
+        boolean isUpdate = model.updateDateAndStateWork(nowDate, nowState, idServicio);
+        
         if(!isUpdate){
             JOptionPane.showMessageDialog(view, "Error al actualiza el estado del servicio", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
         }
         
-        this.work.setFechaEntrega(Timestamp.valueOf(nowDate));
+        String formattedDate = nowDate.format(formatter);
+        
+        this.work.setFechaEntrega(Timestamp.valueOf(formattedDate));
         this.work.setEstadoServicio(nowState);
-        view.setTextOutDate(nowDate.toString());
+        view.setTextOutDate(formattedDate);
         view.setTextStatus(nowState);
-        view.setEnabled(!isUpdate);
+        view.btnFinalEnable(!isUpdate);
     }
 
     private int InputDialog(String labelString, String title) {

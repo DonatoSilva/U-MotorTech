@@ -14,7 +14,8 @@
         <group>
             <file>file:/C:/Users/figue/OneDrive/Documentos/NetBeansProjects/MotorTech/src/controller/WorkController.java</file>
             <file>file:/C:/Users/figue/OneDrive/Documentos/NetBeansProjects/MotorTech/src/igu/ViewWork.java</file>
-            <file>file:/C:/Users/figue/OneDrive/Documentos/NetBeansProjects/MotorTech/src/database/ListQuery.java</file>
+            <file>file:/C:/Users/figue/OneDrive/Documentos/NetBeansProjects/MotorTech/src/igu/Home.java</file>
+            <file>file:/C:/Users/figue/OneDrive/Documentos/NetBeansProjects/MotorTech/src/controller/HomeController.java</file>
             <file>file:/C:/Users/figue/OneDrive/Documentos/NetBeansProjects/MotorTech/src/motortech/Work.java</file>
             <file>file:/C:/Users/figue/OneDrive/Documentos/NetBeansProjects/MotorTech/src/dao/WorkDAO.java</file>
         </group>

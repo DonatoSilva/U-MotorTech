@@ -689,18 +689,28 @@ public class Home extends javax.swing.JFrame {
     private void checkInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkInActionPerformed
         if (checkIn.isSelected()) {
             checkFinish.setSelected(false);
+            String search = inputSearch.getText();
+            
+            if (inputSearch.getText().equals("Buscar")) {
+                search = "";
+            }
 
             Status = "En taller";
-            getHomeController().searchWork(inputSearch.getText(), Status);
+            getHomeController().searchWork(search, Status);
         }
     }//GEN-LAST:event_checkInActionPerformed
 
     private void checkFinishActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkFinishActionPerformed
         if (checkFinish.isSelected()) {
             checkIn.setSelected(false);
+            String search = inputSearch.getText();
+            
+            if (inputSearch.getText().equals("Buscar")) {
+                search = "";
+            }
 
             Status = "Terminado";
-            getHomeController().searchWork(inputSearch.getText(), Status);
+            getHomeController().searchWork(search, Status);
         }
     }//GEN-LAST:event_checkFinishActionPerformed
 

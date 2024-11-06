@@ -75,7 +75,7 @@ public class ListQuery {
         String updateHorasServicioQuery = "UPDATE Servicios SET HorasTrabajo = ? WHERE IdServicio = ?;";
         String updateCostoManoObraServicioQuery = "UPDATE Servicios SET CostoManoObra = ? WHERE IdServicio = ?;";
         String updateRepuestosServicioQuery = "UPDATE Servicios SET CostoRepuestos = ? WHERE IdServicio = ?;";
-        String setFinalQuery = "UPDATE Servicio SET FechaEntrega = ?, EstadoServicio = ? WHERE IdServicio = ?;";
+        String setFinalQuery = "UPDATE Servicios SET FechaEntrega = ?, EstadoServicio = ? WHERE IdServicio = ?;";
         String insertServicioQuery = "INSERT INTO Servicios (CostoManoObra, CostoRepuestos, HorasTrabajo, PropietarioID, VehiculoPlaca, EstadoVehiculo, MotivoIngreso, EstadoServicio) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
         
         

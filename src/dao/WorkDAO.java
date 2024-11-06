@@ -23,7 +23,7 @@ public class WorkDAO {
 
             String query = preparedStatement.toString();
             query = query.substring(query.indexOf(": ") + 2);
-            
+
             List<Map<String, Object>> resultList = MyConnection.fetchData(DATABASE, query);
             if (resultList.isEmpty()) {
                 System.err.println("No se tienen trabajos registrados");
@@ -33,7 +33,12 @@ public class WorkDAO {
                 Work work = new Work();
                 work.setIdServicio((Integer) workResult.get("IdServicio"));
                 work.setFechaIngreso((Timestamp) workResult.get("FechaIngreso"));
-                work.setFechaEntrega((Timestamp) workResult.get("FechaEntrega"));
+                
+                LocalDateTime fechaEntrega = (LocalDateTime) workResult.get("FechaEntrega");
+                if (fechaEntrega != null) {
+                    work.setFechaEntrega(Timestamp.valueOf(fechaEntrega));
+                }
+                
                 work.setCostoManoObra(((BigDecimal) workResult.get("CostoManoObra")).doubleValue());
                 work.setCostoRepuestos(((BigDecimal) workResult.get("CostoRepuestos")).doubleValue());
                 work.setHorasTrabajo((Integer) workResult.get("HorasTrabajo"));
@@ -67,7 +72,12 @@ public class WorkDAO {
             Map<String, Object> workResult = resultList.get(0);
             work.setIdServicio((Integer) workResult.get("IdServicio"));
             work.setFechaIngreso((Timestamp) workResult.get("FechaIngreso"));
-            work.setFechaEntrega((Timestamp) workResult.get("FechaEntrega"));
+
+            LocalDateTime fechaEntrega = (LocalDateTime) workResult.get("FechaEntrega");
+            if (fechaEntrega != null) {
+                work.setFechaEntrega(Timestamp.valueOf(fechaEntrega));
+            }
+
             work.setCostoManoObra(((BigDecimal) workResult.get("CostoManoObra")).doubleValue());
             work.setCostoRepuestos(((BigDecimal) workResult.get("CostoRepuestos")).doubleValue());
             work.setHorasTrabajo((Integer) workResult.get("HorasTrabajo"));
@@ -104,7 +114,12 @@ public class WorkDAO {
                 Work work = new Work();
                 work.setIdServicio((Integer) workResult.get("IdServicio"));
                 work.setFechaIngreso((Timestamp) workResult.get("FechaIngreso"));
-                work.setFechaEntrega((Timestamp) workResult.get("FechaEntrega"));
+
+                LocalDateTime fechaEntrega = (LocalDateTime) workResult.get("FechaEntrega");
+                if (fechaEntrega != null) {
+                    work.setFechaEntrega(Timestamp.valueOf(fechaEntrega));
+                }
+
                 work.setCostoManoObra(((BigDecimal) workResult.get("CostoManoObra")).doubleValue());
                 work.setCostoRepuestos(((BigDecimal) workResult.get("CostoRepuestos")).doubleValue());
                 work.setHorasTrabajo((Integer) workResult.get("HorasTrabajo"));
@@ -163,7 +178,7 @@ public class WorkDAO {
             return false;
         }
     }
-    
+
     public boolean updateHoursWork(int hours, int idServicio) {
         Map<String, String> Querys = ListQuery.getListQuery();
         try (Connection connection = MyConnection.getConnection(DATABASE); PreparedStatement preparedStatement = connection.prepareStatement(Querys.get("UpdateHoursWork"))) {
@@ -179,7 +194,7 @@ public class WorkDAO {
             return false;
         }
     }
-    
+
     public boolean updateHandCostWork(int cost, int idServicio) {
         Map<String, String> Querys = ListQuery.getListQuery();
         try (Connection connection = MyConnection.getConnection(DATABASE); PreparedStatement preparedStatement = connection.prepareStatement(Querys.get("UpdateCostoManoObraWork"))) {
@@ -195,7 +210,7 @@ public class WorkDAO {
             return false;
         }
     }
-    
+
     public boolean updateSparePartsWork(int cost, int idServicio) {
         Map<String, String> Querys = ListQuery.getListQuery();
         try (Connection connection = MyConnection.getConnection(DATABASE); PreparedStatement preparedStatement = connection.prepareStatement(Querys.get("UpdateSparePartsWork"))) {
@@ -211,7 +226,7 @@ public class WorkDAO {
             return false;
         }
     }
-    
+
     public boolean updateDateAndStateWork(LocalDateTime nowDate, String nowState, int idServicio) {
         Map<String, String> Querys = ListQuery.getListQuery();
         try (Connection connection = MyConnection.getConnection(DATABASE); PreparedStatement preparedStatement = connection.prepareStatement(Querys.get("setFinal"))) {
@@ -228,7 +243,7 @@ public class WorkDAO {
             return false;
         }
     }
-    
+
     public boolean deleteWork(int idServicio) {
         Map<String, String> Querys = ListQuery.getListQuery();
         try (Connection connection = MyConnection.getConnection(DATABASE); PreparedStatement preparedStatement = connection.prepareStatement(Querys.get("DeleteWork"))) {

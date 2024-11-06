@@ -123,6 +123,8 @@ public class HomeController {
                 view.removeRow(row);
             }
         }
+        
+        view.setVisible(true);
     }
 
     public void NewWork() {
