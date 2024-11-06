@@ -16,7 +16,6 @@ public class Work {
     private String estadoVehiculo;
     private String motivoIngreso;
     private String estadoServicio;
-    private String usuarioID;
     
     // Constructor
     public Work() {}
@@ -33,7 +32,6 @@ public class Work {
         this.estadoVehiculo = estadoVehiculo;
         this.motivoIngreso = motivoIngreso;
         this.estadoServicio = estadoServicio;
-        this.usuarioID = usuarioID;
     }
 
     public int getIdServicio() {
@@ -122,13 +120,5 @@ public class Work {
 
     public void setEstadoServicio(String estadoServicio) {
         this.estadoServicio = estadoServicio;
-    }
-
-    public String getUsuarioID() {
-        return usuarioID;
-    }
-
-    public void setUsuarioID(String usuarioID) {
-        this.usuarioID = usuarioID;
     }
 }

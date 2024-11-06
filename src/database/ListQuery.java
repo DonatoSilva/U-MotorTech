@@ -36,8 +36,8 @@ public class ListQuery {
                 + "HorasTrabajo INT, "
                 + "PropietarioID INT, "
                 + "VehiculoPlaca VARCHAR(10), "
-                + "EstadoVehiculo VARCHAR(10), "
-                + "MotivoIngreso VARCHAR(255), "
+                + "EstadoVehiculo VARCHAR(20), "
+                + "MotivoIngreso TEXT, "
                 + "EstadoServicio VARCHAR(50), "
                 + "UsuarioID VARCHAR(20), "
                 + "FOREIGN KEY (PropietarioID) REFERENCES Propietarios(Cedula), "
@@ -67,11 +67,17 @@ public class ListQuery {
         String getAutomobileByPlacaQuery = "SELECT * FROM Vehiculos WHERE Placa = ?";
         String allAutomobilesByOwnerIDQuery = "SELECT * FROM Vehiculos WHERE PropietarioID = ?";
 
-        String getAllServiciosQuery = "SELECT * FROM Servicios";
+        String getAllServiciosQuery = "SELECT * FROM Servicios WHERE EstadoServicio = ?";
+        String getServiciosByPlacaQuery = "SELECT * FROM Servicios WHERE VehiculoPlaca LIKE ? AND EstadoServicio = ?";
         String getServicioByIdQuery = "SELECT * FROM Servicios WHERE IdServicio = ?";
         String deleteServicioQuery = "DELETE FROM Servicios WHERE IdServicio = ?";
-        String updateServicioQuery = "UPDATE Servicios SET FechaEntrega = ?, CostoManoObra = ?, CostoRepuestos = ?, HorasTrabajo = ?, PropietarioID = ?, VehiculoPlaca = ?, EstadoVehiculo = ?, MotivoIngreso = ?, EstadoServicio = ?, UsuarioID = ? WHERE IdServicio = ?";
-        String insertServicioQuery = "INSERT INTO Servicios (FechaEntrega, CostoManoObra, CostoRepuestos, HorasTrabajo, PropietarioID, VehiculoPlaca, EstadoVehiculo, MotivoIngreso, EstadoServicio, UsuarioID) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String updateServicioQuery = "UPDATE Servicios SET PropietarioID = ?, VehiculoPlaca = ?, EstadoVehiculo = ?, MotivoIngreso = ? WHERE IdServicio = ?";
+        String updateHorasServicioQuery = "UPDATE Servicios SET HorasTrabajo = ? WHERE IdServicio = ?;";
+        String updateCostoManoObraServicioQuery = "UPDATE Servicios SET CostoManoObra = ? WHERE IdServicio = ?;";
+        String updateRepuestosServicioQuery = "UPDATE Servicios SET CostoRepuestos = ? WHERE IdServicio = ?;";
+        String setFinalQuery = "UPDATE Servicio SET FechaEntrega = ?, EstadoServicio = ? WHERE IdServicio = ?;";
+        String insertServicioQuery = "INSERT INTO Servicios (CostoManoObra, CostoRepuestos, HorasTrabajo, PropietarioID, VehiculoPlaca, EstadoVehiculo, MotivoIngreso, EstadoServicio) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+        
         
         // Crear el diccionario y almacenar las consultas
         Map<String, String> listQuery = new HashMap<>();
@@ -108,6 +114,18 @@ public class ListQuery {
         listQuery.put("DeleteAutomobile", deleteAutomobileQuery);
         listQuery.put("UpdateAutomobile", updateAutomobileQuery);
         listQuery.put("InsertAutomobile", insertAutomobileQuery);
+        
+        //Servicios
+        listQuery.put("AllWorks", getAllServiciosQuery);
+        listQuery.put("GetWorkById", getServicioByIdQuery);
+        listQuery.put("GetWorksByPlaca", getServiciosByPlacaQuery);
+        listQuery.put("DeleteWork", deleteServicioQuery);
+        listQuery.put("UpdateWork", updateServicioQuery);
+        listQuery.put("UpdateHoursWork", updateHorasServicioQuery);
+        listQuery.put("UpdateCostoManoObraWork", updateCostoManoObraServicioQuery);
+        listQuery.put("UpdateSparePartsWork", updateRepuestosServicioQuery);
+        listQuery.put("setFinal", setFinalQuery);
+        listQuery.put("InsertWork", insertServicioQuery);
         return listQuery;
     }
 }

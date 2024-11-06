@@ -1,40 +1,192 @@
 package igu;
 
+import controller.NewWorkController;
 import java.awt.Color;
-import javax.swing.JFrame;
+import java.util.ArrayList;
+import java.util.Enumeration;
+import java.util.List;
+import javax.swing.AbstractButton;
+import javax.swing.ButtonModel;
+import javax.swing.JCheckBox;
 import motortech.Inputs;
 import motortech.MotorTech;
 import motortech.Views;
+import motortech.Work;
 
 public class ViewNewWork extends javax.swing.JFrame {
+
     private int xMouse;
     private int yMouse;
-    
+
     private String textCedula;
     private String textPlaca;
-    private JFrame callerOrigin;
-    
-    public ViewNewWork(JFrame callerOriginFrame) {
+
+    private Work work = null;
+    private NewWorkController newWorkController;
+
+    public ViewNewWork(Work work) {
         initComponents();
-        
-        callerOrigin = callerOriginFrame;
+
+        this.work = work;
         initInput();
     }
-    
+
     public ViewNewWork() {
         initComponents();
         initInput();
     }
-    
+
     private void initInput() {
+        cbEMal.setActionCommand("Mal");
+        cbERegular.setActionCommand("Regular");
+        cbEBien.setActionCommand("Bien");
+        
         textCedula = inputCedula.getText();
         textPlaca = inputPlaca.getText();
+    }
+
+    public NewWorkController getNewWorkController() {
+        return newWorkController;
+    }
+
+    public void setNewWorkController(NewWorkController newWorkController) {
+        this.newWorkController = newWorkController;
+    }
+
+    public Work getWork() {
+        return work;
+    }
+
+    public String getCedula() {
+        if (textCedula.equals(inputCedula.getText())) {
+            return "";
+        }
+
+        return inputCedula.getText();
+    }
+
+    public void setInputCedula(String text) {
+        inputCedula.setText(text);
+    }
+
+    public String getInputPlaca() {
+        if (textPlaca.equals(inputPlaca.getText())) {
+            return "";
+        }
+
+        return inputPlaca.getText();
+    }
+
+    public void setInputPlaca(String text) {
+        inputPlaca.setText(text);
+    }
+
+    public void setTextNameOwner(String nameOwner) {
+        lblNameOwner.setText(nameOwner);
+    }
+
+    public void setTextIdCardOwner(String idCardOwner) {
+        lblIdCardOwner.setText(idCardOwner);
+    }
+    
+    public int getIdCard(){
+        return Integer.parseInt(lblIdCardOwner.getText());
+    }
+
+    public void setTextCellOwner(String cellOwner) {
+        lblCellOwner.setText(cellOwner);
+    }
+
+    public void setTextEmailOwner(String emailOwner) {
+        lblEmailOwner.setText(emailOwner);
+    }
+
+    public void setTextAddresOwner(String addres) {
+        lblAddresOwner.setText(addres);
+    }
+
+    public void setTextPlaca(String placa) {
+        lblPlaca.setText(placa);
+    }
+    
+    public String getTextPlaca() {
+        return lblPlaca.getText();
+    }
+
+    public void setTextType(String type) {
+        lblType.setText(type);
+    }
+
+    public void setTextTNumber(String tNumber) {
+        lblTNumber.setText(tNumber);
+    }
+
+    public String getTypeSelect() {
+        ButtonModel selectModel = btnTypeGroup.getSelection();
+        if (selectModel != null ) {
+            return selectModel.getActionCommand();
+        }
+        return null;
+    }
+
+    public void setTypeSelect(String actionCommand) {
+        Enumeration<AbstractButton> buttons = btnTypeGroup.getElements();
+        while (buttons.hasMoreElements()) {
+            AbstractButton button = buttons.nextElement();
+            if (button.getActionCommand().equals(actionCommand)) {
+                button.setSelected(true);
+                break;
+            }
+        }
+    }
+
+    public String getSelectCheckBox() {
+        List<JCheckBox> checkBoxes = new ArrayList<JCheckBox>();
+
+        checkBoxes.add(cbMecanica);
+        checkBoxes.add(cbAire);
+        checkBoxes.add(cbAlineacion);
+        checkBoxes.add(cbPintura);
+        checkBoxes.add(cbAceite);
+        checkBoxes.add(cbSuspension);
+        checkBoxes.add(cbLLantas);
+        checkBoxes.add(cbFrenos);
+        
+        List<String> selectedOptions = new ArrayList<>();
+
+        for (JCheckBox checkBox : checkBoxes) {
+            if (checkBox.isSelected()) {
+                selectedOptions.add(checkBox.getActionCommand());
+            }
+        }
+        
+        return String.join(", ", selectedOptions);
+    }
+    
+    public void setSelectCheckBox(List<String> listActionCommand){
+         List<JCheckBox> checkBoxes = new ArrayList<JCheckBox>();
+
+        checkBoxes.add(cbMecanica);
+        checkBoxes.add(cbAire);
+        checkBoxes.add(cbAlineacion);
+        checkBoxes.add(cbPintura);
+        checkBoxes.add(cbAceite);
+        checkBoxes.add(cbSuspension);
+        checkBoxes.add(cbLLantas);
+        checkBoxes.add(cbFrenos);
+        
+        for (JCheckBox checkBox : checkBoxes) {
+            if (listActionCommand.contains(checkBox.getActionCommand())) {
+                checkBox.setSelected(true);
+            }
+        }
     }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        btnTypeGroup = new javax.swing.ButtonGroup();
         Container = new javax.swing.JPanel();
         lblTitle = new javax.swing.JLabel();
         btnExit = new javax.swing.JPanel();
@@ -50,18 +202,18 @@ public class ViewNewWork extends javax.swing.JFrame {
         lblNameUser = new java.awt.Label();
         inputCedula = new javax.swing.JTextField();
         SepNameUser = new javax.swing.JSeparator();
-        jPanel1 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
+        btnSearchOwner = new javax.swing.JPanel();
+        lblSearchOwner = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
+        lblNameOwner = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
+        lblIdCardOwner = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
-        jLabel13 = new javax.swing.JLabel();
+        lblAddresOwner = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
+        lblCellOwner = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
-        jLabel15 = new javax.swing.JLabel();
+        lblEmailOwner = new javax.swing.JLabel();
         inputPlaca = new javax.swing.JTextField();
         lblNameUser1 = new java.awt.Label();
         btnAutoSearch = new javax.swing.JPanel();
@@ -69,20 +221,24 @@ public class ViewNewWork extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         SepNameUser1 = new javax.swing.JSeparator();
         jLabel9 = new javax.swing.JLabel();
-        jLabel16 = new javax.swing.JLabel();
-        jLabel17 = new javax.swing.JLabel();
+        lblPlaca = new javax.swing.JLabel();
+        lblTNumber = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
         jLabel19 = new javax.swing.JLabel();
-        jLabel20 = new javax.swing.JLabel();
+        lblType = new javax.swing.JLabel();
         jLabel21 = new javax.swing.JLabel();
-        jCheckBox1 = new javax.swing.JCheckBox();
-        jCheckBox2 = new javax.swing.JCheckBox();
-        jCheckBox3 = new javax.swing.JCheckBox();
-        jCheckBox4 = new javax.swing.JCheckBox();
-        jCheckBox5 = new javax.swing.JCheckBox();
-        jCheckBox6 = new javax.swing.JCheckBox();
-        jCheckBox7 = new javax.swing.JCheckBox();
-        jCheckBox8 = new javax.swing.JCheckBox();
+        cbPintura = new javax.swing.JCheckBox();
+        cbMecanica = new javax.swing.JCheckBox();
+        cbAlineacion = new javax.swing.JCheckBox();
+        cbSuspension = new javax.swing.JCheckBox();
+        cbEMal = new javax.swing.JCheckBox();
+        cbLLantas = new javax.swing.JCheckBox();
+        cbFrenos = new javax.swing.JCheckBox();
+        cbAire = new javax.swing.JCheckBox();
+        jLabel3 = new javax.swing.JLabel();
+        cbAceite = new javax.swing.JCheckBox();
+        cbEBien = new javax.swing.JCheckBox();
+        cbERegular = new javax.swing.JCheckBox();
         btnNewAutomobile = new javax.swing.JPanel();
         lblNewAutomobile = new javax.swing.JLabel();
         btnNewOwner = new javax.swing.JPanel();
@@ -247,8 +403,8 @@ public class ViewNewWork extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel1.setText("Seleccione los motivos de ingreso");
-        ContainerInputs.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 260, -1, -1));
+        jLabel1.setText("Seleccione el estado del vehiculo");
+        ContainerInputs.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 250, -1, -1));
 
         lblNameUser.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         lblNameUser.setFont(new java.awt.Font("Century Gothic", 0, 10)); // NOI18N
@@ -275,81 +431,93 @@ public class ViewNewWork extends javax.swing.JFrame {
         SepNameUser.setPreferredSize(new java.awt.Dimension(310, 10));
         ContainerInputs.add(SepNameUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 90, -1, -1));
 
-        jPanel1.setBackground(new java.awt.Color(0, 153, 153));
-        jPanel1.setPreferredSize(new java.awt.Dimension(80, 35));
+        btnSearchOwner.setBackground(new java.awt.Color(0, 153, 153));
+        btnSearchOwner.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnSearchOwner.setPreferredSize(new java.awt.Dimension(80, 35));
+        btnSearchOwner.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnSearchOwnerMouseClicked(evt);
+            }
+        });
 
-        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText("Buscar");
+        lblSearchOwner.setForeground(new java.awt.Color(255, 255, 255));
+        lblSearchOwner.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblSearchOwner.setText("Buscar");
+        lblSearchOwner.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblSearchOwner.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblSearchOwnerMouseClicked(evt);
+            }
+        });
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        javax.swing.GroupLayout btnSearchOwnerLayout = new javax.swing.GroupLayout(btnSearchOwner);
+        btnSearchOwner.setLayout(btnSearchOwnerLayout);
+        btnSearchOwnerLayout.setHorizontalGroup(
+            btnSearchOwnerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(btnSearchOwnerLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 68, Short.MAX_VALUE)
+                .addComponent(lblSearchOwner, javax.swing.GroupLayout.DEFAULT_SIZE, 68, Short.MAX_VALUE)
                 .addContainerGap())
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        btnSearchOwnerLayout.setVerticalGroup(
+            btnSearchOwnerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(btnSearchOwnerLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE)
+                .addComponent(lblSearchOwner, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
-        ContainerInputs.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 50, -1, 40));
+        ContainerInputs.add(btnSearchOwner, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 50, -1, 40));
 
         jLabel4.setFont(new java.awt.Font("Century Gothic", 0, 10)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(204, 204, 204));
         jLabel4.setText("Nombre");
         ContainerInputs.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 110, 60, -1));
 
-        jLabel5.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel5.setText("---------- -----");
-        ContainerInputs.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 120, -1, -1));
+        lblNameOwner.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        lblNameOwner.setForeground(new java.awt.Color(0, 0, 0));
+        lblNameOwner.setText("---------- -----");
+        ContainerInputs.add(lblNameOwner, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 120, -1, -1));
 
         jLabel6.setFont(new java.awt.Font("Century Gothic", 0, 10)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(204, 204, 204));
         jLabel6.setText("Cédula");
         ContainerInputs.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 110, 70, -1));
 
-        jLabel7.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel7.setText("----------");
-        ContainerInputs.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 120, -1, -1));
+        lblIdCardOwner.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        lblIdCardOwner.setForeground(new java.awt.Color(0, 0, 0));
+        lblIdCardOwner.setText("----------");
+        ContainerInputs.add(lblIdCardOwner, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 120, -1, -1));
 
         jLabel12.setFont(new java.awt.Font("Century Gothic", 0, 10)); // NOI18N
         jLabel12.setForeground(new java.awt.Color(204, 204, 204));
         jLabel12.setText("Dirección");
         ContainerInputs.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 110, 70, -1));
 
-        jLabel13.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
-        jLabel13.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel13.setText("---------");
-        ContainerInputs.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 120, -1, -1));
+        lblAddresOwner.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        lblAddresOwner.setForeground(new java.awt.Color(0, 0, 0));
+        lblAddresOwner.setText("---------");
+        ContainerInputs.add(lblAddresOwner, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 120, -1, -1));
 
         jLabel10.setFont(new java.awt.Font("Century Gothic", 0, 10)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(204, 204, 204));
         jLabel10.setText("Teléfono");
         ContainerInputs.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 150, 80, -1));
 
-        jLabel11.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
-        jLabel11.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel11.setText("---------");
-        ContainerInputs.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 160, -1, -1));
+        lblCellOwner.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        lblCellOwner.setForeground(new java.awt.Color(0, 0, 0));
+        lblCellOwner.setText("---------");
+        ContainerInputs.add(lblCellOwner, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 160, -1, -1));
 
         jLabel14.setFont(new java.awt.Font("Century Gothic", 0, 10)); // NOI18N
         jLabel14.setForeground(new java.awt.Color(204, 204, 204));
         jLabel14.setText("Correo");
         ContainerInputs.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 150, 90, -1));
 
-        jLabel15.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
-        jLabel15.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel15.setText("-----------");
-        ContainerInputs.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 160, 180, -1));
+        lblEmailOwner.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        lblEmailOwner.setForeground(new java.awt.Color(0, 0, 0));
+        lblEmailOwner.setText("-----------");
+        ContainerInputs.add(lblEmailOwner, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 160, 180, -1));
 
         inputPlaca.setBackground(new java.awt.Color(255, 255, 255));
         inputPlaca.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
@@ -373,11 +541,23 @@ public class ViewNewWork extends javax.swing.JFrame {
         ContainerInputs.add(lblNameUser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 40, -1, -1));
 
         btnAutoSearch.setBackground(new java.awt.Color(0, 153, 153));
+        btnAutoSearch.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnAutoSearch.setPreferredSize(new java.awt.Dimension(80, 35));
+        btnAutoSearch.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnAutoSearchMouseClicked(evt);
+            }
+        });
 
         lblAutoSearch.setForeground(new java.awt.Color(255, 255, 255));
         lblAutoSearch.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblAutoSearch.setText("Buscar");
+        lblAutoSearch.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblAutoSearch.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblAutoSearchMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout btnAutoSearchLayout = new javax.swing.GroupLayout(btnAutoSearch);
         btnAutoSearch.setLayout(btnAutoSearchLayout);
@@ -412,15 +592,15 @@ public class ViewNewWork extends javax.swing.JFrame {
         jLabel9.setText("Placa");
         ContainerInputs.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 110, 60, -1));
 
-        jLabel16.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
-        jLabel16.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel16.setText("-----------------");
-        ContainerInputs.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 120, -1, -1));
+        lblPlaca.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        lblPlaca.setForeground(new java.awt.Color(0, 0, 0));
+        lblPlaca.setText("-----------------");
+        ContainerInputs.add(lblPlaca, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 120, -1, -1));
 
-        jLabel17.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
-        jLabel17.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel17.setText("----------------");
-        ContainerInputs.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 160, -1, -1));
+        lblTNumber.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        lblTNumber.setForeground(new java.awt.Color(0, 0, 0));
+        lblTNumber.setText("----------------");
+        ContainerInputs.add(lblTNumber, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 160, -1, -1));
 
         jLabel18.setFont(new java.awt.Font("Century Gothic", 0, 10)); // NOI18N
         jLabel18.setForeground(new java.awt.Color(204, 204, 204));
@@ -432,64 +612,90 @@ public class ViewNewWork extends javax.swing.JFrame {
         jLabel19.setText("Tipo");
         ContainerInputs.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 110, 60, -1));
 
-        jLabel20.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
-        jLabel20.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel20.setText("--------------");
-        jLabel20.setToolTipText("");
-        ContainerInputs.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 120, 100, -1));
+        lblType.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        lblType.setForeground(new java.awt.Color(0, 0, 0));
+        lblType.setText("--------------");
+        lblType.setToolTipText("");
+        ContainerInputs.add(lblType, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 120, 100, -1));
 
         jLabel21.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         jLabel21.setForeground(new java.awt.Color(0, 0, 0));
         jLabel21.setText("Datos del Vehiculo");
         ContainerInputs.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 10, -1, -1));
 
-        jCheckBox1.setBackground(new java.awt.Color(255, 255, 255));
-        jCheckBox1.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        jCheckBox1.setForeground(new java.awt.Color(0, 0, 0));
-        jCheckBox1.setText("Chapa y pintura ");
-        ContainerInputs.add(jCheckBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 350, -1, -1));
+        cbPintura.setBackground(new java.awt.Color(255, 255, 255));
+        cbPintura.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        cbPintura.setForeground(new java.awt.Color(0, 0, 0));
+        cbPintura.setText("Chapa y pintura ");
+        ContainerInputs.add(cbPintura, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 350, -1, -1));
 
-        jCheckBox2.setBackground(new java.awt.Color(255, 255, 255));
-        jCheckBox2.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        jCheckBox2.setForeground(new java.awt.Color(0, 0, 0));
-        jCheckBox2.setText("Mecánica en general ");
-        ContainerInputs.add(jCheckBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 290, -1, -1));
+        cbMecanica.setBackground(new java.awt.Color(255, 255, 255));
+        cbMecanica.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        cbMecanica.setForeground(new java.awt.Color(0, 0, 0));
+        cbMecanica.setText("Mecánica en general ");
+        ContainerInputs.add(cbMecanica, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 290, -1, -1));
 
-        jCheckBox3.setBackground(new java.awt.Color(255, 255, 255));
-        jCheckBox3.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        jCheckBox3.setForeground(new java.awt.Color(0, 0, 0));
-        jCheckBox3.setText("Alineación y rotación de ruedas");
-        ContainerInputs.add(jCheckBox3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 320, -1, -1));
+        cbAlineacion.setBackground(new java.awt.Color(255, 255, 255));
+        cbAlineacion.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        cbAlineacion.setForeground(new java.awt.Color(0, 0, 0));
+        cbAlineacion.setText("Alineación y rotación de ruedas");
+        ContainerInputs.add(cbAlineacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 320, -1, -1));
 
-        jCheckBox4.setBackground(new java.awt.Color(255, 255, 255));
-        jCheckBox4.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        jCheckBox4.setForeground(new java.awt.Color(0, 0, 0));
-        jCheckBox4.setText("Sistemas de suspensión");
-        ContainerInputs.add(jCheckBox4, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 320, -1, -1));
+        cbSuspension.setBackground(new java.awt.Color(255, 255, 255));
+        cbSuspension.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        cbSuspension.setForeground(new java.awt.Color(0, 0, 0));
+        cbSuspension.setText("Sistemas de suspensión");
+        ContainerInputs.add(cbSuspension, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 320, -1, -1));
 
-        jCheckBox5.setBackground(new java.awt.Color(255, 255, 255));
-        jCheckBox5.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        jCheckBox5.setForeground(new java.awt.Color(0, 0, 0));
-        jCheckBox5.setText("Cambio de aceite ");
-        ContainerInputs.add(jCheckBox5, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 290, -1, -1));
+        cbEMal.setBackground(new java.awt.Color(255, 255, 255));
+        btnTypeGroup.add(cbEMal);
+        cbEMal.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        cbEMal.setForeground(new java.awt.Color(0, 0, 0));
+        cbEMal.setText("Mal");
+        ContainerInputs.add(cbEMal, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 350, -1, -1));
 
-        jCheckBox6.setBackground(new java.awt.Color(255, 255, 255));
-        jCheckBox6.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        jCheckBox6.setForeground(new java.awt.Color(0, 0, 0));
-        jCheckBox6.setText("Reparación de llantas");
-        ContainerInputs.add(jCheckBox6, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 350, -1, -1));
+        cbLLantas.setBackground(new java.awt.Color(255, 255, 255));
+        cbLLantas.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        cbLLantas.setForeground(new java.awt.Color(0, 0, 0));
+        cbLLantas.setText("Reparación de llantas");
+        ContainerInputs.add(cbLLantas, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 350, -1, -1));
 
-        jCheckBox7.setBackground(new java.awt.Color(255, 255, 255));
-        jCheckBox7.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        jCheckBox7.setForeground(new java.awt.Color(0, 0, 0));
-        jCheckBox7.setText("Servicio de frenos");
-        ContainerInputs.add(jCheckBox7, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 380, -1, -1));
+        cbFrenos.setBackground(new java.awt.Color(255, 255, 255));
+        cbFrenos.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        cbFrenos.setForeground(new java.awt.Color(0, 0, 0));
+        cbFrenos.setText("Servicio de frenos");
+        ContainerInputs.add(cbFrenos, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 380, -1, -1));
 
-        jCheckBox8.setBackground(new java.awt.Color(255, 255, 255));
-        jCheckBox8.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        jCheckBox8.setForeground(new java.awt.Color(0, 0, 0));
-        jCheckBox8.setText("Aire acondicionado y calefacción");
-        ContainerInputs.add(jCheckBox8, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 380, -1, -1));
+        cbAire.setBackground(new java.awt.Color(255, 255, 255));
+        cbAire.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        cbAire.setForeground(new java.awt.Color(0, 0, 0));
+        cbAire.setText("Aire acondicionado y calefacción");
+        ContainerInputs.add(cbAire, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 380, -1, -1));
+
+        jLabel3.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel3.setText("Seleccione los motivos de ingreso");
+        ContainerInputs.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 260, -1, -1));
+
+        cbAceite.setBackground(new java.awt.Color(255, 255, 255));
+        cbAceite.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        cbAceite.setForeground(new java.awt.Color(0, 0, 0));
+        cbAceite.setText("Cambio de aceite ");
+        ContainerInputs.add(cbAceite, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 290, -1, -1));
+
+        cbEBien.setBackground(new java.awt.Color(255, 255, 255));
+        btnTypeGroup.add(cbEBien);
+        cbEBien.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        cbEBien.setForeground(new java.awt.Color(0, 0, 0));
+        cbEBien.setText("Bien");
+        ContainerInputs.add(cbEBien, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 290, -1, -1));
+
+        cbERegular.setBackground(new java.awt.Color(255, 255, 255));
+        btnTypeGroup.add(cbERegular);
+        cbERegular.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        cbERegular.setForeground(new java.awt.Color(0, 0, 0));
+        cbERegular.setText("Regular");
+        ContainerInputs.add(cbERegular, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 320, -1, -1));
 
         btnNewAutomobile.setBackground(new java.awt.Color(255, 255, 255));
         btnNewAutomobile.setPreferredSize(new java.awt.Dimension(80, 35));
@@ -639,7 +845,7 @@ public class ViewNewWork extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void lblExitcloseApp(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblExitcloseApp
-        Views.closeWindows();
+        getNewWorkController().CloseApp();
     }//GEN-LAST:event_lblExitcloseApp
 
     private void lblExitMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblExitMouseEntered
@@ -671,14 +877,7 @@ public class ViewNewWork extends javax.swing.JFrame {
     }//GEN-LAST:event_lblBtnPrevMouseExited
 
     private void btnPrevMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPrevMouseClicked
-        if (callerOrigin == null) {
-            Home home = new Home();
-            Views.openWindows(home, this);
-
-            return;
-        }
-
-        Views.openWindows(callerOrigin, this);
+        getNewWorkController().Prev();
     }//GEN-LAST:event_btnPrevMouseClicked
 
     private void btnPrevMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPrevMouseEntered
@@ -702,7 +901,7 @@ public class ViewNewWork extends javax.swing.JFrame {
     }//GEN-LAST:event_lblBtnEndMouseExited
 
     private void btnEndMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEndMouseClicked
-        callerOrigin.setVisible(true);
+        getNewWorkController().Action();
     }//GEN-LAST:event_btnEndMouseClicked
 
     private void btnEndMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEndMouseEntered
@@ -743,8 +942,7 @@ public class ViewNewWork extends javax.swing.JFrame {
     }//GEN-LAST:event_lblNewAutomobileMouseClicked
 
     private void btnNewAutomobileMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnNewAutomobileMouseClicked
-        ViewNewAutomobile automobile = new ViewNewAutomobile(true);
-        Views.openWindows(automobile);
+        getNewWorkController().NewAutomobile();
     }//GEN-LAST:event_btnNewAutomobileMouseClicked
 
     private void lblNewAutomobileMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblNewAutomobileMouseEntered
@@ -768,8 +966,7 @@ public class ViewNewWork extends javax.swing.JFrame {
     }//GEN-LAST:event_lblNewOwnerMouseExited
 
     private void btnNewOwnerMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnNewOwnerMouseClicked
-        ViewNewOwner newOwner  = new ViewNewOwner();
-        Views.openWindows(newOwner);
+        getNewWorkController().NewOwner();
     }//GEN-LAST:event_btnNewOwnerMouseClicked
 
     private void btnNewOwnerMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnNewOwnerMouseEntered
@@ -779,6 +976,22 @@ public class ViewNewWork extends javax.swing.JFrame {
     private void btnNewOwnerMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnNewOwnerMouseExited
         lblNewOwnerMouseExited(evt);
     }//GEN-LAST:event_btnNewOwnerMouseExited
+
+    private void lblSearchOwnerMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblSearchOwnerMouseClicked
+        getNewWorkController().SearchOwner();
+    }//GEN-LAST:event_lblSearchOwnerMouseClicked
+
+    private void btnSearchOwnerMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSearchOwnerMouseClicked
+        lblSearchOwnerMouseClicked(evt);
+    }//GEN-LAST:event_btnSearchOwnerMouseClicked
+
+    private void btnAutoSearchMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAutoSearchMouseClicked
+        lblAutoSearchMouseClicked(evt);
+    }//GEN-LAST:event_btnAutoSearchMouseClicked
+
+    private void lblAutoSearchMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblAutoSearchMouseClicked
+        getNewWorkController().SearchAuto();
+    }//GEN-LAST:event_lblAutoSearchMouseClicked
 
     /**
      * @param args the command line arguments
@@ -796,46 +1009,51 @@ public class ViewNewWork extends javax.swing.JFrame {
     private javax.swing.JPanel btnNewAutomobile;
     private javax.swing.JPanel btnNewOwner;
     private javax.swing.JPanel btnPrev;
+    private javax.swing.JPanel btnSearchOwner;
+    private javax.swing.ButtonGroup btnTypeGroup;
+    private javax.swing.JCheckBox cbAceite;
+    private javax.swing.JCheckBox cbAire;
+    private javax.swing.JCheckBox cbAlineacion;
+    private javax.swing.JCheckBox cbEBien;
+    private javax.swing.JCheckBox cbEMal;
+    private javax.swing.JCheckBox cbERegular;
+    private javax.swing.JCheckBox cbFrenos;
+    private javax.swing.JCheckBox cbLLantas;
+    private javax.swing.JCheckBox cbMecanica;
+    private javax.swing.JCheckBox cbPintura;
+    private javax.swing.JCheckBox cbSuspension;
     private javax.swing.JTextField inputCedula;
     private javax.swing.JTextField inputPlaca;
-    private javax.swing.JCheckBox jCheckBox1;
-    private javax.swing.JCheckBox jCheckBox2;
-    private javax.swing.JCheckBox jCheckBox3;
-    private javax.swing.JCheckBox jCheckBox4;
-    private javax.swing.JCheckBox jCheckBox5;
-    private javax.swing.JCheckBox jCheckBox6;
-    private javax.swing.JCheckBox jCheckBox7;
-    private javax.swing.JCheckBox jCheckBox8;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel16;
-    private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel lblAddresOwner;
     private javax.swing.JLabel lblAutoSearch;
     private javax.swing.JLabel lblBtnEnd;
     private javax.swing.JLabel lblBtnPrev;
+    private javax.swing.JLabel lblCellOwner;
+    private javax.swing.JLabel lblEmailOwner;
     private javax.swing.JLabel lblExit;
+    private javax.swing.JLabel lblIdCardOwner;
     private java.awt.Label lblMinimize;
+    private javax.swing.JLabel lblNameOwner;
     private java.awt.Label lblNameUser;
     private java.awt.Label lblNameUser1;
     private javax.swing.JLabel lblNewAutomobile;
     private javax.swing.JLabel lblNewOwner;
+    private javax.swing.JLabel lblPlaca;
+    private javax.swing.JLabel lblSearchOwner;
+    private javax.swing.JLabel lblTNumber;
     private javax.swing.JLabel lblTitle;
+    private javax.swing.JLabel lblType;
     // End of variables declaration//GEN-END:variables
 }

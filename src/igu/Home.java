@@ -5,36 +5,60 @@ import controller.SignUpController;
 import dao.UserDAO;
 import java.awt.Color;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 import motortech.Inputs;
 import motortech.MotorTech;
 import motortech.Views;
 
 public class Home extends javax.swing.JFrame {
+
     MotorTech motorTech;
-    
+
     private int xMouse;
     private int yMouse;
-    
+
     private String textSearch;
     private HomeController homeController;
+    private String Status = "En taller";
 
-        
     public Home() {
         initComponents();
-        
+
         motorTech = new MotorTech();
-        motorTech.setStatusTable("IN");
-        
+
         lblTitle.requestFocus();
         textSearch = inputSearch.getText();
     }
-    
+
     public HomeController getHomeController() {
         return homeController;
     }
 
     public void setHomeController(HomeController homeController) {
         this.homeController = homeController;
+    }
+
+    public void addRow(Object[] rowData) {
+        DefaultTableModel table = (DefaultTableModel) tableWork.getModel();
+        table.addRow(rowData);
+    }
+
+    public void removeRow(int row) {
+        DefaultTableModel table = (DefaultTableModel) tableWork.getModel();
+        table.removeRow(row);
+    }
+
+    public void resetTable() {
+        DefaultTableModel table = (DefaultTableModel) tableWork.getModel();
+        table.setRowCount(0);
+    }
+
+    public void setEnabledTable(boolean a) {
+        tableWork.setEnabled(a);
+    }
+
+    public String getStatus() {
+        return Status;
     }
 
     @SuppressWarnings("unchecked")
@@ -51,8 +75,6 @@ public class Home extends javax.swing.JFrame {
         contentSearch = new javax.swing.JPanel();
         inputSearch = new javax.swing.JTextField();
         jSeparator1 = new javax.swing.JSeparator();
-        btnSearch = new javax.swing.JPanel();
-        lblBtnSearch = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
         tableWork = new javax.swing.JTable();
         btnExit = new javax.swing.JPanel();
@@ -180,41 +202,12 @@ public class Home extends javax.swing.JFrame {
             }
         });
         inputSearch.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                inputSearchKeyPressed(evt);
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                inputSearchKeyReleased(evt);
             }
         });
         contentSearch.add(inputSearch, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 344, 30));
         contentSearch.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 344, 10));
-
-        btnSearch.setBackground(new java.awt.Color(0, 153, 153));
-        btnSearch.setMinimumSize(new java.awt.Dimension(76, 35));
-        btnSearch.setPreferredSize(new java.awt.Dimension(55, 35));
-        btnSearch.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnSearchMouseClicked(evt);
-            }
-        });
-        btnSearch.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        lblBtnSearch.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        lblBtnSearch.setForeground(new java.awt.Color(255, 255, 255));
-        lblBtnSearch.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblBtnSearch.setText("Buscar");
-        lblBtnSearch.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        lblBtnSearch.setPreferredSize(new java.awt.Dimension(55, 35));
-        lblBtnSearch.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                lblBtnSearchMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                lblBtnSearchMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                lblBtnSearchMouseExited(evt);
-            }
-        });
-        btnSearch.add(lblBtnSearch, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         tableWork.setBackground(new java.awt.Color(255, 255, 255));
         tableWork.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
@@ -223,15 +216,22 @@ public class Home extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Id", "Propietario", "Placa", "Tipo de vehiculo"
+                "Id", "Propietario", "Placa", "Estado del Vehiculo"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
             }
         });
         tableWork.setGridColor(new java.awt.Color(238, 238, 238));
@@ -245,6 +245,11 @@ public class Home extends javax.swing.JFrame {
             }
         });
         jScrollPane3.setViewportView(tableWork);
+        if (tableWork.getColumnModel().getColumnCount() > 0) {
+            tableWork.getColumnModel().getColumn(0).setResizable(false);
+            tableWork.getColumnModel().getColumn(0).setPreferredWidth(5);
+            tableWork.getColumnModel().getColumn(2).setResizable(false);
+        }
 
         btnExit.setBackground(new java.awt.Color(0, 153, 153));
         btnExit.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -462,8 +467,6 @@ public class Home extends javax.swing.JFrame {
                     .addGroup(ContainerLayout.createSequentialGroup()
                         .addGap(2, 2, 2)
                         .addComponent(contentSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 389, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnMinimize, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -507,7 +510,6 @@ public class Home extends javax.swing.JFrame {
                     .addGroup(ContainerLayout.createSequentialGroup()
                         .addGroup(ContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(contentSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(ContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                 .addComponent(btnMinimize, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(btnExit, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
@@ -559,14 +561,6 @@ public class Home extends javax.swing.JFrame {
     private void inputSearchFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputSearchFocusLost
         Inputs.inputTextFocus(inputSearch, textSearch, true);
     }//GEN-LAST:event_inputSearchFocusLost
-
-    private void lblBtnSearchMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBtnSearchMouseEntered
-        btnSearch.setBackground(MotorTech.getBgPrimarySelect());
-    }//GEN-LAST:event_lblBtnSearchMouseEntered
-
-    private void lblBtnSearchMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBtnSearchMouseExited
-        btnSearch.setBackground(MotorTech.getBgPrimary());
-    }//GEN-LAST:event_lblBtnSearchMouseExited
 
     private void ContainerMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ContainerMousePressed
         xMouse = evt.getX();
@@ -668,11 +662,11 @@ public class Home extends javax.swing.JFrame {
                 new String[]{"Cerrar sesión", "Cancelar"},
                 "Cancelar"
         );
-        
+
         if (opcion == 1) {
             return;
         }
-        
+
         this.getHomeController().login();
     }//GEN-LAST:event_btnOutSesionMouseClicked
 
@@ -685,47 +679,33 @@ public class Home extends javax.swing.JFrame {
     }//GEN-LAST:event_lblBtnNewWorkMouseExited
 
     private void tableWorkMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableWorkMouseClicked
-        tableWork.setEnabled(false);
         if (evt.getClickCount() == 2) {
-            ViewWork viewWork = new ViewWork(this);
-            tableWork.setEnabled(true);
-            Views.openWindows(viewWork, this);
+            this.setEnabled(false);
+            this.getHomeController().tableWorks(evt);
+            this.setEnabled(true);
         }
     }//GEN-LAST:event_tableWorkMouseClicked
 
     private void checkInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkInActionPerformed
         if (checkIn.isSelected()) {
             checkFinish.setSelected(false);
-            
-            motorTech.setStatusTable("IN");
+
+            Status = "En taller";
+            getHomeController().searchWork(inputSearch.getText(), Status);
         }
     }//GEN-LAST:event_checkInActionPerformed
 
     private void checkFinishActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkFinishActionPerformed
         if (checkFinish.isSelected()) {
             checkIn.setSelected(false);
-            
-            motorTech.setStatusTable("FINISH");
+
+            Status = "Terminado";
+            getHomeController().searchWork(inputSearch.getText(), Status);
         }
     }//GEN-LAST:event_checkFinishActionPerformed
 
-    private void inputSearchKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_inputSearchKeyPressed
-        if (evt.getKeyCode() == 10) {
-            inputSearch.setText("");
-        }
-    }//GEN-LAST:event_inputSearchKeyPressed
-
-    private void btnSearchMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSearchMouseClicked
-        inputSearch.setText("");
-    }//GEN-LAST:event_btnSearchMouseClicked
-
-    private void lblBtnSearchMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBtnSearchMouseClicked
-        btnSearchMouseClicked(evt);
-    }//GEN-LAST:event_lblBtnSearchMouseClicked
-
     private void btnNewWorkMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnNewWorkMouseClicked
-        ViewNewWork newWork = new ViewNewWork(this);
-        Views.openWindows( newWork, this);
+        getHomeController().NewWork();
     }//GEN-LAST:event_btnNewWorkMouseClicked
 
     private void lblBtnNewWorkMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBtnNewWorkMouseClicked
@@ -756,10 +736,19 @@ public class Home extends javax.swing.JFrame {
         lblUser.setForeground(Color.BLACK);
     }//GEN-LAST:event_btnUserMouseExited
 
+    private void inputSearchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_inputSearchKeyReleased
+        String placa = inputSearch.getText().trim();
+
+        if ("".equals(placa)) {
+            getHomeController().resetDataTable(true);
+        }
+
+        this.getHomeController().searchWork(placa, getStatus());
+    }//GEN-LAST:event_inputSearchKeyReleased
+
     /**
      * @param args the command line arguments
      */
-    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Container;
@@ -769,7 +758,6 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JPanel btnNewWork;
     private javax.swing.JPanel btnOutSesion;
     private javax.swing.JPanel btnOwner;
-    private javax.swing.JPanel btnSearch;
     private javax.swing.JPanel btnUser;
     private javax.swing.JRadioButton checkFinish;
     private javax.swing.JRadioButton checkIn;
@@ -783,7 +771,6 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JLabel lblBtnNewWork;
     private javax.swing.JLabel lblBtnOwner;
-    private javax.swing.JLabel lblBtnSearch;
     private javax.swing.JLabel lblExit;
     private java.awt.Label lblMinimize;
     private javax.swing.JLabel lblNewUser;

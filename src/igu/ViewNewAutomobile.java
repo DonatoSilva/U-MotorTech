@@ -465,11 +465,11 @@ public class ViewNewAutomobile extends javax.swing.JFrame {
     }//GEN-LAST:event_inputTNumberFocusLost
 
     private void inputIdOwnerFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputIdOwnerFocusGained
-        Inputs.inputTextFocus(inputIdOwner, textNumber1, true);
+        Inputs.inputTextFocus(inputIdOwner, textNumber1);
     }//GEN-LAST:event_inputIdOwnerFocusGained
 
     private void inputIdOwnerFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputIdOwnerFocusLost
-        Inputs.inputTextFocus(inputIdOwner, textNumber1);
+        Inputs.inputTextFocus(inputIdOwner, textNumber1, true);
     }//GEN-LAST:event_inputIdOwnerFocusLost
 
     /**

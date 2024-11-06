@@ -2,6 +2,7 @@ package controller;
 
 import dao.OwnerDAO;
 import igu.ViewNewOwner;
+import igu.ViewNewWork;
 import igu.ViewOwner;
 import igu.ViewOwners;
 import javax.swing.JFrame;
@@ -85,6 +86,14 @@ public class NewOwnerController {
             OwnerController ownerController = viewOwner.getOwnerController();
             
             ownerController.setData(viewOwner.getIdCard());
+            callerView.setVisible(true);
+            view.dispose();
+        }
+        
+        if(callerView instanceof ViewNewWork){
+            ViewNewWork viewNewWork = (ViewNewWork) callerView;
+            NewWorkController newWorkController = viewNewWork.getNewWorkController();
+            
             callerView.setVisible(true);
             view.dispose();
         }

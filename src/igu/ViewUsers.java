@@ -531,10 +531,8 @@ public class ViewUsers extends javax.swing.JFrame {
     }//GEN-LAST:event_ContainerMousePressed
 
     private void inputSearchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_inputSearchKeyReleased
-        UsersController usersController = this.getUsersController();
-        
         String phone = inputSearch.getText().trim();
-        usersController.searchUsersByPhone(phone);
+        getUsersController().searchUsersByPhone(phone);
     }//GEN-LAST:event_inputSearchKeyReleased
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
