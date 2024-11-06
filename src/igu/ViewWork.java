@@ -96,6 +96,14 @@ public class ViewWork extends javax.swing.JFrame {
         lblOutDate.setText(date);
     }
     
+    public void btnFinalEnable(boolean a){
+        btnEnd.setEnabled(a);
+        
+        if(!a){
+            btnEnd.setForeground(Color.GRAY);
+        }
+    }
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -289,10 +297,15 @@ public class ViewWork extends javax.swing.JFrame {
         });
         btnPrev.add(lblBtnPrev, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
 
-        btnEnd.setBackground(new java.awt.Color(204, 204, 204));
+        btnEnd.setBackground(new java.awt.Color(0, 102, 102));
         btnEnd.setForeground(new java.awt.Color(255, 255, 255));
         btnEnd.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnEnd.setPreferredSize(new java.awt.Dimension(100, 35));
+        btnEnd.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnEndMouseClicked(evt);
+            }
+        });
         btnEnd.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         lblBtnEnd.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
@@ -868,6 +881,10 @@ public class ViewWork extends javax.swing.JFrame {
     private void btnSparePartsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSparePartsMouseClicked
         getWorkController().spareParts();
     }//GEN-LAST:event_btnSparePartsMouseClicked
+
+    private void btnEndMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEndMouseClicked
+        this.getWorkController().stateFinal();
+    }//GEN-LAST:event_btnEndMouseClicked
 
     /**
      * @param args the command line arguments

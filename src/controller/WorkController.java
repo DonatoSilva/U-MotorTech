@@ -7,6 +7,8 @@ import igu.Home;
 import igu.ViewNewWork;
 import igu.ViewWork;
 import java.awt.GridLayout;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -39,6 +41,10 @@ public class WorkController {
         Views.openWindows(view, callerView);
         this.resetDataView();
     }
+    
+    private LocalDateTime getNowDate(){
+        return LocalDateTime.now();
+    }
 
     public void Prev() {
         if (callerView == null) {
@@ -66,7 +72,6 @@ public class WorkController {
         
         view.setTextName(name);
         view.setTextIdCard(String.valueOf(idCard));
-        view.setTextIdCard(email);
         view.setTextAddres(addres);
         view.setTextCell(cell);
         view.setTextEmail(email);
@@ -85,6 +90,13 @@ public class WorkController {
         
         //work
         String ID = String.valueOf(this.work.getIdServicio());
+        String inDate = this.work.getFechaIngreso().toString();
+        String outDate = "0000-00-00 00:00:00";
+        
+        if(this.work.getFechaEntrega() != null){
+            outDate = this.work.getFechaEntrega().toString();
+        }        
+        
         String stateAuto = this.work.getEstadoVehiculo();
         String stateWork = this.work.getEstadoServicio();
         String reason = this.work.getMotivoIngreso();
@@ -94,6 +106,8 @@ public class WorkController {
         String total = String.valueOf(this.calculateTotalCost());
         
         view.setTextID(ID);
+        view.setTextInDate(inDate);
+        view.setTextOutDate(outDate);
         view.setTextStatus(stateWork);
         view.setTextStateAuto(stateAuto);
         view.setTextReason(reason);
@@ -180,6 +194,22 @@ public class WorkController {
         this.work.setCostoRepuestos(number);
         view.setTextSpareParts(Integer.toString(number));
         view.setTextTotal(String.valueOf(this.calculateTotalCost()));
+    }
+    
+    public void stateFinal(){
+        LocalDateTime nowDate = LocalDateTime.now();
+        String nowState = "Terminado";
+        
+        boolean isUpdate = model.updateDateAndStateWork(nowDate, nowState, 0);
+        if(!isUpdate){
+            JOptionPane.showMessageDialog(view, "Error al actualiza el estado del servicio", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        
+        this.work.setFechaEntrega(Timestamp.valueOf(nowDate));
+        this.work.setEstadoServicio(nowState);
+        view.setTextOutDate(nowDate.toString());
+        view.setTextStatus(nowState);
+        view.setEnabled(!isUpdate);
     }
 
     private int InputDialog(String labelString, String title) {

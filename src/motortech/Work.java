@@ -7,7 +7,7 @@ import java.sql.Date;
 public class Work {
     private int idServicio;
     private Timestamp fechaIngreso;
-    private Date fechaEntrega;
+    private Timestamp fechaEntrega;
     private double costoManoObra;
     private double costoRepuestos;
     private int horasTrabajo;
@@ -20,7 +20,7 @@ public class Work {
     // Constructor
     public Work() {}
 
-    public Work(int idServicio, Timestamp fechaIngreso, Date fechaEntrega, double costoManoObra, double costoRepuestos, int horasTrabajo, int propietarioID, String vehiculoPlaca, String estadoVehiculo, String motivoIngreso, String estadoServicio, String usuarioID) {
+    public Work(int idServicio, Timestamp fechaIngreso, Timestamp fechaEntrega, double costoManoObra, double costoRepuestos, int horasTrabajo, int propietarioID, String vehiculoPlaca, String estadoVehiculo, String motivoIngreso, String estadoServicio, String usuarioID) {
         this.idServicio = idServicio;
         this.fechaIngreso = fechaIngreso;
         this.fechaEntrega = fechaEntrega;
@@ -50,11 +50,11 @@ public class Work {
         this.fechaIngreso = fechaIngreso;
     }
 
-    public Date getFechaEntrega() {
+    public Timestamp getFechaEntrega() {
         return fechaEntrega;
     }
 
-    public void setFechaEntrega(Date fechaEntrega) {
+    public void setFechaEntrega(Timestamp fechaEntrega) {
         this.fechaEntrega = fechaEntrega;
     }
 

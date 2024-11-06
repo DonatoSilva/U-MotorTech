@@ -5,10 +5,10 @@ import database.ListQuery;
 import java.sql.*;
 import database.MyConnection;
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import motortech.User;
 import motortech.Work;
 
 public class WorkDAO {
@@ -33,7 +33,7 @@ public class WorkDAO {
                 Work work = new Work();
                 work.setIdServicio((Integer) workResult.get("IdServicio"));
                 work.setFechaIngreso((Timestamp) workResult.get("FechaIngreso"));
-                work.setFechaEntrega((Date) workResult.get("FechaEntrega"));
+                work.setFechaEntrega((Timestamp) workResult.get("FechaEntrega"));
                 work.setCostoManoObra(((BigDecimal) workResult.get("CostoManoObra")).doubleValue());
                 work.setCostoRepuestos(((BigDecimal) workResult.get("CostoRepuestos")).doubleValue());
                 work.setHorasTrabajo((Integer) workResult.get("HorasTrabajo"));
@@ -67,7 +67,7 @@ public class WorkDAO {
             Map<String, Object> workResult = resultList.get(0);
             work.setIdServicio((Integer) workResult.get("IdServicio"));
             work.setFechaIngreso((Timestamp) workResult.get("FechaIngreso"));
-            work.setFechaEntrega((Date) workResult.get("FechaEntrega"));
+            work.setFechaEntrega((Timestamp) workResult.get("FechaEntrega"));
             work.setCostoManoObra(((BigDecimal) workResult.get("CostoManoObra")).doubleValue());
             work.setCostoRepuestos(((BigDecimal) workResult.get("CostoRepuestos")).doubleValue());
             work.setHorasTrabajo((Integer) workResult.get("HorasTrabajo"));
@@ -104,7 +104,7 @@ public class WorkDAO {
                 Work work = new Work();
                 work.setIdServicio((Integer) workResult.get("IdServicio"));
                 work.setFechaIngreso((Timestamp) workResult.get("FechaIngreso"));
-                work.setFechaEntrega((Date) workResult.get("FechaEntrega"));
+                work.setFechaEntrega((Timestamp) workResult.get("FechaEntrega"));
                 work.setCostoManoObra(((BigDecimal) workResult.get("CostoManoObra")).doubleValue());
                 work.setCostoRepuestos(((BigDecimal) workResult.get("CostoRepuestos")).doubleValue());
                 work.setHorasTrabajo((Integer) workResult.get("HorasTrabajo"));
@@ -179,6 +179,7 @@ public class WorkDAO {
             return false;
         }
     }
+    
     public boolean updateHandCostWork(int cost, int idServicio) {
         Map<String, String> Querys = ListQuery.getListQuery();
         try (Connection connection = MyConnection.getConnection(DATABASE); PreparedStatement preparedStatement = connection.prepareStatement(Querys.get("UpdateCostoManoObraWork"))) {
@@ -194,6 +195,7 @@ public class WorkDAO {
             return false;
         }
     }
+    
     public boolean updateSparePartsWork(int cost, int idServicio) {
         Map<String, String> Querys = ListQuery.getListQuery();
         try (Connection connection = MyConnection.getConnection(DATABASE); PreparedStatement preparedStatement = connection.prepareStatement(Querys.get("UpdateSparePartsWork"))) {
@@ -209,11 +211,12 @@ public class WorkDAO {
             return false;
         }
     }
-    public boolean updateDateAndStateWork(int cost, int idServicio) {
+    
+    public boolean updateDateAndStateWork(LocalDateTime nowDate, String nowState, int idServicio) {
         Map<String, String> Querys = ListQuery.getListQuery();
         try (Connection connection = MyConnection.getConnection(DATABASE); PreparedStatement preparedStatement = connection.prepareStatement(Querys.get("setFinal"))) {
-            preparedStatement.setInt(1, cost);
-            preparedStatement.setInt(2, idServicio);
+            preparedStatement.setTimestamp(1, Timestamp.valueOf(nowDate));
+            preparedStatement.setString(2, nowState);
             preparedStatement.setInt(3, idServicio);
 
             String query = preparedStatement.toString();
@@ -225,7 +228,7 @@ public class WorkDAO {
             return false;
         }
     }
-
+    
     public boolean deleteWork(int idServicio) {
         Map<String, String> Querys = ListQuery.getListQuery();
         try (Connection connection = MyConnection.getConnection(DATABASE); PreparedStatement preparedStatement = connection.prepareStatement(Querys.get("DeleteWork"))) {
