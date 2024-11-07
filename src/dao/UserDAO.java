@@ -2,6 +2,7 @@ package dao;
 
 import database.ListQuery;
 import database.MyConnection;
+import database.PasswordUtil;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,20 +17,24 @@ public class UserDAO {
         
         Map<String, String> Querys = ListQuery.getListQuery();
 
-        try (Connection connection = MyConnection.getConnection(DATABASE); PreparedStatement preparedStatement = connection.prepareStatement(Querys.get("IsLogin"))) {
+        try (Connection connection = MyConnection.getConnection(DATABASE); PreparedStatement preparedStatement = connection.prepareStatement(Querys.get("GetHashesLogin"))) {
 
             preparedStatement.setString(1, user);
-            preparedStatement.setString(2, password);
             
             String query = preparedStatement.toString();
             query = query.substring(query.indexOf(": ") + 2);
 
             List<Map<String, Object>> resultList = MyConnection.fetchData(DATABASE, query);
+            Map<String, Object> res = resultList.getFirst();
+            String hashes = res.get("Contrasena").toString();
             
-            if (resultList.size() == 0){return 404;}
+            boolean isValidate = PasswordUtil.checkPassword(password, hashes);
             
-            return 200; 
-
+            if (isValidate) {
+                return 200;
+            }
+            
+            return 401;
         } catch (SQLException e) {
             e.printStackTrace();
             System.out.println("Error al verificar el usuario: " + e.getMessage());
@@ -153,12 +158,14 @@ public class UserDAO {
         Map<String, String> Querys = ListQuery.getListQuery();
 
         try (Connection connection = MyConnection.getConnection(DATABASE); PreparedStatement preparedStatement = connection.prepareStatement(Querys.get("InsertUser"))) {
-
+            
+            String pass = PasswordUtil.hashPassword(user.getContrasena());
+            
             preparedStatement.setString(1, user.getTelefono());
             preparedStatement.setString(2, user.getUsuario());
             preparedStatement.setString(3, user.getNombresApellidos());
             preparedStatement.setString(4, user.getCorreoElectronico());
-            preparedStatement.setString(5, user.getContrasena());
+            preparedStatement.setString(5, pass);
 
             String query = preparedStatement.toString();
             query = query.substring(query.indexOf(": ") + 2);

@@ -79,7 +79,7 @@ public class LoginController {
                 return;
             }
             
-            if (result == 404){
+            if (result == 401){
                 JOptionPane.showMessageDialog(view, "Usuario o Contraseña incorrectos");
                 return;
             }

@@ -25,7 +25,7 @@ public class ListQuery {
                 + "Usuario VARCHAR(20) UNIQUE NOT NULL, "
                 + "NombresApellidos VARCHAR(100) NOT NULL, "
                 + "CorreoElectronico VARCHAR(100) NOT NULL, "
-                + "Contrasena VARCHAR(50) NOT NULL)";
+                + "Contrasena VARCHAR(80) NOT NULL)";
 
         String serviciosQuery = "CREATE TABLE Servicios ("
                 + "IdServicio INT PRIMARY KEY AUTO_INCREMENT, "
@@ -51,7 +51,7 @@ public class ListQuery {
         String getUserByPhoneQuery = "SELECT * FROM Usuarios WHERE Telefono = ?";
         String getUsersByPhoneQuery = "SELECT * FROM Usuarios WHERE Telefono LIKE ?";
         
-        String isLogin = "SELECT * FROM Usuarios WHERE Usuario = ? AND Contrasena = ?";
+        String hashesLogin = "SELECT Contrasena FROM Usuarios WHERE Usuario = ?";
         
         String allOwnersQuery = "SELECT * FROM Propietarios";
         String deleteOwnerQuery = "DELETE FROM Propietarios WHERE Cedula = ?";
@@ -97,7 +97,7 @@ public class ListQuery {
         listQuery.put("GetUsersByPhone", getUsersByPhoneQuery);
         
         /// Login 
-        listQuery.put("IsLogin", isLogin);
+        listQuery.put("GetHashesLogin", hashesLogin);
         
         /// Owners
         listQuery.put("AllOwners", allOwnersQuery);
