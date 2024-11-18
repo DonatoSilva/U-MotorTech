@@ -62,47 +62,12 @@ public class OwnerController {
     }
 
     public void DeleteOwner() {
-        int deleteModal = JOptionPane.showOptionDialog(
-                view,
-                "¿Seguro que desea eliminar este propietario?",
-                "MotorTech - Propietario",
-                JOptionPane.YES_NO_OPTION,
-                JOptionPane.WARNING_MESSAGE,
-                null,
-                new String[]{"Cancelar", "Eliminar"},
-                "Cancelar"
-        );
-
-        if (deleteModal == 1) {
-            int deleteAutos = JOptionPane.showOptionDialog(
-                    view,
-                    "Esta acción eliminara todos los vehiculos asociados a este propietario",
-                    "MotorTech - Propietario",
-                    JOptionPane.YES_NO_OPTION,
-                    JOptionPane.WARNING_MESSAGE,
-                    null,
-                    new Object[]{"Sí", "No"},
-                    "Sí"
-            );
-
-            if (deleteAutos == JOptionPane.YES_OPTION) {
-                boolean isAutosDelete = automobileDAO.deleteAutomobiles(view.getIdCard());
-
-                if (!isAutosDelete) {
-                    JOptionPane.showMessageDialog(view, "Algo salio mal al intentar eliminar los vehiculos asociados al propietario: " + view.getIdCard());
-                    return;
-                }
-
-                boolean isDelete = model.deleteOwner(owner.getCedula());
-
-                if (!isDelete) {
-                    JOptionPane.showMessageDialog(view, "No se logro eliminar al propietario con la cédula " + view.getIdCard());
-                } else {
-                    JOptionPane.showMessageDialog(view, "Se logro eliminar al propietario con la cédula " + view.getIdCard());
-                }
-
-                this.CloseView();
-            }
+        ViewOwners viewOwners = (ViewOwners) callerView;
+        OwnersController ownersController = viewOwners.getOwnersController();
+        boolean isDelete = ownersController.deleteOwner(owner.getCedula());
+        
+        if (isDelete) {
+            this.CloseView();
         }
     }
 
@@ -182,7 +147,6 @@ public class OwnerController {
             if (isDelete) {
                 JOptionPane.showMessageDialog(view, "Vehiculo eliminado con exito, placa: " + placa);
                 view.removeRow(row);
-
                 return;
             }
 

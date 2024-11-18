@@ -9,6 +9,7 @@ import java.util.List;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
+import motortech.Automobile;
 import motortech.Owner;
 import motortech.Views;
 
@@ -87,48 +88,10 @@ public class OwnersController {
         }
 
         if (opcion == 1) {
-            int deleteModal = JOptionPane.showOptionDialog(
-                    view,
-                    "¿Seguro que desea eliminar este propietario?",
-                    "MotorTech - Propietario",
-                    JOptionPane.YES_NO_OPTION,
-                    JOptionPane.WARNING_MESSAGE,
-                    null,
-                    new String[]{"Cancelar", "Eliminar"},
-                    "Cancelar"
-            );
+            boolean isDelete = this.deleteOwner(cedula);
 
-            if (deleteModal == 1) {
-                int deleteAutos = JOptionPane.showOptionDialog(
-                        view,
-                        "Esta acción eliminara todos los vehiculos asociados a este propietario",
-                        "MotorTech - Propietario",
-                        JOptionPane.YES_NO_OPTION,
-                        JOptionPane.WARNING_MESSAGE,
-                        null,
-                        new Object[]{"Sí", "No"},
-                        "Sí"
-                );
-
-                if (deleteAutos == JOptionPane.YES_OPTION) {
-                    AutomobileDAO automobileDAO = new AutomobileDAO();
-                    boolean isAutosDelete = automobileDAO.deleteAutomobiles(cedula);
-                    
-                    if (!isAutosDelete) {
-                        JOptionPane.showMessageDialog(view, "Algo salio mal al intentar eliminar los vehiculos asociados al propietario: " + cedula);
-                        return;
-                    }
-                    
-                    boolean isDelete = model.deleteOwner(cedula);
-
-                    if (!isDelete) {
-                        JOptionPane.showMessageDialog(view, "No se logro eliminar al propietario con la cédula: " + cedula);
-                        return;
-                    }
-
-                    JOptionPane.showMessageDialog(view, "Se logro eliminar al propietario con la cédula: " + cedula);
-                    view.removeRow(row);
-                }
+            if (isDelete) {
+                view.removeRow(row);
             }
         }
 
@@ -137,6 +100,59 @@ public class OwnersController {
         }
 
         this.setEnabledTable(true);
+    }
+
+    public boolean deleteOwner(int idCard) {
+        int deleteModal = JOptionPane.showOptionDialog(
+                view,
+                "¿Seguro que desea eliminar este propietario?",
+                "MotorTech - Propietario",
+                JOptionPane.YES_NO_OPTION,
+                JOptionPane.WARNING_MESSAGE,
+                null,
+                new String[]{"Cancelar", "Eliminar"},
+                "Cancelar"
+        );
+
+        if (deleteModal == 1) {
+            int deleteAutos = JOptionPane.showOptionDialog(
+                    view,
+                    "Esta acción eliminara todos los vehiculos asociados a este propietario",
+                    "MotorTech - Propietario",
+                    JOptionPane.YES_NO_OPTION,
+                    JOptionPane.WARNING_MESSAGE,
+                    null,
+                    new Object[]{"Sí", "No"},
+                    "Sí"
+            );
+
+            if (deleteAutos == JOptionPane.YES_OPTION) {
+                AutomobileDAO automobileDAO = new AutomobileDAO();
+                List<Automobile> carsExistence = automobileDAO.getAllAutomobiles(idCard);
+
+                if (!carsExistence.isEmpty()) {
+                    boolean isAutosDelete = automobileDAO.deleteAutomobiles(idCard);
+
+                    if (!isAutosDelete) {
+                        JOptionPane.showMessageDialog(view, "Algo salio mal al intentar eliminar los vehiculos asociados al propietario: " + idCard);
+                        return false;
+                    }
+                }
+
+                boolean isDelete = model.deleteOwner(idCard);
+
+                if (!isDelete) {
+                    JOptionPane.showMessageDialog(view, "No se logro eliminar al propietario con la cédula: " + idCard);
+                    return false;
+                }
+
+                JOptionPane.showMessageDialog(view, "Propietario eliminado: " + idCard);
+            }
+
+            return true;
+        }
+
+        return false;
     }
 
     public void setEnabledTable(boolean a) {
