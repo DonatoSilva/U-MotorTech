@@ -40,7 +40,7 @@ public class ViewNewWork extends javax.swing.JFrame {
         cbEMal.setActionCommand("Mal");
         cbERegular.setActionCommand("Regular");
         cbEBien.setActionCommand("Bien");
-        
+
         textCedula = inputCedula.getText();
         textPlaca = inputPlaca.getText();
     }
@@ -88,8 +88,8 @@ public class ViewNewWork extends javax.swing.JFrame {
     public void setTextIdCardOwner(String idCardOwner) {
         lblIdCardOwner.setText(idCardOwner);
     }
-    
-    public int getIdCard(){
+
+    public int getIdCard() {
         return Integer.parseInt(lblIdCardOwner.getText());
     }
 
@@ -108,7 +108,7 @@ public class ViewNewWork extends javax.swing.JFrame {
     public void setTextPlaca(String placa) {
         lblPlaca.setText(placa);
     }
-    
+
     public String getTextPlaca() {
         return lblPlaca.getText();
     }
@@ -123,7 +123,7 @@ public class ViewNewWork extends javax.swing.JFrame {
 
     public String getTypeSelect() {
         ButtonModel selectModel = btnTypeGroup.getSelection();
-        if (selectModel != null ) {
+        if (selectModel != null) {
             return selectModel.getActionCommand();
         }
         return null;
@@ -151,7 +151,7 @@ public class ViewNewWork extends javax.swing.JFrame {
         checkBoxes.add(cbSuspension);
         checkBoxes.add(cbLLantas);
         checkBoxes.add(cbFrenos);
-        
+
         List<String> selectedOptions = new ArrayList<>();
 
         for (JCheckBox checkBox : checkBoxes) {
@@ -159,13 +159,12 @@ public class ViewNewWork extends javax.swing.JFrame {
                 selectedOptions.add(checkBox.getActionCommand());
             }
         }
-        
+
         return String.join(", ", selectedOptions);
     }
-    
-    public void setSelectCheckBox(List<String> listActionCommand){
-         List<JCheckBox> checkBoxes = new ArrayList<JCheckBox>();
 
+    public void setSelectCheckBox(List<String> listActionCommand) {
+        List<JCheckBox> checkBoxes = new ArrayList<JCheckBox>();
         checkBoxes.add(cbMecanica);
         checkBoxes.add(cbAire);
         checkBoxes.add(cbAlineacion);
@@ -174,10 +173,12 @@ public class ViewNewWork extends javax.swing.JFrame {
         checkBoxes.add(cbSuspension);
         checkBoxes.add(cbLLantas);
         checkBoxes.add(cbFrenos);
-        
+
         for (JCheckBox checkBox : checkBoxes) {
-            if (listActionCommand.contains(checkBox.getActionCommand())) {
-                checkBox.setSelected(true);
+            for (String actionCommand : listActionCommand) {
+                if (actionCommand.trim().equals(checkBox.getActionCommand())) {
+                    checkBox.setSelected(true);
+                }
             }
         }
     }
@@ -626,13 +627,13 @@ public class ViewNewWork extends javax.swing.JFrame {
         cbPintura.setBackground(new java.awt.Color(255, 255, 255));
         cbPintura.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         cbPintura.setForeground(new java.awt.Color(0, 0, 0));
-        cbPintura.setText("Chapa y pintura ");
+        cbPintura.setText("Chapa y pintura");
         ContainerInputs.add(cbPintura, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 350, -1, -1));
 
         cbMecanica.setBackground(new java.awt.Color(255, 255, 255));
         cbMecanica.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         cbMecanica.setForeground(new java.awt.Color(0, 0, 0));
-        cbMecanica.setText("Mecánica en general ");
+        cbMecanica.setText("Mecánica en general");
         ContainerInputs.add(cbMecanica, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 290, -1, -1));
 
         cbAlineacion.setBackground(new java.awt.Color(255, 255, 255));
@@ -680,7 +681,7 @@ public class ViewNewWork extends javax.swing.JFrame {
         cbAceite.setBackground(new java.awt.Color(255, 255, 255));
         cbAceite.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         cbAceite.setForeground(new java.awt.Color(0, 0, 0));
-        cbAceite.setText("Cambio de aceite ");
+        cbAceite.setText("Cambio de aceite");
         ContainerInputs.add(cbAceite, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 290, -1, -1));
 
         cbEBien.setBackground(new java.awt.Color(255, 255, 255));

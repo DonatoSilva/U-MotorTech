@@ -61,8 +61,6 @@ public class LoginController {
             return false;
         }
 
-        
-
         return true;
     }
 
@@ -75,12 +73,17 @@ public class LoginController {
             if (result == 200) {
                 Home home = new Home();
                 WorkDAO workDAO = new WorkDAO();
-                HomeController homeController = new HomeController(home, workDAO, view);
+                new HomeController(home, workDAO, view);
+                return;
+            }
+            
+            if (result == 404) {
+                JOptionPane.showMessageDialog(view, "Usuario incorrecto");
                 return;
             }
             
             if (result == 401){
-                JOptionPane.showMessageDialog(view, "Usuario o Contraseña incorrectos");
+                JOptionPane.showMessageDialog(view, "Contraseña incorrecta");
                 return;
             }
             
@@ -93,6 +96,6 @@ public class LoginController {
 
     public void signUp() {
         ViewNewSignUp viewNewSignUp = new ViewNewSignUp();
-        SignUpController signUpController = new SignUpController(viewNewSignUp, modal, view);
+        new SignUpController(viewNewSignUp, modal, view);
     }
 }

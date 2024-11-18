@@ -237,8 +237,7 @@ public class WorkController {
             String input = textField.getText();
             try {
                 int number = Integer.parseInt(input);
-                JOptionPane.showMessageDialog(view, "Ingresaste: " + number);
-
+                
                 return number;
             } catch (NumberFormatException e) {
                 JOptionPane.showMessageDialog(view, "Por favor, ingrese un número valido.", "Error", JOptionPane.ERROR_MESSAGE);

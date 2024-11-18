@@ -851,7 +851,7 @@ public class ViewWork extends javax.swing.JFrame {
     }//GEN-LAST:event_lblBtnPrevMouseClicked
 
     private void lblBtnEditarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBtnEditarMouseClicked
-        //iniciar controlador
+        getWorkController().editWork();
     }//GEN-LAST:event_lblBtnEditarMouseClicked
 
     private void lblBtnEditarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBtnEditarMouseEntered

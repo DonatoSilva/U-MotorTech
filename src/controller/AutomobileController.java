@@ -1,11 +1,13 @@
 package controller;
 
 import dao.AutomobileDAO;
+import dao.OwnerDAO;
 import igu.ViewNewAutomobile;
 import igu.ViewOwner;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import motortech.Automobile;
+import motortech.Owner;
 import motortech.Views;
 
 public class AutomobileController {
@@ -13,7 +15,7 @@ public class AutomobileController {
     private ViewNewAutomobile view;
     private AutomobileDAO model;
     private JFrame callerView;
-    
+
     private String placa = "";
     private String tipo = "";
     private String TNumber = "";
@@ -36,7 +38,7 @@ public class AutomobileController {
         this.tipo = automobile.getTipoVehiculo();
         this.TNumber = automobile.getTarjetaPropiedad();
         this.placa = automobile.getPlaca();
-        
+
         init();
     }
 
@@ -64,61 +66,77 @@ public class AutomobileController {
     }
 
     public void Action() {
-        if(view.getIsEdit()){
+        OwnerDAO ownerDao = new OwnerDAO();
+        Owner owner = ownerDao.getOwner(view.getTxtInputIdOwner());
+
+        if (owner.getDireccion() == null) {
+            JOptionPane.showMessageDialog(view, "Error no existe un propietario con ese numero de cedula");
+            return;
+        }
+
+        if (view.getIsEdit()) {
             this.UpdateAutomobile();
             return;
         }
-        
+
         this.CreateAutomobile();
     }
 
     private void CreateAutomobile() {
-        Automobile automobile = new Automobile();
+        try {
+            Automobile automobile = new Automobile();
 
-        automobile.setPlaca(view.getTxtInputPlate());
-        automobile.setTarjetaPropiedad(view.getTxtTInputNumber());
-        automobile.setPropietarioID(view.getTxtInputIdOwner());
-        automobile.setTipoVehiculo(view.getSelectRadioButton());
+            automobile.setPlaca(view.getTxtInputPlate());
+            automobile.setTarjetaPropiedad(view.getTxtTInputNumber());
+            automobile.setPropietarioID(view.getTxtInputIdOwner());
+            automobile.setTipoVehiculo(view.getSelectRadioButton());
 
-        boolean isCreate = model.createAutomobile(automobile);
+            boolean isCreate = model.createAutomobile(automobile);
 
-        if (isCreate) {
-            JOptionPane.showMessageDialog(view, "Automovil creado " + automobile.getPlaca());
+            if (isCreate) {
+                JOptionPane.showMessageDialog(view, "Automovil creado " + automobile.getPlaca());
+                this.CloseApp();
+                return;
+            }
+
+            JOptionPane.showMessageDialog(view, "Error al intentar crear el Automovil");
             this.CloseApp();
-            return;
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(view, e.getMessage());
         }
-
-        JOptionPane.showMessageDialog(view, "Error al intentar crear el Automovil");
-        this.CloseApp();
     }
 
     private void UpdateAutomobile() {
-        Automobile automobile = new Automobile();
+        try {
+            Automobile automobile = new Automobile();
 
-        automobile.setPlaca(view.getTxtInputPlate());
-        automobile.setTarjetaPropiedad(view.getTxtTInputNumber());
-        automobile.setPropietarioID(view.getTxtInputIdOwner());
-        automobile.setTipoVehiculo(view.getSelectRadioButton());
+            automobile.setPlaca(view.getTxtInputPlate());
+            automobile.setTarjetaPropiedad(view.getTxtTInputNumber());
+            automobile.setPropietarioID(view.getTxtInputIdOwner());
+            automobile.setTipoVehiculo(view.getSelectRadioButton());
 
-        boolean isCreate = model.updateAutomobile(automobile);
+            boolean isCreate = model.updateAutomobile(automobile);
 
-        if (isCreate) {
-            JOptionPane.showMessageDialog(view, "Automovil editado " + automobile.getPlaca());
+            if (isCreate) {
+                JOptionPane.showMessageDialog(view, "Automovil editado " + automobile.getPlaca());
+                this.CloseApp();
+                return;
+            }
+
+            JOptionPane.showMessageDialog(view, "Error al intentar editar el Automovil");
             this.CloseApp();
-            return;
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(view, e.getMessage());
         }
-
-        JOptionPane.showMessageDialog(view, "Error al intentar editar el Automovil");
-        this.CloseApp();
     }
 
     public void CloseApp() {
-        if (callerView instanceof ViewOwner){
+        if (callerView instanceof ViewOwner) {
             ViewOwner viewOwner = (ViewOwner) callerView;
             OwnerController ownerController = viewOwner.getOwnerController();
             ownerController.resetTable();
         }
-        
+
         view.dispose();
     }
 }

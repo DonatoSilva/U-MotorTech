@@ -41,8 +41,9 @@ public class MotorTech {
         if (opcion == 1) {
             return;
         }
-
-        Views.openWindows(login, view);
+        
+        new LoginController(login, new UserDAO());
+        view.dispose();
     }
 
     /// App status

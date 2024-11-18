@@ -41,34 +41,43 @@ public class NewOwnerController {
     }
 
     private void CreateOwner() {
-        Owner owner = new Owner(view.getTxtInputIDCard(), view.getTxtInputNameOwner(), view.getTxtInputAdressOwner(), view.getTxtInputCellOwner(), view.getTxtInputEmailOwner());
+        try {
+            Owner owner = new Owner(view.getTxtInputIDCard(), view.getTxtInputNameOwner(), view.getTxtInputAdressOwner(), view.getTxtInputCellOwner(), view.getTxtInputEmailOwner());
 
-        boolean isCreate = model.createOwner(owner);
-        String name = owner.getNombresApellidos();
+            boolean isCreate = model.createOwner(owner);
+            String name = owner.getNombresApellidos();
 
-        if (isCreate) {
-            JOptionPane.showMessageDialog(view, "Propietario creado " + name);
-            this.CloseView();
-            return;
+            if (isCreate) {
+                JOptionPane.showMessageDialog(view, "Propietario creado " + name);
+                this.CloseView();
+                return;
+            }
+
+            JOptionPane.showMessageDialog(view, "No se logro crear el Propietario " + name);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(view, e.getMessage());
         }
 
-        JOptionPane.showMessageDialog(view, "No se logro crear el Propietario " + name);
     }
 
     private void UpdateOwner() {
-        Owner owner = new Owner(view.getTxtInputIDCard(), view.getTxtInputNameOwner(), view.getTxtInputAdressOwner(), view.getTxtInputCellOwner(), view.getTxtInputEmailOwner());
+        try {
+            Owner owner = new Owner(view.getTxtInputIDCard(), view.getTxtInputNameOwner(), view.getTxtInputAdressOwner(), view.getTxtInputCellOwner(), view.getTxtInputEmailOwner());
 
-        boolean isEdit = model.updateOwner(owner);
+            boolean isEdit = model.updateOwner(owner);
 
-        String name = owner.getNombresApellidos();
+            String name = owner.getNombresApellidos();
 
-        if (isEdit) {
-            JOptionPane.showMessageDialog(view, "Propietario editado " + name);
-            this.CloseView();
-            return;
+            if (isEdit) {
+                JOptionPane.showMessageDialog(view, "Propietario editado " + name);
+                this.CloseView();
+                return;
+            }
+
+            JOptionPane.showMessageDialog(view, "No se logro editar el Propietario " + name);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(view, e.getMessage());
         }
-
-        JOptionPane.showMessageDialog(view, "No se logro editar el Propietario " + name);
     }
 
     public void CloseView() {
@@ -80,20 +89,20 @@ public class NewOwnerController {
             view.dispose();
             return;
         }
-        
+
         if (callerView instanceof ViewOwner) {
             ViewOwner viewOwner = (ViewOwner) callerView;
             OwnerController ownerController = viewOwner.getOwnerController();
-            
+
             ownerController.setData(viewOwner.getIdCard());
             callerView.setVisible(true);
             view.dispose();
         }
-        
-        if(callerView instanceof ViewNewWork){
+
+        if (callerView instanceof ViewNewWork) {
             ViewNewWork viewNewWork = (ViewNewWork) callerView;
             NewWorkController newWorkController = viewNewWork.getNewWorkController();
-            
+
             callerView.setVisible(true);
             view.dispose();
         }

@@ -1,10 +1,13 @@
 package igu;
 
 import controller.AutomobileController;
+import java.awt.Toolkit;
+import java.awt.event.KeyEvent;
 import java.util.Enumeration;
 import javax.swing.AbstractButton;
 import javax.swing.ButtonModel;
 import motortech.Inputs;
+import motortech.Inputs.ValidationPatterns;
 import motortech.MotorTech;
 import motortech.Views;
 
@@ -30,8 +33,8 @@ public class ViewNewAutomobile extends javax.swing.JFrame {
     private void initApp() {
         rbtnAuto.setActionCommand("Automóvil");
         rbtnCamioneta.setActionCommand("Camioneta");
-        
-        if(isEdit){
+
+        if (isEdit) {
             inputPlate.setEnabled(false);
         }
 
@@ -45,8 +48,13 @@ public class ViewNewAutomobile extends javax.swing.JFrame {
     }
 
     public String getTxtInputPlate() {
-        return this.inputPlate.getText();
+        String messageValid = Inputs.inputValidate(this, inputPlate, "La Placa", ValidationPatterns.PLACA);
 
+        if (!messageValid.isEmpty()) {
+            throw new IllegalArgumentException(messageValid);
+        }
+
+        return this.inputPlate.getText();
     }
 
     public void setTxtTInputNumber(String TNumber) {
@@ -54,6 +62,12 @@ public class ViewNewAutomobile extends javax.swing.JFrame {
     }
 
     public String getTxtTInputNumber() {
+        String messageValid = Inputs.inputValidate(this, inputTNumber, "El número de la targeta de propiedad");
+
+        if (!messageValid.isEmpty()) {
+            throw new IllegalArgumentException(messageValid);
+        }
+
         return this.inputTNumber.getText();
     }
 
@@ -62,6 +76,12 @@ public class ViewNewAutomobile extends javax.swing.JFrame {
     }
 
     public int getTxtInputIdOwner() {
+        String messageValid = Inputs.inputValidate(this, inputIdOwner, "La cedula del propietario", ValidationPatterns.ID_CARD);
+
+        if (!messageValid.isEmpty()) {
+            throw new IllegalArgumentException(messageValid);
+        }
+
         return Integer.parseInt(this.inputIdOwner.getText());
     }
 
@@ -75,13 +95,14 @@ public class ViewNewAutomobile extends javax.swing.JFrame {
             }
         }
     }
-    
+
     public String getSelectRadioButton() {
         ButtonModel selectModel = buttonGroup.getSelection();
-        if (selectModel != null) {
-            return selectModel.getActionCommand();
+        if (selectModel == null) {
+            throw new IllegalArgumentException("Seleccione el estado del vehiculo");
         }
-        return null;
+
+        return selectModel.getActionCommand();
     }
 
     public boolean getIsEdit() {
@@ -379,6 +400,11 @@ public class ViewNewAutomobile extends javax.swing.JFrame {
                 inputIdOwnerFocusLost(evt);
             }
         });
+        inputIdOwner.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                inputIdOwnerKeyTyped(evt);
+            }
+        });
         Container.add(inputIdOwner, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 240, 290, 30));
 
         lblUser2.setFont(new java.awt.Font("Century Gothic", 0, 10)); // NOI18N
@@ -471,6 +497,20 @@ public class ViewNewAutomobile extends javax.swing.JFrame {
     private void inputIdOwnerFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputIdOwnerFocusLost
         Inputs.inputTextFocus(inputIdOwner, textNumber1, true);
     }//GEN-LAST:event_inputIdOwnerFocusLost
+
+    private void inputIdOwnerKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_inputIdOwnerKeyTyped
+        char c = evt.getKeyChar();
+
+        if (c == KeyEvent.VK_BACK_SPACE || c == KeyEvent.VK_DELETE || Character.isDigit(c)) {
+            return;
+        }
+
+        if (!Character.isDigit(c)) {
+            evt.consume();
+            Toolkit.getDefaultToolkit().beep();
+            return;
+        }
+    }//GEN-LAST:event_inputIdOwnerKeyTyped
 
     /**
      * @param args the command line arguments

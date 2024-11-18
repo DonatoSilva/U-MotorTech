@@ -6,6 +6,7 @@ import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 import javax.swing.JTextField;
 import motortech.Inputs;
+import motortech.Inputs.ValidationPatterns;
 import motortech.MotorTech;
 import motortech.Owner;
 import motortech.Views;
@@ -46,12 +47,12 @@ public class ViewNewOwner extends javax.swing.JFrame {
     }
 
     private void initApp() {
-        
-        if(isEdit) {
+
+        if (isEdit) {
             this.titleWindow.setText("Editar propietario");
             this.lblBtnOwner.setText("Guardar");
         }
-        
+
         textNameOwner = inputNameOwner.getText();
         textAdressOwner = inputAdressOwner.getText();
         textCellOwner = inputCellOwner.getText();
@@ -68,22 +69,52 @@ public class ViewNewOwner extends javax.swing.JFrame {
     }
 
     public String getTxtInputAdressOwner() {
+        String messageValid = Inputs.inputValidate(this, inputAdressOwner, "Correo electronico");
+
+        if (!messageValid.isEmpty()) {
+            throw new IllegalArgumentException(messageValid);
+        }
+
         return inputAdressOwner.getText();
     }
 
     public String getTxtInputCellOwner() {
-        return inputCellOwner.getText();
+        String messageValid = Inputs.inputValidate(this, inputCellOwner, "Número de celular", ValidationPatterns.CELL);
+
+        if (!messageValid.isEmpty()) {
+            throw new IllegalArgumentException(messageValid);
+        }
+
+        return inputEmailOwner.getText();
     }
 
     public String getTxtInputEmailOwner() {
+        String messageValid = Inputs.inputValidate(this, inputEmailOwner, "Correo electronico", ValidationPatterns.EMAIL);
+
+        if (!messageValid.isEmpty()) {
+            throw new IllegalArgumentException(messageValid);
+        }
+
         return inputEmailOwner.getText();
     }
 
     public int getTxtInputIDCard() {
+        String messageValid = Inputs.inputValidate(this, inputIDCard, "número de la cédula", ValidationPatterns.ID_CARD);
+        
+        if (!messageValid.isEmpty()) { 
+            throw new IllegalArgumentException(messageValid); 
+        }
+        
         return Integer.parseInt(inputIDCard.getText());
     }
 
     public String getTxtInputNameOwner() {
+        String messageValid = Inputs.inputValidate(this, inputNameOwner, "Nombre");
+        
+        if (!messageValid.isEmpty()) { 
+            throw new IllegalArgumentException(messageValid); 
+        }
+        
         return inputNameOwner.getText();
     }
 
@@ -242,6 +273,11 @@ public class ViewNewOwner extends javax.swing.JFrame {
             }
             public void focusLost(java.awt.event.FocusEvent evt) {
                 inputCellOwnerFocusLost(evt);
+            }
+        });
+        inputCellOwner.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                inputCellOwnerKeyTyped(evt);
             }
         });
 
@@ -638,10 +674,24 @@ public class ViewNewOwner extends javax.swing.JFrame {
 
         if (!Character.isDigit(c)) {
             evt.consume();
-            Toolkit.getDefaultToolkit().beep(); 
+            Toolkit.getDefaultToolkit().beep();
             return;
         }
     }//GEN-LAST:event_inputIDCardKeyTyped
+
+    private void inputCellOwnerKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_inputCellOwnerKeyTyped
+        char c = evt.getKeyChar();
+
+        if (c == KeyEvent.VK_BACK_SPACE || c == KeyEvent.VK_DELETE || Character.isDigit(c)) {
+            return;
+        }
+
+        if (!Character.isDigit(c)) {
+            evt.consume();
+            Toolkit.getDefaultToolkit().beep();
+            return;
+        }
+    }//GEN-LAST:event_inputCellOwnerKeyTyped
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

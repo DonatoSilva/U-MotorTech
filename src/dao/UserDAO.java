@@ -14,26 +14,25 @@ public class UserDAO {
     private final static String DATABASE = "MotorTechDB";
 
     public int verifyUser(String user, String password) {
-        
+
         Map<String, String> Querys = ListQuery.getListQuery();
 
         try (Connection connection = MyConnection.getConnection(DATABASE); PreparedStatement preparedStatement = connection.prepareStatement(Querys.get("GetHashesLogin"))) {
 
             preparedStatement.setString(1, user);
-            
             String query = preparedStatement.toString();
             query = query.substring(query.indexOf(": ") + 2);
-
             List<Map<String, Object>> resultList = MyConnection.fetchData(DATABASE, query);
-            Map<String, Object> res = resultList.getFirst();
+            if (resultList.isEmpty()) {
+                System.out.println("El usuario no existe");
+                return 404;
+            }
+            Map<String, Object> res = resultList.get(0);
             String hashes = res.get("Contrasena").toString();
-            
             boolean isValidate = PasswordUtil.checkPassword(password, hashes);
-            
             if (isValidate) {
                 return 200;
             }
-            
             return 401;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -158,9 +157,9 @@ public class UserDAO {
         Map<String, String> Querys = ListQuery.getListQuery();
 
         try (Connection connection = MyConnection.getConnection(DATABASE); PreparedStatement preparedStatement = connection.prepareStatement(Querys.get("InsertUser"))) {
-            
+
             String pass = PasswordUtil.hashPassword(user.getContrasena());
-            
+
             preparedStatement.setString(1, user.getTelefono());
             preparedStatement.setString(2, user.getUsuario());
             preparedStatement.setString(3, user.getNombresApellidos());

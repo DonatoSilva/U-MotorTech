@@ -4,12 +4,10 @@ import controller.SignUpController;
 import motortech.MotorTech;
 import motortech.Views;
 import motortech.Inputs;
+import motortech.Inputs.ValidationPatterns;
 import motortech.User;
 
 public class ViewNewSignUp extends javax.swing.JFrame {
-
-    ViewLogin login;
-
     private int xMouse;
     private int yMouse;
     
@@ -24,11 +22,12 @@ public class ViewNewSignUp extends javax.swing.JFrame {
 
     public boolean isPopupWindow = false;
     public boolean isEdit = false;
+    
+    private User user;
 
     public ViewNewSignUp() {
         initComponents();
-        login = new ViewLogin();
-
+        
         initInput();
     }
 
@@ -44,12 +43,14 @@ public class ViewNewSignUp extends javax.swing.JFrame {
         isPopupWindow = isPopup;
         this.isEdit = isEdit;
         
+        this.setUser(user);
+        
         inputNameUser.setText(user.getNombresApellidos());
         inputUser.setText(user.getUsuario());
         inputEmailUser.setText(user.getCorreoElectronico());
         inputCellUser.setText(user.getTelefono());
-        inputPassUser.setText(user.getContrasena());
-        inputPassUser1.setText(user.getContrasena());
+        inputPassUser.setText("Contraseña");
+        inputPassUser1.setText("Contraseña");
         
         initInput();
     }
@@ -67,8 +68,66 @@ public class ViewNewSignUp extends javax.swing.JFrame {
         textUser = inputUser.getText();
         textEmailUser = inputEmailUser.getText();
         textCellUser = inputCellUser.getText();
-        textPassUser = String.valueOf(inputPassUser.getPassword());
-        textPassUser1 = String.valueOf(inputPassUser1.getPassword());
+        textPassUser = String.valueOf("Contraseña");
+        textPassUser1 = String.valueOf("Contraseña");
+    }
+    
+    public void setUser(User user){
+        this.user = user;
+    }
+    
+    public User getUser() {
+        return this.user;
+    }
+    
+    public String getTxtUser(){
+        String messageValid = Inputs.inputValidate(this, inputUser, "Usuario");
+        
+        if (!messageValid.isEmpty()) {
+            throw new IllegalArgumentException(messageValid);
+        }
+        
+        return String.valueOf(inputUser.getText());
+    }
+    
+    public String getTxtName() {
+        String messageValid = Inputs.inputValidate(this, inputNameUser, "Nombre");
+        
+        if (!messageValid.isEmpty()) {
+            throw new IllegalArgumentException(messageValid);
+        }
+        
+        return String.valueOf(inputNameUser.getText());
+    }
+    
+    public String getTxtCell() {
+        String messageValid = Inputs.inputValidate(this, inputCellUser, "Telefono", ValidationPatterns.CELL);
+        
+        if (!messageValid.isEmpty()) {
+            throw new IllegalArgumentException(messageValid);
+        }
+        
+        return String.valueOf(inputCellUser.getText());
+    }
+    
+    public String getTxtEmail(){
+        String messageValid = Inputs.inputValidate(this, inputEmailUser, "Telefono", ValidationPatterns.EMAIL);
+        
+        if (!messageValid.isEmpty()) {
+            throw new IllegalArgumentException(messageValid);
+        }
+        
+        return String.valueOf(inputEmailUser.getText());
+    }
+    
+    public String getTextPass() {
+        String messageValid = Inputs.inputValidate(this, inputPassUser, "Contraseña", ValidationPatterns.Password);
+        
+        if (!messageValid.isEmpty()) {
+            throw new IllegalArgumentException(messageValid);
+        }
+        
+        return String.valueOf(inputPassUser.getPassword());
     }
     
     public SignUpController getSignUpController() {
@@ -626,7 +685,7 @@ public class ViewNewSignUp extends javax.swing.JFrame {
     }//GEN-LAST:event_lblBtnSingUpMouseExited
 
     private void lblBtnLoginMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBtnLoginMouseClicked
-        Views.openWindows(login, this);
+        getSignUpController().Login();
     }//GEN-LAST:event_lblBtnLoginMouseClicked
 
     private void inputPassUserFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputPassUserFocusGained
