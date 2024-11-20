@@ -6,6 +6,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import javax.swing.JOptionPane;
 import motortech.Automobile;
 
 public class AutomobileDAO {
@@ -74,9 +75,14 @@ public class AutomobileDAO {
             query = query.substring(query.indexOf(": ") + 2);
             return MyConnection.executeQuery(DATABASE, query);
         } catch (SQLException e) {
-            e.printStackTrace();
-            System.out.println("Error al insertar el vehículo: " + e.getMessage());
-            return false;
+            if (e.getSQLState().startsWith("23")) {
+                JOptionPane.showMessageDialog(null, "La placa ya existe, ingresa una nueva placa");
+                return false;
+            } else {
+                e.printStackTrace();
+                System.out.println("Error al insertar el vehículo: " + e.getMessage());
+                return false;
+            }
         }
     }
 

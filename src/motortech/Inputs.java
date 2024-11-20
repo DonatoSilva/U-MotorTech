@@ -12,10 +12,11 @@ public class Inputs {
 
     public enum ValidationPatterns {
         CELL("\\d{10}"),
+        NAME("^[A-Za-zÀ-ÿ'\\s-]{1,}$"),
         EMAIL("^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$"),
         ID_CARD("^\\d{5,}$"),
         PLACA("^[A-Z]{3}[0-9]{3}$|^[A-Z]{3}[0-9]{2}[A-Z]{1}$"),
-        Password("^(?=.*[a-z])(?=.*[A-Z])(?=.*[!Q?])[a-zA-Z!Q?]{8,}$");
+        Password("^(?=.*[a-z])(?=.*[A-Z])(?=.*[!Q?])(?=.*\\d)[a-zA-Z\\d!Q?]{8,}$");
 
         private final String pattern;
 
@@ -55,7 +56,7 @@ public class Inputs {
         Pattern pattern = Pattern.compile(validationPatterns.getPattern());
         Matcher matcher = pattern.matcher(text);
 
-        if (!matcher.matches()) {
+        if (!matcher.matches() ) {
             return "El " + messaje + " no es valido";
         }
 

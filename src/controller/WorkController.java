@@ -149,7 +149,7 @@ public class WorkController {
             JOptionPane.showMessageDialog(view, "No se logro encontrar el servicio a editar: " + id);
         }
 
-        new NewWorkController(new ViewNewWork(work), model, callerView);
+        new NewWorkController(new ViewNewWork(work), model, view);
     }
 
     public void hours() {

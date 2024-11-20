@@ -50,8 +50,6 @@ public class ViewOwners extends javax.swing.JFrame {
         table.setRowCount(0);
     }
 
-
-
     public void setEnabledTable(boolean a) {
         tableOwners.setEnabled(a);
     }
@@ -180,9 +178,16 @@ public class ViewOwners extends javax.swing.JFrame {
             Class[] types = new Class [] {
                 java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
             }
         });
         tableOwners.setGridColor(new java.awt.Color(238, 238, 238));
@@ -196,6 +201,10 @@ public class ViewOwners extends javax.swing.JFrame {
             }
         });
         jScrollPane3.setViewportView(tableOwners);
+        if (tableOwners.getColumnModel().getColumnCount() > 0) {
+            tableOwners.getColumnModel().getColumn(0).setResizable(false);
+            tableOwners.getColumnModel().getColumn(1).setResizable(false);
+        }
 
         Container.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 107, 860, 577));
 
@@ -362,7 +371,6 @@ public class ViewOwners extends javax.swing.JFrame {
     }//GEN-LAST:event_inputSearchFocusLost
 
     private void tableOwnersMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableOwnersMouseClicked
-        tableOwners.setEnabled(false);
         if (evt.getClickCount() == 2) {
             JTable table = (JTable) evt.getSource();
             getOwnersController().tableOwners(table);

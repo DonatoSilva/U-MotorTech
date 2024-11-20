@@ -92,6 +92,25 @@ public class WorkDAO {
         }
         return work;
     }
+    public int getWorksByIdOwner(int idOwner) {
+        Map<String, String> Querys = ListQuery.getListQuery();
+        try (Connection connection = MyConnection.getConnection(DATABASE); PreparedStatement preparedStatement = connection.prepareStatement(Querys.get("GetServicioByIdOwner"))) {
+            preparedStatement.setInt(1, idOwner);
+            String query = preparedStatement.toString();
+            query = query.substring(query.indexOf(": ") + 2);
+            List<Map<String, Object>> resultList = MyConnection.fetchData(DATABASE, query);
+            
+            if (resultList.isEmpty()) {
+                return 404;
+            }
+            
+            return 200;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println("Error al buscar el trabajos para " + idOwner + ": " + e.getMessage());
+            return 501;
+        }
+    }
 
     public List<Work> getWorksByPlaca(String placa, String estado) {
         List<Work> works = new ArrayList<>();
@@ -254,6 +273,19 @@ public class WorkDAO {
         } catch (SQLException e) {
             e.printStackTrace();
             System.out.println("Error al eliminar el trabajo con id: " + idServicio);
+            return false;
+        }
+    }
+    public boolean deletesWorkByIdOwner(int idOwner) {
+        Map<String, String> Querys = ListQuery.getListQuery();
+        try (Connection connection = MyConnection.getConnection(DATABASE); PreparedStatement preparedStatement = connection.prepareStatement(Querys.get("DeletesServicioByIdOwner"))) {
+            preparedStatement.setInt(1, idOwner);
+            String query = preparedStatement.toString();
+            query = query.substring(query.indexOf(": ") + 2);
+            return MyConnection.executeQuery(DATABASE, query);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println("Error al eliminar el trabajo con id: " + idOwner);
             return false;
         }
     }

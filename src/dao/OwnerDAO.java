@@ -6,6 +6,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import javax.swing.JOptionPane;
 import motortech.Owner;
 
 public class OwnerDAO {
@@ -99,9 +100,14 @@ public class OwnerDAO {
             query = query.substring(query.indexOf(": ") + 2);
             return MyConnection.executeQuery(DATABASE, query);
         } catch (SQLException e) {
-            e.printStackTrace();
-            System.out.println("Error al eliminar el propietario: " + e.getMessage());
-            return false;
+            if (true) {
+                JOptionPane.showMessageDialog(null, "La cédula ya existe, ingresa una nueva cédula");
+                return false;
+            } else {
+                e.printStackTrace();
+                System.out.println("Error al eliminar el propietario: " + e.getMessage());
+                return false;
+            }
         }
     }
     

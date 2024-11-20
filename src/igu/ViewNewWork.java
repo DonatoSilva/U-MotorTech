@@ -2,12 +2,15 @@ package igu;
 
 import controller.NewWorkController;
 import java.awt.Color;
+import java.awt.Toolkit;
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.List;
 import javax.swing.AbstractButton;
 import javax.swing.ButtonModel;
 import javax.swing.JCheckBox;
+import javax.swing.JTextField;
 import motortech.Inputs;
 import motortech.MotorTech;
 import motortech.Views;
@@ -90,7 +93,13 @@ public class ViewNewWork extends javax.swing.JFrame {
     }
 
     public int getIdCard() {
-        return Integer.parseInt(lblIdCardOwner.getText());
+        String idOwner = lblIdCardOwner.getText();
+        
+        if(idOwner.equals("----------")){
+            throw new IllegalArgumentException("Ingrese un propietario");
+        }
+        
+        return Integer.parseInt(idOwner);
     }
 
     public void setTextCellOwner(String cellOwner) {
@@ -110,7 +119,13 @@ public class ViewNewWork extends javax.swing.JFrame {
     }
 
     public String getTextPlaca() {
-        return lblPlaca.getText();
+        String placa = lblPlaca.getText();
+        
+        if (placa.equals("-----------------")) {
+            throw new IllegalArgumentException("Ingrese un vehículo");
+        }
+        
+        return placa;
     }
 
     public void setTextType(String type) {
@@ -123,10 +138,12 @@ public class ViewNewWork extends javax.swing.JFrame {
 
     public String getTypeSelect() {
         ButtonModel selectModel = btnTypeGroup.getSelection();
-        if (selectModel != null) {
-            return selectModel.getActionCommand();
+        
+        if (selectModel == null) {
+            throw new IllegalArgumentException("Seleccione el estado del vehiculo, pues este no puede ser vacio");
         }
-        return null;
+        
+        return  selectModel.getActionCommand();
     }
 
     public void setTypeSelect(String actionCommand) {
@@ -159,8 +176,22 @@ public class ViewNewWork extends javax.swing.JFrame {
                 selectedOptions.add(checkBox.getActionCommand());
             }
         }
+        
+        if(selectedOptions.isEmpty()){
+            throw new IllegalArgumentException("Seleccione el motivo de ingreso del vehículo.");
+        }
 
         return String.join(", ", selectedOptions);
+    }
+    
+    public void enableFocusIdCArd(){
+        Inputs.inputTextFocus(inputCedula, textCedula, true);
+        inputCedula.transferFocus();
+    }
+    
+    public void enableFocusPlate(){
+        Inputs.inputTextFocus(inputPlaca, textPlaca, true);
+        inputPlaca.transferFocus();
     }
 
     public void setSelectCheckBox(List<String> listActionCommand) {
@@ -415,7 +446,7 @@ public class ViewNewWork extends javax.swing.JFrame {
         inputCedula.setBackground(new java.awt.Color(255, 255, 255));
         inputCedula.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         inputCedula.setForeground(new java.awt.Color(204, 204, 204));
-        inputCedula.setText("Intriduzca la cedula completa");
+        inputCedula.setText("Introduzca la cedula completa");
         inputCedula.setToolTipText("");
         inputCedula.setBorder(null);
         inputCedula.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -424,6 +455,11 @@ public class ViewNewWork extends javax.swing.JFrame {
             }
             public void focusLost(java.awt.event.FocusEvent evt) {
                 inputCedulaFocusLost(evt);
+            }
+        });
+        inputCedula.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                inputCedulaKeyTyped(evt);
             }
         });
         ContainerInputs.add(inputCedula, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 310, 30));
@@ -523,7 +559,7 @@ public class ViewNewWork extends javax.swing.JFrame {
         inputPlaca.setBackground(new java.awt.Color(255, 255, 255));
         inputPlaca.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         inputPlaca.setForeground(new java.awt.Color(204, 204, 204));
-        inputPlaca.setText("Intriduzca la placa del vehículo");
+        inputPlaca.setText("Introduzca la placa del vehículo");
         inputPlaca.setToolTipText("");
         inputPlaca.setBorder(null);
         inputPlaca.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -993,6 +1029,20 @@ public class ViewNewWork extends javax.swing.JFrame {
     private void lblAutoSearchMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblAutoSearchMouseClicked
         getNewWorkController().SearchAuto();
     }//GEN-LAST:event_lblAutoSearchMouseClicked
+
+    private void inputCedulaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_inputCedulaKeyTyped
+        char c = evt.getKeyChar();
+
+        if (c == KeyEvent.VK_BACK_SPACE || c == KeyEvent.VK_DELETE || Character.isDigit(c)) {
+            return;
+        }
+
+        if (!Character.isDigit(c)) {
+            evt.consume();
+            Toolkit.getDefaultToolkit().beep();
+            return;
+        }
+    }//GEN-LAST:event_inputCedulaKeyTyped
 
     /**
      * @param args the command line arguments

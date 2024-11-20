@@ -69,8 +69,8 @@ public class AutomobileController {
         OwnerDAO ownerDao = new OwnerDAO();
         Owner owner = ownerDao.getOwner(view.getTxtInputIdOwner());
 
-        if (owner.getDireccion() == null) {
-            JOptionPane.showMessageDialog(view, "Error no existe un propietario con ese numero de cedula");
+        if (owner.getCedula() == 0) {
+            JOptionPane.showMessageDialog(view, "No existe un propietario con ese numero de cedula");
             return;
         }
 

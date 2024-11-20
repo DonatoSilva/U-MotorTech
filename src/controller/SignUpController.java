@@ -7,7 +7,6 @@ import igu.ViewNewSignUp;
 import igu.ViewUsers;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import motortech.Inputs;
 import motortech.User;
 import motortech.Views;
 

@@ -25,6 +25,10 @@ public class ViewOwner extends javax.swing.JFrame {
     public void setOwnerController(OwnerController ownerController) {
         this.ownerController = ownerController;
     }
+    
+    public void setEnableTable(boolean a){
+        tableAutos.setEnabled(a);
+    }
 
     public void addRow(Object[] rowData) {
         DefaultTableModel table = (DefaultTableModel) tableAutos.getModel();
@@ -541,8 +545,8 @@ public class ViewOwner extends javax.swing.JFrame {
     }//GEN-LAST:event_lblBtnEditarMouseExited
 
     private void tableAutosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableAutosMouseClicked
+        tableAutos.setEnabled(false);
         if (evt.getClickCount() == 2) {
-            tableAutos.setEnabled(false);
             JTable table = (JTable) evt.getSource();
 
             int row = table.getSelectedRow();
@@ -551,7 +555,6 @@ public class ViewOwner extends javax.swing.JFrame {
             Object TNumber = table.getValueAt(row, 2);
             
             getOwnerController().tableAutos(placa.toString(), tipo.toString(), TNumber.toString(), row);
-            tableAutos.setEnabled(true);
         }
     }//GEN-LAST:event_tableAutosMouseClicked
 

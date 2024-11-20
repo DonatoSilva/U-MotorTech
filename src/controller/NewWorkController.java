@@ -6,6 +6,7 @@ import dao.WorkDAO;
 import igu.Home;
 import igu.ViewNewAutomobile;
 import igu.ViewNewOwner;
+import igu.ViewNewSignUp;
 import igu.ViewNewWork;
 import java.util.Arrays;
 import java.util.List;
@@ -13,6 +14,7 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import motortech.Automobile;
 import motortech.Owner;
+import motortech.User;
 import motortech.Views;
 import motortech.Work;
 
@@ -55,7 +57,6 @@ public class NewWorkController {
     public void Prev() {
         if (callerView == null) {
             new HomeController(new Home(), model, view);
-
             return;
         }
 
@@ -63,12 +64,29 @@ public class NewWorkController {
     }
 
     public void Action() {
-        if (view.getWork() == null) {
-            this.Create();
+        int opcion = JOptionPane.showOptionDialog(
+                view,
+                "¿Seleccione lo que desea hacaer con este usuario?",
+                "MotorTech - Usuario",
+                JOptionPane.YES_NO_OPTION,
+                JOptionPane.WARNING_MESSAGE,
+                null,
+                new String[]{"Cancelar", "Seguro de los datos"},
+                "Cancelar"
+        );
+
+        if (opcion == 0) {
             return;
         }
 
-        this.Update();
+        if (opcion == 1) {
+            if (view.getWork() == null) {
+                this.Create();
+                return;
+            }
+
+            this.Update();
+        }
     }
 
     public void SearchOwner() {
@@ -78,11 +96,15 @@ public class NewWorkController {
             JOptionPane.showMessageDialog(view, "No se puede tener la cedula vacia");
         }
 
+        SearchOwner(Integer.valueOf(cedula));
+    }
+
+    public void SearchOwner(int idOwner) {
         OwnerDAO ownerDAO = new OwnerDAO();
-        Owner owner = ownerDAO.getOwner(Integer.parseInt(cedula));
+        Owner owner = ownerDAO.getOwner(idOwner);
 
         if (owner.getNombresApellidos() == null) {
-            JOptionPane.showMessageDialog(view, "No se encontro ningun propietario con la cedula: " + cedula);
+            JOptionPane.showMessageDialog(view, "No se encontro ningun propietario con la cedula: " + idOwner);
             this.resetDataOwner();
             return;
         }
@@ -100,6 +122,9 @@ public class NewWorkController {
         AutomobileDAO automobileDAO = new AutomobileDAO();
         Automobile automobile = automobileDAO.getAutomobile(placa);
 
+        int idOwner = automobile.getPropietarioID();
+        SearchOwner(idOwner); /// garantiza que esten relacionados 
+
         if (automobile.getPlaca() == null) {
             JOptionPane.showMessageDialog(view, "No se encontro ningun Vehiculo con la placa: " + placa);
             this.resetDataAuto();
@@ -111,6 +136,7 @@ public class NewWorkController {
 
     private void resetDataOwner() {
         view.setInputCedula("");
+        view.enableFocusIdCArd();
         view.setTextNameOwner("---------- -----");
         view.setTextIdCardOwner("----------");
         view.setTextCellOwner("---------");
@@ -120,6 +146,7 @@ public class NewWorkController {
 
     private void setDataOwner(Owner owner) {
         view.setInputCedula("");
+        view.enableFocusIdCArd();
         view.setTextNameOwner(owner.getNombresApellidos());
         view.setTextCellOwner(owner.getTelefono());
         view.setTextIdCardOwner(Integer.toString(owner.getCedula()));
@@ -129,6 +156,7 @@ public class NewWorkController {
 
     private void resetDataAuto() {
         view.setInputPlaca("");
+        view.enableFocusPlate();
         view.setTextPlaca("-----------------");
         view.setTextTNumber("----------------");
         view.setTextType("--------------");
@@ -136,6 +164,7 @@ public class NewWorkController {
 
     private void setDataAuto(Automobile auto) {
         view.setInputPlaca("");
+        view.enableFocusPlate();
         view.setTextPlaca(auto.getPlaca());
         view.setTextTNumber(auto.getTarjetaPropiedad());
         view.setTextType(auto.getTipoVehiculo());
@@ -162,47 +191,55 @@ public class NewWorkController {
     }
 
     private void Create() {
-        Work work = new Work();
-        work.setCostoManoObra(0);
-        work.setCostoRepuestos(0);
-        work.setHorasTrabajo(0);
-        work.setPropietarioID(view.getIdCard());
-        work.setVehiculoPlaca(view.getTextPlaca());
-        work.setEstadoVehiculo(view.getTypeSelect());
-        work.setMotivoIngreso(view.getSelectCheckBox());
-        work.setEstadoServicio("En taller");
+        try {
+            Work work = new Work();
+            work.setCostoManoObra(0);
+            work.setCostoRepuestos(0);
+            work.setHorasTrabajo(0);
+            work.setPropietarioID(view.getIdCard());
+            work.setVehiculoPlaca(view.getTextPlaca());
+            work.setEstadoVehiculo(view.getTypeSelect());
+            work.setMotivoIngreso(view.getSelectCheckBox());
+            work.setEstadoServicio("En taller");
 
-        boolean isCreate = model.createWork(work);
+            boolean isCreate = model.createWork(work);
 
-        if (isCreate) {
-            JOptionPane.showMessageDialog(view, "Se creo correctamente el servicio");
-            this.CloseApp();
-            return;
+            if (isCreate) {
+                JOptionPane.showMessageDialog(view, "Se creo correctamente el servicio");
+                this.CloseApp();
+                return;
+            }
+
+            JOptionPane.showMessageDialog(view, "Error al crear el servicio");
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(view, e.getMessage());
         }
-
-        JOptionPane.showMessageDialog(view, "Error al crear el servicio");
     }
 
     private void Update() {
-        Work work = new Work();
-        work.setCostoManoObra(0);
-        work.setCostoRepuestos(0);
-        work.setHorasTrabajo(0);
-        work.setPropietarioID(view.getIdCard());
-        work.setVehiculoPlaca(view.getTextPlaca());
-        work.setEstadoVehiculo(view.getTypeSelect());
-        work.setMotivoIngreso(view.getSelectCheckBox());
-        work.setEstadoServicio("En taller");
+        try {
+            Work work = new Work();
+            work.setCostoManoObra(0);
+            work.setCostoRepuestos(0);
+            work.setHorasTrabajo(0);
+            work.setPropietarioID(view.getIdCard());
+            work.setVehiculoPlaca(view.getTextPlaca());
+            work.setEstadoVehiculo(view.getTypeSelect());
+            work.setMotivoIngreso(view.getSelectCheckBox());
+            work.setEstadoServicio("En taller");
 
-        boolean isCreate = model.updateWork(work);
+            boolean isCreate = model.updateWork(work);
 
-        if (isCreate) {
-            JOptionPane.showMessageDialog(view, "Se actualizo correctamente el servicio");
-            this.CloseApp();
-            return;
+            if (isCreate) {
+                JOptionPane.showMessageDialog(view, "Se actualizo correctamente el servicio");
+                this.CloseApp();
+                return;
+            }
+
+            JOptionPane.showMessageDialog(view, "Error al actualizar el servicio");
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(view, e.getMessage());
         }
-
-        JOptionPane.showMessageDialog(view, "Error al actualizar el servicio");
     }
 
     public void CloseApp() {

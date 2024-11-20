@@ -1,6 +1,8 @@
 package igu;
 
 import controller.SignUpController;
+import java.awt.Toolkit;
+import java.awt.event.KeyEvent;
 import motortech.MotorTech;
 import motortech.Views;
 import motortech.Inputs;
@@ -60,6 +62,7 @@ public class ViewNewSignUp extends javax.swing.JFrame {
         
         
         if (isEdit) {
+            titleWindow.setText("Editar usuario");
             inputCellUser.setEditable(!isEdit);
             lblBtnSingUp.setText("Editar");
         }
@@ -91,7 +94,7 @@ public class ViewNewSignUp extends javax.swing.JFrame {
     }
     
     public String getTxtName() {
-        String messageValid = Inputs.inputValidate(this, inputNameUser, "Nombre");
+        String messageValid = Inputs.inputValidate(this, inputNameUser, "Nombre", ValidationPatterns.NAME);
         
         if (!messageValid.isEmpty()) {
             throw new IllegalArgumentException(messageValid);
@@ -121,13 +124,19 @@ public class ViewNewSignUp extends javax.swing.JFrame {
     }
     
     public String getTextPass() {
+        String pass = String.valueOf(inputPassUser.getPassword());
+        
+        if(pass.equals(textPassUser)){
+            return pass;
+        }
+        
         String messageValid = Inputs.inputValidate(this, inputPassUser, "Contraseña", ValidationPatterns.Password);
         
         if (!messageValid.isEmpty()) {
             throw new IllegalArgumentException(messageValid);
         }
         
-        return String.valueOf(inputPassUser.getPassword());
+        return pass;
     }
     
     public SignUpController getSignUpController() {
@@ -302,6 +311,11 @@ public class ViewNewSignUp extends javax.swing.JFrame {
             }
             public void focusLost(java.awt.event.FocusEvent evt) {
                 inputCellUserFocusLost(evt);
+            }
+        });
+        inputCellUser.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                inputCellUserKeyTyped(evt);
             }
         });
 
@@ -668,6 +682,40 @@ public class ViewNewSignUp extends javax.swing.JFrame {
     }//GEN-LAST:event_inputUserFocusLost
 
     private void lblBtnSingUpMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBtnSingUpMouseClicked
+        lblBtnSingUp.requestFocusInWindow();
+        String title = "MotorTech - Registrar usuario";
+        
+        if (!isEdit) {
+            if (textNameUser.equals(inputNameUser.getText())) {
+                Inputs.dialogMessageDialog(this, inputNameUser, title, "La direcccón no puede estar vacía");
+                return;
+            }
+
+            if (textCellUser.equals(inputCellUser.getText())) {
+                Inputs.dialogMessageDialog(this, inputCellUser, title, "El nombre no puede estar vacío");
+                return;
+            }
+
+            if (inputEmailUser.getText().equals(textEmailUser)) {
+                Inputs.dialogMessageDialog(this, inputEmailUser, title, "El campo del celular no puede estar vacío");
+                return;
+            }
+
+            if (textUser.equals(inputUser.getText())) {
+                Inputs.dialogMessageDialog(this, inputUser, title, "El correo electronico no puede estar vacío");
+                return;
+            }
+
+            if (textPassUser.equals(String.valueOf(inputPassUser.getPassword()))) {
+                Inputs.dialogMessageDialog(this, inputPassUser, title, "La contraseña no puede estar vacia");
+                return;
+            }
+            if (textPassUser1.equals(String.valueOf(inputPassUser1.getPassword()))) {
+                Inputs.dialogMessageDialog(this, inputPassUser1, title, "La contraseña no puede estar vacia");
+                return;
+            }
+        }
+        
         if (isEdit){
            signUpController.updateUser();
            return;
@@ -703,6 +751,20 @@ public class ViewNewSignUp extends javax.swing.JFrame {
     private void inputPassUser1FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputPassUser1FocusLost
         Inputs.inputPassFocus(inputPassUser1, textPassUser1, true);
     }//GEN-LAST:event_inputPassUser1FocusLost
+
+    private void inputCellUserKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_inputCellUserKeyTyped
+        char c = evt.getKeyChar();
+
+        if (c == KeyEvent.VK_BACK_SPACE || c == KeyEvent.VK_DELETE || Character.isDigit(c)) {
+            return;
+        }
+
+        if (!Character.isDigit(c)) {
+            evt.consume();
+            Toolkit.getDefaultToolkit().beep();
+            return;
+        }
+    }//GEN-LAST:event_inputCellUserKeyTyped
 
     /**
      * @param args the command line arguments

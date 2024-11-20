@@ -17,7 +17,7 @@ public class ViewNewAutomobile extends javax.swing.JFrame {
     private int yMouse;
     private String textPlates;
     private String textNumber;
-    private String textNumber1;
+    private String textIdCard;
 
     private AutomobileController automobileController;
 
@@ -40,7 +40,7 @@ public class ViewNewAutomobile extends javax.swing.JFrame {
 
         textPlates = inputPlate.getText();
         textNumber = inputTNumber.getText();
-        textNumber1 = inputIdOwner.getText();
+        textIdCard = inputIdOwner.getText();
     }
 
     public void setTxtInputPlate(String plate) {
@@ -377,6 +377,11 @@ public class ViewNewAutomobile extends javax.swing.JFrame {
                 inputTNumberFocusLost(evt);
             }
         });
+        inputTNumber.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                inputTNumberKeyTyped(evt);
+            }
+        });
         Container.add(inputTNumber, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 180, 290, 30));
 
         Sepuser1.setForeground(new java.awt.Color(153, 153, 153));
@@ -467,6 +472,21 @@ public class ViewNewAutomobile extends javax.swing.JFrame {
     }//GEN-LAST:event_lblBtnCancelopenSingUp
 
     private void btnSaveopenHome(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSaveopenHome
+        if(textPlates.equals(inputPlate.getText().trim()) && !isEdit){
+            Inputs.dialogMessageDialog(this, inputPlate, textPlates, "La placa no puede estar vacia");
+            return;
+        }
+        
+        if(textNumber.equals(inputTNumber.getText().trim()) && !isEdit){
+            Inputs.dialogMessageDialog(this, inputTNumber, textNumber, "El numero de la targeta de propiedad no puede estar vacio");
+            return;
+        }
+        
+        if(textIdCard.equals(inputIdOwner.getText().trim()) && !isEdit){
+            Inputs.dialogMessageDialog(this, inputIdOwner, textIdCard, "El propietario no puede estar vacio");
+            return;
+        }
+        
         getAutomobileController().Action();
     }//GEN-LAST:event_btnSaveopenHome
 
@@ -491,11 +511,11 @@ public class ViewNewAutomobile extends javax.swing.JFrame {
     }//GEN-LAST:event_inputTNumberFocusLost
 
     private void inputIdOwnerFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputIdOwnerFocusGained
-        Inputs.inputTextFocus(inputIdOwner, textNumber1);
+        Inputs.inputTextFocus(inputIdOwner, textIdCard);
     }//GEN-LAST:event_inputIdOwnerFocusGained
 
     private void inputIdOwnerFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputIdOwnerFocusLost
-        Inputs.inputTextFocus(inputIdOwner, textNumber1, true);
+        Inputs.inputTextFocus(inputIdOwner, textIdCard, true);
     }//GEN-LAST:event_inputIdOwnerFocusLost
 
     private void inputIdOwnerKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_inputIdOwnerKeyTyped
@@ -511,6 +531,20 @@ public class ViewNewAutomobile extends javax.swing.JFrame {
             return;
         }
     }//GEN-LAST:event_inputIdOwnerKeyTyped
+
+    private void inputTNumberKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_inputTNumberKeyTyped
+        char c = evt.getKeyChar();
+
+        if (c == KeyEvent.VK_BACK_SPACE || c == KeyEvent.VK_DELETE || Character.isDigit(c)) {
+            return;
+        }
+
+        if (!Character.isDigit(c)) {
+            evt.consume();
+            Toolkit.getDefaultToolkit().beep();
+            return;
+        }
+    }//GEN-LAST:event_inputTNumberKeyTyped
 
     /**
      * @param args the command line arguments

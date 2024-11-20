@@ -7,6 +7,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import javax.swing.JOptionPane;
 import motortech.User;
 
 public class UserDAO {
@@ -92,8 +93,12 @@ public class UserDAO {
             user.setContrasena((String) userResult.get("Contrasena"));
 
         } catch (SQLException e) {
-            e.printStackTrace();
-            System.out.println("Error al buscar el usuario " + telefono + ": " + e.getMessage());
+            if (true) {
+                JOptionPane.showMessageDialog(null, "El teléfono ya existe, ingresa un nuevo numero de teléfono");
+            } else {
+                e.printStackTrace();
+                System.out.println("Error al buscar el usuario " + telefono + ": " + e.getMessage());
+            }
         }
 
         return user;

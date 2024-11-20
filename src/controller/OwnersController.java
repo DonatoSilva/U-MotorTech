@@ -2,6 +2,7 @@ package controller;
 
 import dao.AutomobileDAO;
 import dao.OwnerDAO;
+import dao.WorkDAO;
 import igu.ViewNewOwner;
 import igu.ViewOwner;
 import igu.ViewOwners;
@@ -130,6 +131,18 @@ public class OwnersController {
                 AutomobileDAO automobileDAO = new AutomobileDAO();
                 List<Automobile> carsExistence = automobileDAO.getAllAutomobiles(idCard);
 
+                WorkDAO workDAO = new WorkDAO();
+                int worksExits = workDAO.getWorksByIdOwner(idCard);
+
+                if (worksExits == 200) {
+                    boolean isWorksDelete = workDAO.deletesWorkByIdOwner(idCard);
+
+                    if (!isWorksDelete) {
+                        JOptionPane.showMessageDialog(view, "Algo salio mal al intentar eliminar los servicios asociados al propietario: " + idCard);
+                        return false;
+                    }
+                }
+
                 if (!carsExistence.isEmpty()) {
                     boolean isAutosDelete = automobileDAO.deleteAutomobiles(idCard);
 
@@ -151,7 +164,8 @@ public class OwnersController {
 
             return true;
         }
-
+        
+        setEnabledTable(true);
         return false;
     }
 

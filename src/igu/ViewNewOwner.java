@@ -4,7 +4,6 @@ import controller.NewOwnerController;
 import java.awt.Color;
 import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
-import javax.swing.JTextField;
 import motortech.Inputs;
 import motortech.Inputs.ValidationPatterns;
 import motortech.MotorTech;
@@ -85,7 +84,7 @@ public class ViewNewOwner extends javax.swing.JFrame {
             throw new IllegalArgumentException(messageValid);
         }
 
-        return inputEmailOwner.getText();
+        return inputCellOwner.getText();
     }
 
     public String getTxtInputEmailOwner() {
@@ -100,21 +99,21 @@ public class ViewNewOwner extends javax.swing.JFrame {
 
     public int getTxtInputIDCard() {
         String messageValid = Inputs.inputValidate(this, inputIDCard, "número de la cédula", ValidationPatterns.ID_CARD);
-        
-        if (!messageValid.isEmpty()) { 
-            throw new IllegalArgumentException(messageValid); 
+
+        if (!messageValid.isEmpty()) {
+            throw new IllegalArgumentException(messageValid);
         }
-        
+
         return Integer.parseInt(inputIDCard.getText());
     }
 
     public String getTxtInputNameOwner() {
         String messageValid = Inputs.inputValidate(this, inputNameOwner, "Nombre");
-        
-        if (!messageValid.isEmpty()) { 
-            throw new IllegalArgumentException(messageValid); 
+
+        if (!messageValid.isEmpty()) {
+            throw new IllegalArgumentException(messageValid);
         }
-        
+
         return inputNameOwner.getText();
     }
 

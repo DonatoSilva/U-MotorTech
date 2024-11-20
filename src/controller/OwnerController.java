@@ -154,6 +154,12 @@ public class OwnerController {
                 JOptionPane.showMessageDialog(view, "Error al eliminar vehiculo, placa: " + placa);
             }
         }
+        
+        this.setEnabledTable(true);
+    }
+    
+    private void setEnabledTable(boolean a){
+        view.setEnableTable(a);
     }
 
     public void NewAuto(int IdCard) {
