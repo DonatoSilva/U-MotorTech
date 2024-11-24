@@ -15,7 +15,7 @@ public class Inputs {
         NAME("^[A-Za-zÀ-ÿ'\\s-]{1,}$"),
         EMAIL("^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$"),
         ID_CARD("^\\d{5,}$"),
-        PLACA("^[A-Z]{3}[0-9]{3}$|^[A-Z]{3}[0-9]{2}[A-Z]{1}$"),
+        PLACA("^[A-Z]{3}[0-9]{3}$"),
         Password("^(?=.*[a-z])(?=.*[A-Z])(?=.*[!Q?])(?=.*\\d)[a-zA-Z\\d!Q?]{8,}$");
 
         private final String pattern;

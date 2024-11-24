@@ -99,7 +99,7 @@ public class ViewNewAutomobile extends javax.swing.JFrame {
     public String getSelectRadioButton() {
         ButtonModel selectModel = buttonGroup.getSelection();
         if (selectModel == null) {
-            throw new IllegalArgumentException("Seleccione el estado del vehiculo");
+            throw new IllegalArgumentException("Seleccione el tipo del vehiculo");
         }
 
         return selectModel.getActionCommand();
